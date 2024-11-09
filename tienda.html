@@ -3,155 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tienda</title>
+    <title>Portfolio alec alvarez</title>
 </head>
 <body>
+    <main>
+        <div class="cuadradoizquierdo"></div>
+        <div class="cuadradoderecho"></div>
+        <img src="/Imagen de WhatsApp 2024-11-08 a las 17.06.06_3b145d50.jpg" alt="" height="300" width="300">
+    </main>
     <style>
-        /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-    </style>
-    <style>
-        header{
-    width: 1536px;
-    background: black;
-    color: white;
-    padding: 20px 20px;
+html{
+    background-color: black;
 }
 
-header h1{
-        /* float: left; */
-        font-size: 70px;
-        /* display: inline-block; */
-        font-family: fantasy;
-        text-align: center;
-        width: 120px;
-        /* left: 200px; */
-        top: auto;
-        margin: 0px 690px;
-}
-
-header p{
-    text-align: center;
-    margin: 20px 20px 5px 20px;
-}
-
-header ul{
-
-    display: inline-block;
-    text-align: center;
-    /* left: 20%; */
-    margin-left: 620px;
-    margin-top: 20px;
-    font-size: 15px;
-}
-
-header ul li{
-    float: left;
-    margin-left: 20px;
-    font-family: sans-serif;
-}
-
-header ul li:hover{
-    text-decoration: underline;
-    animation-delay: 2s;
-}
-
-header ul a li{
-    color: white;
-}
-
-main{
-    background-image: url(guepardo.jpg);
-    width: 1536px;
-    height: 1000px;
-    position: fixed;
-    overflow: auto;
-}
-
-main form {
-    height: 30px;
-    text-align: center;
-    border: 2px solid transparent;
-    color: black;
-    margin-top: 25px;
+        main .cuadradoizquierdo{
+            height: 400px;
     width: 200px;
-    line-height: 2.3;
+    border-radius: 5px;
+    box-shadow: -1px -1px 20px 4px white;
+    filter: blur(2px);
+    background-color: white;
     position: absolute;
-    margin: 190px 670px;
-    font-family: fantasy;
-}
+    right: 1420px;
+    top: 60px;
+        }
 
-main form input{
-    height: 25px;
-    text-align: center;
-    }
+        main .cuadradoderecho{
+            height: 400px;
+    width: 146px;
+    border-radius: 5px 0px 0px 5px;
+    box-shadow: -1px -1px 20px 4px white;
+    filter: blur(2px);
+    background-color: white;
+    position: absolute;
+    left: 1373px;
+    top: 820px;
+        }
 
-    main form button{
-        background-color: black;
-        color: white;
-        padding: 5px 66px 5px;
-    }
 
-    main form button:hover{
-        background-color: white;
-        color:black;
-        cursor: pointer;
-        border: transparent;
-    }
-
+        main img{
+            position: absolute;
+    left: 600px;
+    top: 360px;
+    border-radius: 100%;
+    box-shadow: -3px 1px 20px 11px #ffffff8a;
+        }
 
     </style>
-    <form action="#" method="get">
-
-        <input type="text" placeholder="Nombre">
-        <input type="password" placeholder="Crear contraseña">
-        <button>Entrar</button>
-    </form>
 </body>
 </html>
