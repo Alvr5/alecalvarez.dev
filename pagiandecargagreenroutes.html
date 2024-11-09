@@ -36,6 +36,7 @@
           position: absolute;
     top: 80px;
     left: 220px;
+    width: 210px;
         }
         body{
           text-align: center;
@@ -49,6 +50,29 @@
               transform: rotate(360deg);
               animation-duration: 2s;
             }
-        }</style>
+        }
+        
+        @media (max-width: 480px){
+          body{
+            top: 330px;
+            position: absolute;
+            width: auto;
+            height: auto;
+            left: 0px;
+            margin-right: 30px;
+          }
+
+          button{
+            left: 181px;
+            position: relative;
+          }
+
+
+          span{
+            left: 100px
+          }
+        }
+
+        </style>
 </body>
 </html>
