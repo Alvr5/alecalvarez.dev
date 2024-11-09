@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj Analógico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="clock">
+        <div class="hand hour-hand"></div>
+        <div class="hand minute-hand"></div>
+        <div class="hand second-hand"></div>
+        <div class="center-point"></div>
+    </div>
+    <script>
+    
+    const hourHand = document.querySelector('.hour-hand');
+        const minuteHand = document.querySelector('.minute-hand');
+        const secondHand = document.querySelector('.second-hand');
+        
+        // Configura la hora inicial a las 10:00:00
+        let startTime = new Date();
+        startTime.setHours(10, 0, 0); 
+        
+        function updateClock() {
+            const now = new Date();
+        
+            // Calcula los ángulos
+            const hours = (now.getHours() % 12) + now.getMinutes() / 60;
+            const minutes = now.getMinutes() + now.getSeconds() / 60;
+            const seconds = now.getSeconds();
+        
+            // Rota las manecillas
+            hourHand.style.transform = `rotate(${hours * 30}deg)`;
+            minuteHand.style.transform = `rotate(${minutes * 6}deg)`;
+            secondHand.style.transform = `rotate(${seconds * 6}deg)`;
+        }
+        
+        // Actualiza cada segundo
+        setInterval(updateClock, 1000);
+        
+        // Muestra el reloj desde el tiempo inicial (10:00:00)
+        updateClock();
+        </script>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.clock {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 10px solid #333;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.hand {
+    position: absolute;
+    background: #333;
+    transform-origin: bottom;
+    transform: rotate(90deg); /* Empieza apuntando hacia las 10 */
+}
+
+.hour-hand {
+    width: 5px;
+    height: 50px;
+    top: 35px;
+}
+
+.minute-hand {
+    width: 3px;
+    height: 70px;
+    top: 15px;
+}
+
+.second-hand {
+    width: 2px;
+    height: 80px;
+    background: #e74c3c;
+    top: 10px;
+}
+
+    </style>
+</body>
+</html>
