@@ -1,0 +1,138 @@
+header{
+    background-color: black;
+    height: 70px;
+}
+
+header .logo{
+    position: absolute;
+    margin: 10px 10px;
+}
+
+header .menu{
+    color: white;
+    display: inline-block;
+    margin-left: 90px;
+    margin-top: 25px;
+}
+
+header .menu ul{
+    display: inline-block;
+}
+
+header .menu li{
+    font-size: 14px;
+    float: left;
+    margin-left: 30px;
+    font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300; 
+  font-style: normal;
+}
+
+header .menu li a{
+    color: white;
+    text-decoration: none;
+}
+
+header .menu li a:hover{
+    text-decoration: underline;
+}
+
+/*epmienza el main*/
+
+main img .fotouno{
+    float: left;
+    filter: opacity(10%);
+}
+
+main img .fotodos{
+    float: left;
+
+}
+main .rectangulo{
+    position: re;
+    width: 250px;
+    height: 355px;
+    background-color: black;
+    opacity: 60%;
+    top: 0;
+    margin: 120px 50px;
+    border-radius: 5px;
+    background: white;
+    display: flex;
+    box-shadow: 0px 0px 20px 4px #00000038;
+}
+
+main .rectangulodos{
+    position: absolute;
+    width: 750px;
+    height: 1055px;
+    background-color: black;
+    opacity: 60%;
+    margin: 0px 754px;
+}
+
+main{
+    background-color: black;
+}
+
+main article{
+    margin: 0px 199px;
+}
+
+main article img{
+    background-size: cover;
+}
+main .invierno{
+    color: white;
+    position: absolute;
+    margin: 450px 710px;
+    font-size: 120px;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-optical-sizing: auto;
+    background-color: rgb(0, 0, 0);
+    padding: 20px 20px;
+    /* box-shadow: inset 1px 3px 11px 11px rgb(102 102 102 / 36%); */
+    text-shadow: 0px 0px 20px white;
+}
+
+main .vertiendadeinvierno{
+    background-color: white;
+    color: black;
+    padding: 10px 40px;
+    position: absolute;
+    margin: 640px 682px;
+    border-radius: 5px;
+    border: transparent;
+    main .vertiendadeinvierno a{
+    text-decoration: none;
+    color: black;
+}
+}
+
+main .vertiendadeinvierno a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+
+main .vertiendadeinvierno, a:hover{
+    background-color: black;
+    color: white;
+    border: 2px white;
+
+}
+
+
+
+main ul{
+    margin: 20px 20px;
+    background-color: white;
+}
+
+main ul li{
+    display: inline-flex;
+    margin-left: 20px;
+}
