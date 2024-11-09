@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio alec alvarez</title>
+</head>
+<body>
+    <main>
+        <div class="cuadradoizquierdo"></div>
+        <div class="cuadradoderecho"></div>
+        <img src="Imagen de WhatsApp 2024-11-08 a las 17.06.06_3b145d50.jpg" alt="" height="300" width="300">
+        <p class="bienvenida">Hola bienvenido a mi Portfolio, soy Alec Alvarez!</p>
+    </main>
+    <style>
+
+html{
+    background-color: black;
+}
+
+        main .cuadradoizquierdo{
+            height: 400px;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: -1px -1px 20px 4px white;
+    filter: blur(2px);
+    background-color: white;
+    position: absolute;
+    right: 1420px;
+    top: 60px;
+        }
+
+        main .cuadradoderecho{
+            height: 400px;
+    width: 146px;
+    border-radius: 5px 0px 0px 5px;
+    box-shadow: -1px -1px 20px 4px white;
+    filter: blur(2px);
+    background-color: white;
+    position: absolute;
+    left: 1373px;
+    top: 820px;
+        }
+
+
+        main img{
+            position: absolute;
+    left: 600px;
+    top: 360px;
+    border-radius: 100%;
+    box-shadow: -3px 1px 20px 11px #ffffff8a;
+        }
+
+        main .bienvenida{
+            color: white;
+    position: absolute;
+    top: 710px;
+    left: 576px;
+    font-weight: bold;
+    font-family: sans-serif;
+    animation: slide 4s  linear;
+        }
+
+        @keyframes slide{
+            from{
+                left: 0px;
+               transform: translate(0,0);
+               opacity: 0%;
+            }
+           to{
+                left: 576px;
+                animation-duration: 2s;
+            }
+        }
+
+    </style>
+
+    <script>
+        // esta funcion comprueba si un elemento esta visible en pantalla
+function isVisible(elm) {
+	var rect = elm.getBoundingClientRect();
+	var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+	return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+}
+
+// cuando se carga la página...
+window.addEventListener('DOMContentLoaded', (ev0) => {
+        // asignamos un evento scroll...
+	window.addEventListener('scroll', (ev1) => {
+                // y a todos los elementos con la clase paused...
+		document.querySelectorAll(".bienvenida").forEach(elm => {
+			if (isVisible(elm)) // que sean visibles...
+				elm.classList.remove("paused"); // les quitamos la clase paused
+		})
+	});
+});
+    </script>
+</body>
+</html>
