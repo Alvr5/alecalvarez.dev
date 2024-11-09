@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Alec Alvarez</title>
+   <link rel="stylesheet" href="https://fontawesome.com/icons/html5?f=brands&s=solid&pc=%23e17714&sc=%23e17714">
 </head>
 <body>
     <main>
@@ -12,17 +13,86 @@
         <img src="Imagen de WhatsApp 2024-11-08 a las 17.06.06_3b145d50.jpg" alt="Foto de Alec" class="foto">
         <p class="bienvenida paused">HOLA BIENVENIDO, SOY ALEC!</p>
         <p class="descripcion">Desarrollador Web</p>
+        <div class="grupo1">
+
+            <p class="habilidades">HABILIDADES</p>
+            
+        <div class="habilidadesrectangulo"> 
+        </div> 
+        <i class="fa-brands fa-html5" id="icono1" style="color: #e17714;">
+            <img src="/html5-brands-solid.svg" alt="" height="200" width="200"><p>HTML</p>
+        </i>
+
+        <div class="habilidadesrectangulo2">
+            
+        </div>
+        <i class="fa-brands fa-css3-alt" id="icono2" style="color: #005eff;">
+            <img src="/css3-alt-brands-solid.svg" alt="" height="200" width="200"><p>CSS</p>
+        </i>
+
+        <div class="habilidadesrectangulo3">
+            
+        </div>
+        <i class="fa-brands fa-js" id="icono3" style="color: #ffc800;">
+            <img src="/js-brands-solid.svg" alt="" height="200" width="200"><p>JAVASCRIPT</p>
+        </i>
+    </div>
+
     </main>
+
+
+
     <style>
-        html { background-color: black; height: 1200px; }
+
+        main .grupo1 .habilidades{
+            color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 590px;
+    left: 630px;
+    font-size: 40px;
+    font-family: sans-serif;
+    /* box-shadow: inset -1px 0px 20px 0px white; */
+    text-shadow: 0px 0 20px white;
+        }
+
+        main  #icono1{
+            position: absolute;
+    top: 661px;
+    left: 370px;
+    scale: 0.2;
+        }
+
+main  #icono2{
+    position: absolute;
+    top: 661px;
+    left: 590px;
+    scale: 0.2;
+}
+
+main #icono3{
+    position: absolute;
+    top: 661px;
+    left: 690px;
+    scale: 0.2;
+}
+
+        main i p{
+            float: right;
+    font-size: 60px;
+    font-family: sans-serif;
+    font-weight: bold;
+        }
+
+        html { background-color: black; height: 5000px; }
 
         main .foto {
             border-radius: 100%;
-            box-shadow: -3px 1px 20px 11px #ffffff8a;
-            width: 50%;
-            max-width: 300px;
-            display: block;
-            margin: 50px auto 40px;
+    box-shadow: -3px 1px 20px 11px #ffffff8a;
+    width: 50%;
+    max-width: 300px;
+    display: block;
+    margin: 50px auto 120px;
         }
 
         main .bienvenida, main .descripcion {
@@ -42,6 +112,41 @@
             margin-top: 10px;
         }
 
+        main .habilidadesrectangulo{
+            height: 60px;
+    width: 119px;
+    background-color: white;
+    border-radius: 420px;
+    position: absolute;
+    left: 500px;
+    top: 730px;
+    box-shadow: 0 0 20px 0px white;
+        }
+
+        main .habilidadesrectangulo2{
+            height: 60px;
+    width: 119px;
+    background-color: white;
+    border-radius: 420px;
+    position: absolute;
+    left: 700px;
+    top: 730px;
+    box-shadow: 0 0 20px 0px white;
+        }
+
+        main .habilidadesrectangulo3{
+            height: 60px;
+    width: 143px;
+    background-color: white;
+    border-radius: 420px;
+    position: absolute;
+    left: 900px;
+    top: 730px;
+    box-shadow: 0 0 20px 0px white;
+        }
+        
+
+        /*animaciones*/
         .animate-slide {
             animation: slide 2s forwards;
         }
@@ -50,6 +155,9 @@
             animation: slide-reverse 1s forwards;
         }
 
+
+
+        /*RESPONSIVE*/
         @keyframes slide {
             from { opacity: 0; transform: translateX(-100px); }
             to { opacity: 1; transform: translateX(0); }
@@ -71,6 +179,9 @@
             main .bienvenida, main .descripcion {
                 font-size: 1em;
             }
+            main p{
+                text-align: center;
+            }
         }
     </style>
 
@@ -78,14 +189,14 @@
         const fuentes = ["Arial", "Georgia", "Courier New", "Verdana", "Times New Roman"];
         let fuenteIndex = 0;
 
-        setInterval(() => {
+        setInterval(() => { // animacion de hola bienvendio con scroll
             const bienvenida = document.querySelector(".bienvenida");
             bienvenida.style.fontFamily = fuentes[fuenteIndex];
             fuenteIndex = (fuenteIndex + 1) % fuentes.length;
         }, 5000);
 
         setInterval(() => {
-            const descripcion = document.querySelector(".descripcion");
+            const descripcion = document.querySelector(".descripcion"); // animacion de descripción con scroll
             descripcion.style.fontFamily = fuentes[fuenteIndex];
             fuenteIndex = (fuenteIndex + 1) % fuentes.length;
         }, 5000);
