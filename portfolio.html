@@ -327,11 +327,6 @@ main .proyectos{
             fuenteIndex = (fuenteIndex + 1) % fuentes.length;
         }, 5000);
 
-        setInterval(() => {
-            const descripcion = document.querySelector(".habilidades"); // animacion de descripción con scroll
-            descripcion.style.fontFamily = fuentes[fuenteIndex];
-            fuenteIndex = (fuenteIndex + 1) % fuentes.length;
-        }, 5000);
 
         function isVisible(elm) {
             var rect = elm.getBoundingClientRect();
