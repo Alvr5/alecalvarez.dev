@@ -9,43 +9,37 @@
     <main>
         <div class="cuadradoizquierdo"></div>
         <div class="cuadradoderecho"></div>
-        <img src="Imagen de WhatsApp 2024-11-08 a las 17.06.06_3b145d50.jpg" alt="Foto de Alec" height="300" width="300">
+        <img src="Imagen de WhatsApp 2024-11-08 a las 17.06.06_3b145d50.jpg" alt="Foto de Alec" class="foto">
         <p class="bienvenida paused">HOLA BIENVENIDO, SOY ALEC!</p>
         <p class="descripcion">Desarrollador Web</p>
     </main>
     <style>
-        html { 
-            background-color: black; 
-            height: 1200px;
-        }
+        html { background-color: black; height: 1200px; }
 
-
-        main img {
-            position: absolute;
-            left: 600px;
-            top: 200px;
+        main .foto {
             border-radius: 100%;
             box-shadow: -3px 1px 20px 11px #ffffff8a;
+            width: 50%;
+            max-width: 300px;
+            display: block;
+            margin: 50px auto 40px;
+        }
+
+        main .bienvenida, main .descripcion {
+            color: white;
+            font-weight: bold;
+            font-family: sans-serif;
+            text-align: center;
+            opacity: 0;
         }
 
         main .bienvenida {
-            color: white;
-            position: absolute;
-            top: 520px;
-            left: 576px;
-            font-weight: bold;
-            font-family: sans-serif;
-            opacity: 0;
+            font-size: 1.5em;
         }
 
         main .descripcion {
-            color: white;
-            position: absolute;
-            top: 550px;
-            left: 576px;
-            font-weight: bold;
-            font-family: sans-serif;
-            opacity: 0;
+            font-size: 1.2em;
+            margin-top: 10px;
         }
 
         .animate-slide {
@@ -57,66 +51,62 @@
         }
 
         @keyframes slide {
-            from { left: 0; opacity: 0; }
-            to { left: 616px; opacity: 1; }
-        }
-
-        
-        @keyframes slide1 {
-            from { 
-                left: 0; opacity: 0; 
-            }
-            to { left: center; opacity: 1; }
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes slide-reverse {
-            from {
-                
-                 left: 576px; opacity: 1; 
-                
-                }
-            to { left: 0; opacity: 0; }
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-100px); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            main .bienvenida, main .descripcion {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main .bienvenida, main .descripcion {
+                font-size: 1em;
+            }
         }
     </style>
 
-    <script> 
-    //--------------------------------------------------------------JAVASCRIPT------------------------------------------------------------------------------------------------
-        const fuentes = ["Arial", "Georgia", "Courier New", "Verdana", "Times New Roman"]; //Cuando vaya scrolleando el usuario se van cambiando en estas fuentes el texto
+    <script>
+        const fuentes = ["Arial", "Georgia", "Courier New", "Verdana", "Times New Roman"];
         let fuenteIndex = 0;
 
-        // Cambia la fuente cada 2 segundos
         setInterval(() => {
             const bienvenida = document.querySelector(".bienvenida");
             bienvenida.style.fontFamily = fuentes[fuenteIndex];
-            fuenteIndex = (fuenteIndex + 1) % fuentes.length; // Avanza al siguiente tipo de fuente en el array
+            fuenteIndex = (fuenteIndex + 1) % fuentes.length;
         }, 5000);
 
         setInterval(() => {
-            const bienvenida = document.querySelector(".descripcion");
-            bienvenida.style.fontFamily = fuentes[fuenteIndex];
-            fuenteIndex = (fuenteIndex + 1) % fuentes.length; // Avanza al siguiente tipo de fuente en el array
+            const descripcion = document.querySelector(".descripcion");
+            descripcion.style.fontFamily = fuentes[fuenteIndex];
+            fuenteIndex = (fuenteIndex + 1) % fuentes.length;
         }, 5000);
 
-        // Función que comprueba si un elemento está visible en pantalla
         function isVisible(elm) {
             var rect = elm.getBoundingClientRect();
             var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
             return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
         }
 
-        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop; // scroll hacia arriba
-
-// animaciones de scroll 
+        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         window.addEventListener('scroll', () => {
             const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const scrollDirection = currentScrollTop > lastScrollTop ? 'down' : 'up';
             lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
 
-            document.querySelectorAll(".bienvenida").forEach(elm => {
+            document.querySelectorAll(".bienvenida, .descripcion").forEach(elm => {
                 if (isVisible(elm)) {
                     if (scrollDirection === 'down') {
-                        elm.classList.remove("animate-slide-reverse"); // cuando el usuario scroleé hacia arriba el texto hará la animacion al revés
+                        elm.classList.remove("animate-slide-reverse");
                         elm.classList.add("animate-slide");
                     } else if (scrollDirection === 'up') {
                         elm.classList.remove("animate-slide");
@@ -124,20 +114,6 @@
                     }
                 }
             });
-
-
-            document.querySelectorAll(".descripcion").forEach(elm => {
-                if (isVisible(elm)) {
-                    if (scrollDirection === 'down') {
-                        elm.classList.remove("animate-slide-reverse"); // cuando el usuario scroleé hacia arriba el texto hará la animacion al revés
-                        elm.classList.add("animate-slide");
-                    } else if (scrollDirection === 'up') {
-                        elm.classList.remove("animate-slide");
-                        elm.classList.add("animate-slide-reverse");
-                    }
-                }
-            });
-
         });
     </script>
 </body>
