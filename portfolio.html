@@ -55,10 +55,8 @@ main .proyectos{
     text-shadow: 1px 0px 20px white;
     position: absolute;
     top: 930px;
-    left: 810px;
+    left: 640px;
 }
-
-
 
         main .grupo1 .habilidades{
             color: white;
@@ -138,6 +136,7 @@ main #icono3{
     top: 730px;
     box-shadow: 0 0 20px 0px white;
         }
+  
 
         main .habilidadesrectangulo2{
             height: 60px;
@@ -160,9 +159,6 @@ main #icono3{
     top: 730px;
     box-shadow: 0 0 20px 0px white;
         }
-        main .proyectos{
-            left: 640px;
-        }
         
 
         /*animaciones*/
@@ -175,16 +171,15 @@ main #icono3{
         }
 
 
-
         /*KEYFRAMES*/
         @keyframes slide {
-            from { opacity: 0; transform: translateX(-100px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { opacity: 0; transform: translateY(-100px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slide-reverse {
-            from { opacity: 1; transform: translateX(0); }
-            to { opacity: 0; transform: translateX(-100px); }
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-100px); }
         }
 
         /* Responsive Styles */
@@ -320,6 +315,30 @@ main .proyectos{
             fuenteIndex = (fuenteIndex + 1) % fuentes.length;
         }, 5000);
 
+        setInterval(() => {
+            const descripcion = document.querySelector(".proyectos"); // animacion de descripción con scroll
+            descripcion.style.fontFamily = fuentes[fuenteIndex];
+            fuenteIndex = (fuenteIndex + 1) % fuentes.length;
+        }, 5000);
+
+        setInterval(() => {
+            const descripcion = document.querySelector("#icono1"); // animacion de descripción con scroll
+            descripcion.style.fontFamily = fuentes[fuenteIndex];
+            fuenteIndex = (fuenteIndex + 1) % fuentes.length;
+        }, 5000);
+
+        setInterval(() => {
+            const descripcion = document.querySelector(".habilidadesrectangulo"); // animacion de descripción con scroll
+            descripcion.style.fontFamily = fuentes[fuenteIndex];
+            fuenteIndex = (fuenteIndex + 1) % fuentes.length;
+        }, 5000);
+
+        setInterval(() => {
+            const descripcion = document.querySelector(".habilidades"); // animacion de descripción con scroll
+            descripcion.style.fontFamily = fuentes[fuenteIndex];
+            fuenteIndex = (fuenteIndex + 1) % fuentes.length;
+        }, 5000);
+
         function isVisible(elm) {
             var rect = elm.getBoundingClientRect();
             var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
@@ -333,7 +352,7 @@ main .proyectos{
             const scrollDirection = currentScrollTop > lastScrollTop ? 'down' : 'up';
             lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
 
-            document.querySelectorAll(".bienvenida, .descripcion").forEach(elm => {
+            document.querySelectorAll(".bienvenida, .descripcion, #icono1, .habilidadesrectangulo, .habilidades, .habilidadesrectangulo2, .habilidadesrectangulo3, #icono2, #icono3").forEach(elm => {
                 if (isVisible(elm)) {
                     if (scrollDirection === 'down') {
                         elm.classList.remove("animate-slide-reverse");
