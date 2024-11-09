@@ -157,7 +157,7 @@ main #icono3{
 
 
 
-        /*RESPONSIVE*/
+        /*KEYFRAMES*/
         @keyframes slide {
             from { opacity: 0; transform: translateX(-100px); }
             to { opacity: 1; transform: translateX(0); }
@@ -176,11 +176,65 @@ main #icono3{
         }
 
         @media (max-width: 480px) {
+
+            main .bienvenida{
+                opacity: 100%;
+            }
+
+            main .descripcion{
+                opacity: 100%;
+            }
+
             main .bienvenida, main .descripcion {
                 font-size: 1em;
             }
             main p{
                 text-align: center;
+            }
+
+            main .grupo1 .habilidades{
+                top: 450px;  left: 73px;
+            }
+
+            main .habilidadesrectangulo{
+                left: 143px;
+                top: 580px;
+            }
+
+            main #icono1{
+                left: 15px;
+                top: 509px;
+            }
+
+            main .habilidadesrectangulo2{
+                left: 143px;
+                top: 700px;
+            }
+
+            main #icono2{
+                top: 631px;
+                left: 33px;
+            }
+
+            main .habilidadesrectangulo3{
+                left: 125px;
+        top: 820px;
+        width: 160px;
+            }
+
+            main #icono3 {
+                position: absolute;
+        /* top: 661px; */
+        left: 60px;
+        top: 748px;
+
+            }
+
+            main #icono3 p{
+                float: left;
+    left: 290px;
+    position: absolute;
+    top: 20px;
             }
         }
     </style>
