@@ -303,7 +303,7 @@ main .proyectos{
         const fuentes = ["Arial", "Georgia", "Courier New", "Verdana", "Times New Roman"];
         let fuenteIndex = 0;
 
-        setInterval(() => { // animacion de hola bienvendio con scroll
+        setInterval(() => { // animaciones de cambio de FUENTES-------------------------------------------------
             const bienvenida = document.querySelector(".bienvenida");
             bienvenida.style.fontFamily = fuentes[fuenteIndex];
             fuenteIndex = (fuenteIndex + 1) % fuentes.length;
@@ -311,12 +311,6 @@ main .proyectos{
 
         setInterval(() => {
             const descripcion = document.querySelector(".descripcion"); // animacion de descripción con scroll
-            descripcion.style.fontFamily = fuentes[fuenteIndex];
-            fuenteIndex = (fuenteIndex + 1) % fuentes.length;
-        }, 5000);
-
-        setInterval(() => {
-            const descripcion = document.querySelector(".proyectos"); // animacion de descripción con scroll
             descripcion.style.fontFamily = fuentes[fuenteIndex];
             fuenteIndex = (fuenteIndex + 1) % fuentes.length;
         }, 5000);
@@ -344,6 +338,8 @@ main .proyectos{
             var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
             return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
         }
+
+        /*ANIMACIONES DE APARICIÓN CUANDO SCROLLEA*/
 
         let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
