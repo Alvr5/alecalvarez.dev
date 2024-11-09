@@ -10,39 +10,20 @@
         <div class="cuadradoizquierdo"></div>
         <div class="cuadradoderecho"></div>
         <img src="Imagen de WhatsApp 2024-11-08 a las 17.06.06_3b145d50.jpg" alt="Foto de Alec" height="300" width="300">
-        <p class="bienvenida paused">Hola bienvenido a mi Portfolio, soy Alec Alvarez!</p>
+        <p class="bienvenida paused">HOLA BIENVENIDO, SOY ALEC!</p>
+        <p class="descripcion">Desarrollador Web</p>
     </main>
     <style>
-        html { background-color: black; }
-
-        main .cuadradoizquierdo {
-            height: 400px;
-            width: 200px;
-            border-radius: 5px;
-            box-shadow: -1px -1px 20px 4px white;
-            filter: blur(2px);
-            background-color: white;
-            position: absolute;
-            right: 1420px;
-            top: 60px;
+        html { 
+            background-color: black; 
+            height: 1200px;
         }
 
-        main .cuadradoderecho {
-            height: 400px;
-            width: 146px;
-            border-radius: 5px 0px 0px 5px;
-            box-shadow: -1px -1px 20px 4px white;
-            filter: blur(2px);
-            background-color: white;
-            position: absolute;
-            left: 1373px;
-            top: 820px;
-        }
 
         main img {
             position: absolute;
             left: 600px;
-            top: 360px;
+            top: 200px;
             border-radius: 100%;
             box-shadow: -3px 1px 20px 11px #ffffff8a;
         }
@@ -50,7 +31,17 @@
         main .bienvenida {
             color: white;
             position: absolute;
-            top: 710px;
+            top: 520px;
+            left: 576px;
+            font-weight: bold;
+            font-family: sans-serif;
+            opacity: 0;
+        }
+
+        main .descripcion {
+            color: white;
+            position: absolute;
+            top: 550px;
             left: 576px;
             font-weight: bold;
             font-family: sans-serif;
@@ -62,23 +53,35 @@
         }
 
         .animate-slide-reverse {
-            animation: slide-reverse 2s forwards;
+            animation: slide-reverse 1s forwards;
         }
 
         @keyframes slide {
             from { left: 0; opacity: 0; }
-            to { left: 576px; opacity: 1; }
+            to { left: 616px; opacity: 1; }
+        }
+
+        
+        @keyframes slide1 {
+            from { 
+                left: 0; opacity: 0; 
+            }
+            to { left: center; opacity: 1; }
         }
 
         @keyframes slide-reverse {
-            from { left: 576px; opacity: 1; }
+            from {
+                
+                 left: 576px; opacity: 1; 
+                
+                }
             to { left: 0; opacity: 0; }
         }
     </style>
 
     <script> 
     //--------------------------------------------------------------JAVASCRIPT------------------------------------------------------------------------------------------------
-        const fuentes = ["Arial", "Georgia", "Courier New", "Verdana", "Times New Roman"];
+        const fuentes = ["Arial", "Georgia", "Courier New", "Verdana", "Times New Roman"]; //Cuando vaya scrolleando el usuario se van cambiando en estas fuentes el texto
         let fuenteIndex = 0;
 
         // Cambia la fuente cada 2 segundos
@@ -86,7 +89,13 @@
             const bienvenida = document.querySelector(".bienvenida");
             bienvenida.style.fontFamily = fuentes[fuenteIndex];
             fuenteIndex = (fuenteIndex + 1) % fuentes.length; // Avanza al siguiente tipo de fuente en el array
-        }, 2000);
+        }, 5000);
+
+        setInterval(() => {
+            const bienvenida = document.querySelector(".descripcion");
+            bienvenida.style.fontFamily = fuentes[fuenteIndex];
+            fuenteIndex = (fuenteIndex + 1) % fuentes.length; // Avanza al siguiente tipo de fuente en el array
+        }, 5000);
 
         // Función que comprueba si un elemento está visible en pantalla
         function isVisible(elm) {
@@ -115,6 +124,20 @@
                     }
                 }
             });
+
+
+            document.querySelectorAll(".descripcion").forEach(elm => {
+                if (isVisible(elm)) {
+                    if (scrollDirection === 'down') {
+                        elm.classList.remove("animate-slide-reverse"); // cuando el usuario scroleé hacia arriba el texto hará la animacion al revés
+                        elm.classList.add("animate-slide");
+                    } else if (scrollDirection === 'up') {
+                        elm.classList.remove("animate-slide");
+                        elm.classList.add("animate-slide-reverse");
+                    }
+                }
+            });
+
         });
     </script>
 </body>
