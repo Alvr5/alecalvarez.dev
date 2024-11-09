@@ -1,0 +1,88 @@
+header{
+    width: 1536px;
+    background: black;
+    color: white;
+    padding: 20px 20px;
+}
+
+header h1{
+        /* float: left; */
+        font-size: 70px;
+        /* display: inline-block; */
+        font-family: fantasy;
+        text-align: center;
+        width: 120px;
+        /* left: 200px; */
+        top: auto;
+        margin: 0px 690px;
+}
+
+header p{
+    text-align: center;
+    margin: 20px 20px 5px 20px;
+}
+
+header ul{
+
+    display: inline-block;
+    text-align: center;
+    /* left: 20%; */
+    margin-left: 620px;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+header ul li{
+    float: left;
+    margin-left: 20px;
+    font-family: sans-serif;
+}
+
+header ul li:hover{
+    text-decoration: underline;
+    animation-delay: 2s;
+}
+
+header ul a li{
+    color: white;
+}
+
+main{
+    background-image: url(guepardo.jpg);
+    width: 1536px;
+    height: 1000px;
+    position: fixed;
+    overflow: auto;
+}
+
+main form {
+    height: 30px;
+    text-align: center;
+    border: 2px solid transparent;
+    color: black;
+    margin-top: 25px;
+    width: 200px;
+    line-height: 2.3;
+    position: absolute;
+    margin: 190px 670px;
+    font-family: fantasy;
+}
+
+main form input{
+    height: 25px;
+    text-align: center;
+    }
+
+    main form button{
+        background-color: black;
+        color: white;
+        padding: 5px 66px 5px;
+    }
+
+    main form button:hover{
+        background-color: white;
+        color:black;
+        cursor: pointer;
+        border: transparent;
+    }
+
