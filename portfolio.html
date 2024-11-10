@@ -38,14 +38,139 @@
         </i>
     </div>
 
-
     <p class="proyectos">PROYECTOS</p>
+
+    <div class="columns">
+        <div class="rectangulotitulo2">
+                <p class="titulo">WORLDFASHION</p>
+                <p class="descripcion1">Tienda online de ropa internacional</p>
+                <button>Obtener vista</button>
+            </div>
+            <div class="column1">
+
+        </div>
+        <div class="rectangulotitulo">
+            <p class="titulo1">ZOO</p>
+            <p class="descripcion2">web de zoo</p>
+            <button>Obtener vista</button>
+        </div>
+        <div class="column2">
+
+        </div>
+    </div>
 
     </main>
 
-
-
     <style>
+
+        main .rectangulotitulo2 button{
+            position: absolute;
+    left: 250px;
+    top: 93px;
+    background: black;
+    color: wheat;
+    padding: 8px;
+    width: 140px;
+    border-radius: 5px;
+    display: none;
+        }
+
+        main .rectangulotitulo button{
+            position: absolute;
+    left: 250px;
+    top: 93px;
+    background: black;
+    color: wheat;
+    padding: 8px;
+    width: 140px;
+    border-radius: 5px;
+    display: none;
+        }
+
+        main .rectangulotitulo2 .titulo{
+            position: absolute;
+    font-weight: bold;
+    font-family: sans-serif;
+    left: 10px;
+    top: 10px;
+}
+
+main .rectangulotitulo2 .descripcion1{
+    margin: 20px;
+    position: absolute;
+    /* font-weight: bold; */
+    font-family: sans-serif;
+    top: 39px;
+    color: #000000b5;
+}
+
+
+main .rectangulotitulo .titulo1{
+    position: absolute;
+    font-weight: bold;
+    font-family: sans-serif;
+    left: 20px;
+}
+
+main .rectangulotitulo .descripcion2{
+    margin: 20px;
+    position: absolute;
+    /* font-weight: bold; */
+    font-family: sans-serif;
+    top: 39px;
+    color: #000000b5;
+}
+
+
+        main .rectangulotitulo{
+            height: 140px;
+    background: white;
+    width: 402px;
+    position: absolute;
+    top: 1405px;
+    left: 870px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+main .rectangulotitulo2{
+    height: 140px;
+    background: white;
+    width: 404px;
+    position: absolute;
+    top: 1405px;
+    left: 200px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+        main .column1{
+            background-image: url(Group122.jpg);
+    /* border: 2px solid white; */
+    width: 202px;
+    height: 141px;
+    position: absolute;
+    left: 300px;
+    top: 1202px;
+    scale: 2;
+    border-radius: 5px 5px 0px 0px;
+    box-shadow: 0px 0px 20px white;
+}
+
+main .column2{
+    background-image: url(guepardo.jpg);
+    border: 1px solid white;
+    width: 199px;
+    height: 132px;
+    position: absolute;
+    background-size: contain;
+    left: 970px;
+    background-repeat: no-repeat;
+    top: 1205px;
+    background-position-x: 0px;
+    scale: 2;
+    border-radius: 5px 5px 0px 0px;
+    box-shadow: 0px 1px 20px 0px white;
+    background-position-y: 0px;
+}
 
 main .proyectos{
     color: #ffffff;
@@ -192,13 +317,21 @@ main #icono3{
         @media (max-width: 380px){
             #icono1 {
                 color: #e17714;
-    width: 410px;
-    left: 0px;
-}
-main .proyectos{
-   left: 60px;
-}
-            }
+                 width: 410px;
+                left: 0px;
+        }
+            main .proyectos{
+                left: 60px;
+        }
+
+        main .column1{
+            left: 130px;
+        width: 160px;
+        background-position-x: 180px;
+        background-position-y: 160px;
+    }
+        }
+
 
             @media  (min-width: 1920px){
 
