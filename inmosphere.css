@@ -1,5 +1,13 @@
+html{
+    width: 1536px;
+
+}
+
 body{
     margin: 0;
+    overflow:scroll;
+    max-width: 1536px;
+    overflow-x: hidden;
 }
 header #menu .logo{
     float: left;
@@ -28,6 +36,12 @@ header #menu .menu ul li{
     align-items: center;
     align-content: center;
     font-family: sans-serif;
+}
+header #menu .menu ul a{
+    color: black;
+}
+header #menu .menu ul li:hover{
+   text-decoration: underline;
 }
 
 header #menu .contacto{
@@ -284,10 +298,10 @@ main .right{
 
 main .slidedos{
     position: absolute;
-    top: 1351px;
+    top: 1281px;
     left: 48px;
     font-size: 70px;
-    width: 640px;
+    width: 540px;
     font-family: sans-serif;
     float: right;
     text-align: end;
@@ -320,4 +334,47 @@ main .descripctiondos{
     position: absolute;
     top: 74px;
     left: 720px;
+}
+
+.testimoniosmain{
+    background-color: black;
+    height: 1810px;
+    width: 1536px;
+    position: absolute;
+    top: 90px;
+}
+
+.testimoniosmain .destello{
+    width: 1460px;
+}
+
+.testimoniosmain .cuadradouno{
+    width: 430px;
+    position: absolute;
+    left: 50px;
+    top: 110px;
+    rotate: 30px;
+    transform: rotate(25deg);
+    border-radius: 35px;
+    box-shadow: 2px 0px 20px 15px #ffffffbf;
+    border: 12px solid white;
+}
+
+
+.testimoniosmain .cuadradodos{
+    width: 430px;
+    position: absolute;
+    left: 1150px;
+    top: 1210px;
+    rotate: 30px;
+    transform: rotate(25deg);
+    border-radius: 35px;
+    box-shadow: 2px 0px 20px 15px #ffffffbf;
+    border: 12px solid white;
+    object-fit: contain;
+}
+
+
+main{
+    overflow: hidden;
 }
