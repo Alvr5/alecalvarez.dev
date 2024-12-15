@@ -18,7 +18,7 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li>Incio</li>
+                    <li>Inicio</li>
                     <a href="testimonios.html">
                     <li>Testimonios</li></a>
                     <li>Sobre nosotros</li>
@@ -49,11 +49,23 @@
 
     <div class="busqueda">
         <p>Busca tu casa con tus propias preferencias</p>
-        <input class="zona" id="zonauno" type="text" placeholder="Zona" maxlength="26">
+        <select name="tipodepropiedad" class="zona" id="">
+            <optgroup name="pais" label="Pais">
+            <option value="casacmp">España</option>
+            <option value="casacmp">Francia</option>
+        </optgroup>
+        </select>
         <img class="localizar" src="Group (2).png" alt="">
-        <input class="tipo" type="text" placeholder="Tipo de propiedad">
-        <input class="presupuest" type="text" placeholder="Presupuesto">
-        <button>Buscar</button>
+        <select name="tipodepropiedad" class="tipo" id="">
+            <optgroup name="pais" label="Tipo de propiedad">
+                <option value="casacmp">Casa de campo</option>
+                <option value="casacmp">Piso</option>
+        </optgroup>
+        </select>
+        <input class="presupuest" type="number" placeholder="Presupuesto">
+        <a href="testimonios.html">
+            <button id="botonbuscar" type="button">Buscar</button>
+        </a>
     </div>
 
 <img class="left" src="Rectangle 8.png" alt="">
