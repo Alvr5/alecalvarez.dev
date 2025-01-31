@@ -1,0 +1,23 @@
+#formulario{
+    position: absolute;
+    top: 0px;
+    text-align: center;
+    width: 1536px;
+    height:800px;
+    overflow: hidden;
+    z-index: -1;
+}
+
+body{
+    margin: 0;
+    overflow: hidden;
+}
+
+h1{
+    position: absolute;
+    z-index: 1;
+    color: yellow;
+    font-family: 'circular';
+    top: 30px;
+    left: 30px;
+}
