@@ -109,6 +109,75 @@
 
         <p id="textofotografosdestacados">FOTOGRAFOS DESTACADOS</p>
 
+        <!-- -----------------------------CARROUSEL---------------------------- -->
+
+
+        <div class="carousel">
+            <button class="button button-left">&#8249;</button>
+            <div class="carousel-track">
+              <div class="carousel-item">
+                <img src="image 8.png" alt="Persona 1">
+                <h3>María Fernández López</h3>
+                <p>
+                  María es una fotógrafa de retratos y eventos apasionada por capturar las emociones y las historias detrás de cada momento.
+                </p>
+              </div>
+              <div class="carousel-item">
+                <img src="image 9.png" alt="Persona 2">
+                <h3>Carlos García Martínez</h3>
+                <p>
+                  Carlos es un experto fotógrafo que combina técnica y pasión para capturar momentos únicos.
+                </p>
+              </div>
+            </div>
+            <button class="button button-right">&#8250;</button>
+          </div>
+          <div class="indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+          </div>
+        
+          <script>
+            // Selección de elementos
+            const track = document.querySelector('.carousel-track');
+            const items = Array.from(track.children);
+            const prevButton = document.querySelector('.button-left');
+            const nextButton = document.querySelector('.button-right');
+            const indicators = Array.from(document.querySelectorAll('.indicator'));
+        
+            let currentIndex = 0;
+        
+            // Función para actualizar el carrusel
+            function updateCarousel(index) {
+              const itemWidth = items[0].getBoundingClientRect().width;
+              track.style.transform = `translateX(-${index * itemWidth}px)`;
+        
+              indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+              });
+            }
+        
+            // Botón "Siguiente"
+            nextButton.addEventListener('click', () => {
+              currentIndex = (currentIndex + 1) % items.length;
+              updateCarousel(currentIndex);
+            });
+        
+            // Botón "Anterior"
+            prevButton.addEventListener('click', () => {
+              currentIndex = (currentIndex - 1 + items.length) % items.length;
+              updateCarousel(currentIndex);
+            });
+        
+            // Indicadores
+            indicators.forEach((indicator, i) => {
+              indicator.addEventListener('click', () => {
+                currentIndex = i;
+                updateCarousel(currentIndex);
+              });
+            });
+          </script>
+
     </main>
 
     <footer>

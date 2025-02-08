@@ -231,7 +231,7 @@ main .comofunciona {
     /* position: relative; */
     position: relative;
     top: 0px;
-    height: 1400px;
+    height: 1200px;
 }
 
 main .comofunciona p {
@@ -677,3 +677,116 @@ main .imagencamara{
     width: 1536px;
     text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo básico para el carrusel */
+
+  .carousel {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* width: 80%; */
+    max-width: 1536px;
+    overflow: hidden;
+    height: 410px;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-item {
+    min-width: 100%;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .carousel-item img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #13B1A6;
+    margin-bottom: 15px;
+  }
+
+  .carousel-item h3 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: #13B1A6;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+
+  .carousel-item p {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+    color: white;
+    font-family: sans-serif;
+  }
+
+  .button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #13B1A6;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    width: 45px;
+    height: 45px;
+    margin: 40px;
+  }
+
+  .button-left {
+    left: 10px;
+  }
+
+  .button-right {
+    right: 10px;
+  }
+
+  .indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    background: black;
+    height: -270px;
+    position: absolute;
+    top: 1880px;
+    z-index: 5;
+    left: 735px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    opacity: 0.5;
+  }
+
+  .indicator.active {
+    background-color: #13B1A6;
+    opacity: 1;
+  }
