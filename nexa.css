@@ -1,23 +1,308 @@
-#formulario{
+body {
+    width: 1536px;
+    margin: 0;
+    overflow: hidden;
+    height: 690px;
+}
+
+h1 {
     position: absolute;
-    top: 0px;
+    z-index: 1;
+    color: #FCE46A;
+    top: 40px;
+    left: 550px;
+    font-family: sans-serif;
+    scale: 2;
+}
+
+.black {
+    background-color: #0000009c;
+    width: 1536px;
+    position: absolute;
+    z-index: -1;
+    height: 730px;
+}
+
+video {
+    position: absolute;
+    z-index: -2;
+    /* scale: 1; */
+    filter: blur(5px);
+    box-shadow: -2px 1px 20px 20px black;
+    width: 1536px;
+    height: max-content;
+}
+
+form {
+    width: 200px;
+    text-align: center;
+    position: absolute;
+    top: 220px;
+    color: #FCE46A;
+    font-family: sans-serif;
+    scale: 1.6;
+    left: 630px;
+}
+
+form input {
+    border: 0px transparent;
+    border-radius: 5px;
+    margin: 20px 0px;
+}
+
+form textarea {
+    border: 0px transparent;
+    border-radius: 5px;
+    margin: 20px 0px;
+}
+
+form button {
+    background-color: #FCE46A;
+    color: black;
+    width: 170px;
+    border: 0px;
+    padding: 10px 0px;
+    border-radius: 5px;
+}
+
+form button:hover {
+
+    scale: 1;
+    background-color: black;
+    color: #FCE46A;
+    animation-duration: 1s;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#flecha {
+    position: absolute;
+    z-index: 2;
+    width: 20px;
+    height: 20px;
+    color: #FCE46A;
+    top: 75px;
+    scale: 3;
+    left: 115px;
+}
+
+#flecha:hover {
+    scale: 4;
+    transition: 0.3s ease-in-out;
+
+}
+
+.uno {
+    position: absolute;
+    top: 530px;
+    left: 480px;
+    font-family: sans-serif;
+    color: #FCE46A;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dos {
+    position: absolute;
+    left: 635px;
+    top: 575px;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #FCE46A;
+}
+
+.bienvenidanexa {
+    font-family: sans-serif;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    /* left: 600px; */
     text-align: center;
     width: 1536px;
-    height:800px;
-    overflow: hidden;
+    color: #FCE46A;
+}
+
+#palabrasfiltradas #listafiltro li {
+    padding: 15px 10px;
+    text-align: center;
+    width: 250px;
+    /* border: 2px solid #00000030; */
+    box-shadow: -1px 1px 5px #0000001a;
+    border-radius: 3px;
     z-index: -1;
+    margin: 10px 0px;
+}
+
+
+#listafiltro {
+    text-align: center;
+    position: absolute;
+    left: 620px;
+    margin: 20px 20px;
+    top: 30px;
+    border-radius: 5px;
+}
+
+body i {
+    color: grey;
+}
+
+body #lupa {
+    position: absolute;
+    scale: 0.06;
+    left: 550px;
+    top: 2px;
+}
+
+body .buscador {
+    width: 250px;
+    position: absolute;
+    left: 645px;
+    /* text-align: center; */
+    border: transparent;
+    box-shadow: 0px 0px 10px #0000000f;
+    top: 10px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#bodyinicio {
+    background-color: black;
+}
+
+#bodyinicio .logo img {
+    position: absolute;
+    left: 50px;
+    top: 40px;
+    scale: 1.7;
+}
+
+#bodyinicio .logo{
+    width: 130px;
+    height: 80px;
+    float: left;
+}
+
+
+#bodyinicio .menu {
+    position: absolute;
+    /* margin-right: 30px; */
+    /* margin-top: 45px; */
+    color: #FCE46A;
+    left: 150px;
+    top: 45px;
+}
+
+#bodyinicio .menu ul{
+    float: left;
+    width: 790px;
+    position: absolute;
+    left: 30px;
+}
+
+#bodyinicio .menu ul li{
+    margin-right: 40px;
+    display: inline-block;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-shadow: -1px 0px 5px #FCE46A;
+}
+
+
+#bodyinicio #botoncontacto {
+    background-color: #FCE46A;
+    color: black;
+    padding: 10px 40px;
+    box-shadow: 0px -1px 20px #FCE46A;
+    border: transparent;
+    border-radius: 5px;
+    float: right;
+    margin: 35px 30px;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+#bodyinicio #botoncontacto:hover{
+    scale: 1.2;
+    transition: 0.3s ease;
+}
+
+main .tca{
+    background-image: url(painting-2111495_1920.jpg);
+    height: 250px;
+    width: 1536px;
+    position: absolute;
+    top: 100px;
+    background-size: cover;
+    background-position-y: -480;
+    background-repeat: no-repeat;
+    background-position-y: -400px;
+}
+
+.tca .filtro{
+    background-color: #fce46a6a;
+    height: 250px;
+    width: 1536px;
+    position: absolute;
+    background-size: cover;
+
+}
+
+.talleresenlaçe{
+    color: #FCE46A;
+}
+
+.menu li:hover{
+    text-decoration: underline;
+    transition: 2s ease-in;
+}
+
+
+.inicioenlaçe {
+    color: #FCE46A;
+}
+
+main #titulotca{
+    position: absolute;
+    font-size: 80px;
+    color: black;
+    top: 142px;
+    z-index: 1;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+main #tallerespopulares{
+    position: absolute;
+    font-family: sans-serif;
+    top: 380px;
+    font-size: 50px;
+    color: #FCE46A;
+    font-weight: bold;
+    /* left: 40px; */
+    text-align: center;
+    width: 1536px;
+}
+
+main .talleres{
+    width: 200px;
+    height: 500px;
+    background-color: white;
+    box-shadow: 0px 0px 20px white;
+    position: absolute;
+    left: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 20px;
 }
 
 body{
-    margin: 0;
-    overflow: hidden;
+    overflow: auto;
 }
 
-h1{
+main #archivo1{
     position: absolute;
-    z-index: 1;
-    color: yellow;
-    font-family: 'circular';
-    top: 30px;
-    left: 30px;
+    top: 140px;
 }
