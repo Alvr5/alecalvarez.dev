@@ -9,6 +9,12 @@ header .menu{
 header .logo{
     position: absolute;
     left: 548px;
+
+}
+
+header .logoinicio{
+    position: absolute;
+    left: 548px;
 }
 header ul{
     position: absolute;
@@ -24,6 +30,7 @@ header ul li{
      margin-left: 20px;
      font-family: sans-serif;
      color: #13B1A6;
+     padding: 10px;
 }
 
 header ul .inicio{
@@ -40,8 +47,17 @@ header ul .porque{
 
 header ul .acceder{
     position: absolute;
-    left: 923px;
+    left: 893px;
     width: 200px;
+    top: 5px;
+
+}
+
+header ul .accederinicio{
+    position: absolute;
+    left: 893px;
+    width: 200px;
+    top: 5px;
 
 }
 
@@ -58,6 +74,8 @@ header .botoncontacto button{
     border: transparent;
     padding: 10px 50px;
     border-radius: 5px;
+    top: 15px;
+    position: absolute;
 }
 
 header #idiomasflecha{
@@ -82,7 +100,7 @@ header .españa{
 
 main .cta img{
     position: absolute;
-    top: 120px;
+    top: 130px;
 }
 
 main select{
@@ -91,7 +109,7 @@ main select{
     padding: 20px 20px;
     position: absolute;
     left: 1360px;
-    top: 30px;
+    top: 45px;
 }
 
 #idioma option[value="es"] {
@@ -180,4 +198,18 @@ main .serfotografo{
         top: 120px;
         font-size: 90px;
         text-shadow: 0px 0px 8px white;
+    }
+
+    header #porque1{
+        background: linear-gradient(#13B1A6, transparent);
+        color: white;
+        height: 30px;
+        width: 220px;
+        border-radius: 5px;
+    }
+
+    header #porque1 p{
+        position: absolute;
+        left: 45px;
+        top: 14px;
     }
