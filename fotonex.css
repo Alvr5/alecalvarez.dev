@@ -221,8 +221,8 @@ main .comofunciona p {
     color: white;
     font-family: sans-serif;
     font-weight: bold;
-    top: 120px;
-    font-size: 90px;
+    top: 60px;
+    font-size: 60px;
     text-shadow: 0px 0px 8px white;
 }
 
@@ -245,23 +245,33 @@ header #porque1 p {
 main #imageneresfotografo {
     position: absolute;
     left: 720px;
-    top: 730px;
+    top: 580px;
+    scale: 0.7;
 }
 
 main .titulocomofunciona2 {
     position: absolute;
-    top: 730px;
+    top: 630px;
     background: black;
-    padding: 20px 140px;
+    padding: 30px 210px;
     border-radius: 16px;
     left: 850px;
     z-index: 1;
     box-shadow: 0px 0px 20px white;
+    /* width: 130px; */
+    scale: 0.8;
 }
 
 main .titulocomofunciona2 p {
     color: #13B1A6;
     font-family: sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    left: 30xpx;
+    position: absolute;
+    left: 130px;
+    width: 170px;
+    top: 20px;
 }
 
 header #bandera {
