@@ -53,11 +53,17 @@ header ul .acceder{
 
 }
 
+header ul .accederporque{
+    position: absolute;
+    left: 893px;
+    width: 200px;
+
+}
+
 header ul .accederinicio{
     position: absolute;
     left: 893px;
     width: 200px;
-    top: 5px;
 
 }
 
@@ -74,8 +80,19 @@ header .botoncontacto button{
     border: transparent;
     padding: 10px 50px;
     border-radius: 5px;
-    top: 15px;
+    top: 10px;
     position: absolute;
+}
+
+header .botoncontactoingles button{
+    background-color: #13B1A6;
+    color: white;
+    border: transparent;
+    padding: 10px 50px;
+    border-radius: 5px;
+    top: 55px;
+    position: absolute;
+    left: 1140px;
 }
 
 header #idiomasflecha{
@@ -103,13 +120,13 @@ main .cta img{
     top: 130px;
 }
 
-main select{
-    background-color: white;
+header select{
+    background-color: transparent;
     border: transparent;
     padding: 20px 20px;
     position: absolute;
-    left: 1360px;
-    top: 45px;
+    left: 1392px;
+    top: 40px;
 }
 
 #idioma option[value="es"] {
@@ -201,15 +218,57 @@ main .serfotografo{
     }
 
     header #porque1{
-        background: linear-gradient(#13B1A6, transparent);
         color: white;
-        height: 30px;
+        height: 230px;
         width: 220px;
         border-radius: 5px;
+        background: #13B1A6;
     }
 
     header #porque1 p{
         position: absolute;
         left: 45px;
-        top: 14px;
+        top: 10px;
     }
+
+    main #imageneresfotografo{
+        position: absolute;
+        left: 720px;
+        top: 730px;
+    }
+
+    main .titulocomofunciona2{
+        position: absolute;
+        top: 730px;
+        background: black;
+        padding: 20px 140px;
+        border-radius: 16px;
+        left: 850px;
+        z-index: 1;
+        box-shadow: 0px 0px 20px white;
+    }
+
+    main .titulocomofunciona2 p{
+        color: white;
+        font-family: sans-serif;
+    }
+
+    header #bandera{
+        position: absolute;
+        left: 1370px;
+        top: 58px;
+    }
+
+    body{
+        line-height: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+   .porquemain{
+    background-color: #13B1A6;
+    height: 200px;
+    width: 1536px;
+    position: absolute;
+    top: 130px;
+   }
