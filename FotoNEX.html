@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -33,13 +34,11 @@
 
 
         <select id="idioma" class="icon-menu" onchange="idioma()">
-            <a href="https://alvr5.github.io/alecalvarez.dev/FotoNEX.html">
-            <option value="es" selected>
+                <option value="es" selected>
                     Español
                 </option>
-            </a>
             <a href="https://alvr5.github.io/alecalvarez.dev/fotoNEXingles.html">
-            <option value="en">
+                <option value="en">
                     Inglés
                 </option>
             </a>
@@ -69,23 +68,7 @@
 
     </footer>
 
-    <script>
-        var select = document.querySelector("#idioma");
-        select.addEventListener('select', idioma);
-
-
-        function idioma() {
-            let id = select.value;
-            if (id === 'en') {
-                location.href = "fotoNEXingles.html";
-            }
-
-            else if (select.value === 'es') {
-
-                location.href = "../FotoNEX.html";
-            }
-        }
-    </script>
+   <script src="cambioidioma.js"></script>
 
     <style>
         header {
