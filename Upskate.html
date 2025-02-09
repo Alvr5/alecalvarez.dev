@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPSKATE</title>
+    <link rel="stylesheet" href="upskate.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mogra&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h2>UPSKATE</h2>
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li class="categorias"> <a href="">
+                    Categorias</a>
+
+                    <ul class="tiposskates">
+                        <li>Skates tradicionales</li>
+                        <li>Skates modernos</li>
+                    </ul>
+                
+                </li>
+                <li>Nuestras tiendas</li>
+                <li>Sobre UPSKATE</li>
+            </ul>
+        </nav>
+
+        <div class="contacto">
+            <button>Contactar</button>
+        </div>
+
+        <p class="ctatitulo">DESLIZA TUS SUEÑOS</p>
+        <img class="flechascta" src="Group 20.png" alt="">
+        
+        <script>
+            let lastScrollY = window.scrollY; // Guarda la posición anterior del scroll
+  let flecha = document.querySelector(".flechascta");
+
+  window.addEventListener("scroll", function() {
+      let currentScrollY = window.scrollY; // Posición actual del scroll
+
+      if (currentScrollY > lastScrollY) { // Si el usuario scrollea hacia abajo
+          flecha.classList.add("animate");
+      } else {
+          flecha.classList.remove("animate"); // Quita la animación si scrollea arriba
+      }
+
+      lastScrollY = currentScrollY; // Actualiza la posición del scroll
+  });
+          </script>
+          
+
+    </header>
+    <main>
+<p>Skates populares</p>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

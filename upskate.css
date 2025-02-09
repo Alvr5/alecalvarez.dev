@@ -1,0 +1,194 @@
+header{
+    background-image: url(skateboard-2209198.jpg);
+    width: 1536px;
+    height: 90px;
+    margin: 0;
+    background-size: cover;
+    height: 870px;
+    background-repeat: no-repeat;
+}
+body{
+    margin: 0;
+    overflow-x: hidden;
+}
+header .logo{
+          /* float: left; */
+    position: relative;
+    left: 30px;
+    width: 130px;
+    top: 31px;
+    font-weight: 800;
+    font-family: sans-serif;
+    font-size: 25px;
+}
+header .logo h2{
+    color: white;
+}
+header .contacto{
+            /* float: right; */
+    position: absolute;
+    left: 1360px;
+    top: 25px;
+    /* background: black; */
+    /* border-radius: 5px; */
+}
+header .categorias{
+    height: 60px;
+}
+
+header .categorias:hover{
+    text-decoration: underline;
+    transition: 1s ease-in;
+}
+
+header .contacto button{
+    background: black;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 10px;
+}
+
+
+header .menu ul{
+    margin: 0;
+    padding: 0;
+    /* float: left; */
+    position: relative;
+    left: 160px;
+    font-family: sans-serif;
+    top: 10px;
+}
+
+header .menu ul li{
+    display: inline-block;
+    margin-left: 30px;
+    color: white;
+}
+
+
+.tiposskates{
+    display: none;
+    position:absolute;
+    top:100%;
+    left:0;
+    background:#eee;
+    padding:0;
+}
+
+   .menu ul a {
+    display:block;
+    color:white;
+    text-decoration:none;
+    font-weight:400;
+    font-size:15px;
+    padding:1px;
+    font-family: sans-serif;
+    letter-spacing:1px;
+   }
+
+   .menu ul li {
+    position:relative;
+    float:left;
+    margin:0;
+    padding:0;
+   }
+
+   .menu ul .tiposskates {
+    display: none;
+    position: absolute;
+    top: 34px;
+    left: 0px;
+    background: transparent;
+    padding: 0px;
+    /* box-shadow: 0px 0px 7px black; */
+    border-radius: 5px;
+    z-index: 3;
+    height: 60px;
+   }
+
+   .menu ul .tiposskates li {
+    float: none;
+    top: 0px;
+    width: 150px;
+    margin-left: 10px;
+    background: white;
+    box-shadow: 0px 0px 5px black;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 32px;
+    left: 40p;
+    margin-top: 10px;
+    padding: 0px 10px;
+    color: black;
+    text-align: center;
+   }
+
+   .menu ul .tiposskates a {
+    line-height:120%;
+    color: black;
+
+   }
+
+   .menu ul li:hover > .tiposskates {
+    display:block;
+    position: absolute;
+    color: black;
+   }
+
+   .menu ul li .tiposskates li:hover{
+cursor: pointer;
+color: white;
+background-color: black;
+border: 1px solid white;
+   }
+
+   header .ctatitulo{
+    position: absolute;
+    color: white;
+    left: 130px;
+    top: 200px;
+    font-size: 140px;
+    text-align: center;
+    width: 1200px;
+    font-family: 'Mogra';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    text-shadow: 0px 0px 20px black;
+   }
+
+.flechascta{
+    position: absolute;
+    top: 530px;
+    left: 650px;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.5s ease-in-out;
+}
+.animate {
+    animation: flechascta 1s infinite alternate;
+    opacity: 1; /* Hace visible cuando se activa */
+}
+
+@keyframes flechascta {
+    from {
+      transform: translateY(0%);
+    }
+  
+    to {
+      transform: translateY(50%);
+    }
+  }
+
+  main p{
+    position: relative;
+    top: 40px;
+    left: 40px;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+
+  main{
+    height: 300px;
+  }
