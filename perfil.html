@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="perfil.css">
+</head>
+
+<body>
+    <div class="fondo1">
+
+        <a href="formularioperfil.html">
+<div class="buttoneditar">
+    <button>Editar perfil</button>
+</div>
+</a>
+
+        <div class="labels">
+        <p><strong>First Name:</strong> </p>
+        <p><strong>First Last Name:</strong> </p>
+        <p><strong>Country:</strong> </p>
+        <p><strong>City:</strong> </p>
+        <p><strong>Address:</strong> </p>
+        <p><strong>Postal Code:</strong> </p>
+        <p><strong>Phone Number:</strong> </p>
+        <p><strong>Experience:</strong></p>
+        <p><strong>Bio:</strong> </p>
+        <p><strong>Studio Available:</strong> </p>
+        <p><strong>Languages:</strong> </p>
+    </div>
+
+    <div class="spans">
+
+        <span id="firstname"></span>
+            <span id="firstLastname"></span>
+            <span id="country"></span>
+            <span id="city"></span>
+            <span id="address"></span>
+            <span id="postalcode"></span>
+             <span id="Phonenumber"></span>
+            <span id="experienceyear"></span>
+            <span id="bio"></span>
+            <span id="optionid"></span>
+            <span id="languages2"></span>
+    </div>
+        
+    <div id="tagContainer"></div>
+    <img id="foto" src="Group 95 (1).jpg" alt="Profile Picture" style="width: 150px; height: 150px;">
+
+    
+    <button id="done">Done</button>
+
+</div>
+</body>
+<script>
+   document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("profile")) {
+        const profile = JSON.parse(localStorage.getItem("profile"));
+
+        document.getElementById('firstname').textContent = profile.firstname || "N/A";
+        document.getElementById('firstLastname').textContent = profile.firstLastName || "N/A";
+        document.getElementById('country').textContent = profile.country || "N/A";
+        document.getElementById('city').textContent = profile.city || "N/A";
+        document.getElementById('address').textContent = profile.address || "N/A";
+        document.getElementById('postalcode').innerHTML = profile.postalCode || "N/A";
+        document.getElementById('Phonenumber').textContent = profile.phoneNumber || "N/A";
+        document.getElementById('experienceyear').textContent = profile.experience || "N/A";
+        document.getElementById('bio').textContent = profile.bio || "N/A";
+        document.getElementById('options').textContent = profile.studio || "N/A";
+        document.getElementById('languages2').textContent = profile.languages2 || "N/A";
+        
+        // Cargar la imagen si existe
+        if (profile.photo) {
+            document.getElementById("foto").src = profile.photo;
+        }
+
+        // Cargar etiquetas
+        const tagContainer = document.getElementById('tagContainer');
+        tagContainer.innerHTML = ""; // Limpiar antes de agregar
+        if (profile.tags) {
+            profile.tags.forEach(tag => {
+                const newTag = document.createElement("div");
+                newTag.classList.add("tag");
+                newTag.textContent = tag;
+                tagContainer.appendChild(newTag);
+            });
+        }
+    }
+    setTimeout(() => {
+    const profile = JSON.parse(localStorage.getItem("profile"));
+    const postalCodeElement = document.getElementById("postalcode");
+
+    if (profile && profile.postalCode) {
+        postalCodeElement.textContent = profile.postalCode;
+        console.log("postalCode actualizado:", profile.postalCode);
+    } else {
+        console.error("No se encontró postalCode en localStorage");
+    }
+}, 100);
+});
+
+</script>
+<style>
+    /* Estilos generales */
+
+</style>
+</html>

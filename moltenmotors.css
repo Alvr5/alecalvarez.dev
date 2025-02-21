@@ -69,6 +69,10 @@ header .menu ul li {
        margin-left: 20px;
 }
 
+header .menu ul a{
+    text-decoration: none;
+}
+
 header .menu ul li:hover{
     box-shadow: 0px 0px 10px white;
     cursor: pointer;
@@ -273,4 +277,41 @@ main .seccion2 .boton2:hover{
     background-color: white;
     color: #013334;
     cursor: pointer;
+}
+
+main .seccion3{
+    height: 1200px;
+    background: black;
+}
+
+
+main .seccion3 .tituloseccion{
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+    font-family: sans-serif;
+    width: 636px;
+    text-align: center;
+    position: relative;
+    top: 80px;
+    left: 440px;
+    z-index: 1;
+}
+
+main .seccion3 .elipse{
+    position: absolute;
+    top: 1870px;
+    z-index: 0;
+}
+
+main .seccion3 .subtituloseccion3{
+    color: white;
+    z-index: 2;
+    position: absolute;
+    top: 2190px;
+    font-size: 25px;
+    width: 559px;
+    left: 480px;
+    font-family: sans-serif;
+    text-align: center;
 }
