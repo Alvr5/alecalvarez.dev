@@ -261,5 +261,622 @@
             }
         });
     </script>
+
+
+<style>
+    body{
+    margin: 0;
+    overflow-x:hidden;
+}
+.fondo{
+    background-image: url(Wave\ SVG.jpg);
+    background-size: cover;
+    width: 1536px;
+    height: 1300px;
+}
+
+.fondo .fondocarta{
+    width: 800px;
+    height: 1100px;
+    background-color: white;
+    position: absolute;
+    left: 340px;
+    top: 90px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px white;
+}
+
+.fondo #foto{
+    height: 100px;
+    width: 100px;
+    border: 2px solid green;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 380px;
+    top: 150px;
+}
+
+.fondo #file{
+    width: 160px;
+    height: 35px;
+    position: absolute;
+    left: 530px;
+    top: 185px;
+    /* padding: 10px 20px; */
+    border: transparent;
+    background: green;
+    border-radius: 5px;
+}
+.fondo #textoboton{
+    position: absolute;
+    left: 538px;
+    top: 177px;
+    /* scale: 0.6.8.9; */
+    color: white;
+    font-family: sans-serif;
+    width: 150px;
+    /* height: 40px; */
+    cursor: pointer;
+}
+
+#uploadBtn{
+    position: absolute;
+    left: 620px;
+    top: 210px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: transparent;
+    background: #00B1A4;
+    color: white;
+    cursor: pointer;
+}
+
+#uploadBtn:hover{
+    box-shadow: 0px 0px 10px #00B1A4;
+    transition: 0.2s ease-in-out;
+}
+
+#removeBtn{
+    position: absolute;
+    left: 760px;
+    top: 210px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: transparent;
+    background: transparent;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+ #foto{
+    width: 150px;
+    height: 150px;
+    border: 2px solid gray;
+    text-align: center;
+    /* align-items: center; */
+    align-content: center;
+    cursor:auto;
+}
+
+.fondo .name{
+    position: absolute;
+    left: 420px;
+    top: 360px;
+    /* padding: 20px; */
+}
+.fondo .name input{
+    padding: 15px 90px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 520px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.fondo .name #firstname{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+
+.name .asterisco{
+    color: red;
+    position: absolute;
+    left: 80px;
+    /* top: 0px; */
+}
+
+
+.FirstLastName{
+    position: absolute;
+    left: 420px;
+    top: 450px;
+    /* padding: 20px; */
+}
+
+.fondo .FirstLastName input{
+    padding: 15px 90px 10px 10px;
+
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 520px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.fondo .FirstLastName #firstLastname{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+
+.FirstLastName .asterisco{
+    color: red;
+    position: absolute;
+    left: 115px;
+    /* top: 0px; */
+}
+
+.FirstLastName input:focus{
+    border: 2px solid #00B1A4;
+    box-shadow: 0 0 10px #00b1a56c;
+    outline: none;
+}
+
+.name input:focus{
+    border: 2px solid #00B1A4;
+    box-shadow: 0 0 10px #00b1a56c;
+    outline: none;
+}
+
+
+
+
+
+.Country{
+    position: absolute;
+    left: 420px;
+    top: 685px;
+}
+
+.Country label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.Country input{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 76px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.Country .asterisco{
+    color: red;
+    position: absolute;
+    left: 60px;
+    /* top: 0px; */
+}
+
+
+
+
+
+.City{
+    position: absolute;
+    left: 530px;
+    top: 685px;
+}
+
+.City label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.City input{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 116px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.City .asterisco{
+    color: red;
+    position: absolute;
+    left: 30px;
+    /* top: 0px; */
+}
+
+
+
+
+
+
+.Adress{
+    position: absolute;
+    left: 680px;
+    top: 685px;
+}
+
+.Adress label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.Adress input{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 176px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.Adress .asterisco{
+    color: red;
+    position: absolute;
+    left: 61px;
+    /* top: 0px; */
+}
+
+
+
+
+
+
+.PostalCode{
+    position: absolute;
+    left: 890px;
+    top: 685px;
+}
+
+.PostalCode label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.PostalCode input{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 131px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.PostalCode .asterisco{
+    color: red;
+    position: absolute;
+    left: 90px;
+    /* top: 0px; */
+}
+
+
+.Phonenumber{
+    position: absolute;
+    left: 680px;
+    top: 772px;
+}
+
+.Phonenumber label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.Phonenumber input{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 176px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.Phonenumber .asterisco{
+    color: red;
+    position: absolute;
+    left: 110px;
+    /* top: 0px; */
+}
+
+
+
+
+.Email{
+    position: relative;
+    left: 420px;
+    top: 615px;
+}
+
+.Email label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.Email input{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 226px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.Email .asterisco{
+    color: red;
+    position: absolute;
+    left: 43px;
+    /* top: 0px; */
+}
+
+
+#phototypes{
+    position: absolute;
+    top: 885px;
+    left: 676px;
+    background: #00B1A4;
+    color: white;
+    padding: 7px 54px 10px 10px;
+    border-radius: 5px;
+    border: transparent;
+    /* text-align: left; */
+    width: 200px;
+}
+
+
+
+
+
+.experience{
+    position: absolute;
+    left: 420px;
+    top: 855px;
+}
+
+.experience label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.experience select{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 244px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.experience .asterisco{
+    color: red;
+    position: absolute;
+    left: 145px;
+    /* top: 0px; */
+}
+
+
+
+
+
+.Bio{
+    position: absolute;
+    left: 420px;
+    top: 535px;
+}
+
+.Bio label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.Bio textarea{
+    background: #dddddd;
+    padding: 3px 30px 3px 10px;
+    border: transparent;
+    color: #0000006b;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 580px;
+    height: 90px;
+}
+
+.Bio .asterisco{
+    color: red;
+    position: absolute;
+    left: 110px;
+    /* top: 0px; */
+}
+
+
+
+
+
+
+
+.tag-container {
+    display: flex;
+    gap: 10px;
+    background: #e6e6e6;
+    padding: 10px;
+    border-radius: 10px;
+    width: 492px;
+    position: relative;
+    top: 720px;
+    left: 420px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    background: #00B1A4;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tag .close {
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.tag-container input{
+    background: transparent;
+    border: transparent;
+    width: 480px;
+}
+
+.tag-container input:focus{
+outline: 0;
+}
+
+#etiquetatitulo{
+    position: relative;
+    top: 637px;
+    left: 676px;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+
+
+.asteriscoetiquetas{
+    color: red;
+    position: absolute;
+    left: 557px;
+    /* top: 0px; */
+    top: 690px;
+    z-index: 3;
+}
+
+
+
+#portfolio{
+    position: absolute;
+    top: 970px;
+    left: 420px;
+    width: 242px;
+    height: 30px;
+    background: #80808045;
+    border: transparent;
+    border-radius: 5px;
+}
+
+.portfoliotitle{
+    position: absolute;
+    top: 945px;
+    left: 420px;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+
+.studio{
+    position: absolute;
+    left: 889px;
+    top: 855px;
+}
+
+.studio label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.studio select{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 176px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.studio .asterisco{
+    color: red;
+    position: absolute;
+    left: 120px;
+    /* top: 0px; */
+}
+
+
+
+.languages{
+    position: absolute;
+    left: 416px;
+    top: 1020px;
+}
+
+.languages label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.languages input{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 166px;
+    margin-top: 10px;
+    color: #0000006b;
+    text-align: center;
+}
+
+.languages .asterisco{
+    color: red;
+    position: absolute;
+    left: 76px;
+    /* top: 0px; */
+}
+
+
+.enviar{
+    position: absolute;
+    top: 1113px;
+    left: 415px;
+}
+
+.enviar button{
+    background: #00B1A4;
+    color: white;
+    border: transparent;
+    padding: 10px 60px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 650px;
+}
+
+
+
+
+
+.logo img{
+    scale: 0.5;
+    position: absolute;
+    left: 570px;
+    top: 0px;
+}
+
+
+</style>
+
+
 </body>
 </html>
