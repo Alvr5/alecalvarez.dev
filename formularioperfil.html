@@ -65,6 +65,13 @@
         </div>
 
 
+        <div class="Email">
+            <i class="asterisco">*</i>
+            <label for="email">Email</label>
+            <input type="email" placeholder="Your email">
+        </div>
+
+
         <div class="Phonenumber">
             <i class="asterisco">*</i>
             <label for="Phonenumber">Phone Number</label>
@@ -92,9 +99,12 @@
 
         <i class="asteriscoetiquetas">*</i>
         <label for="etiquetas" id="etiquetatitulo">Photography types</label>
-        <div class="tag-container" id="tagContainer">
-            <input type="text" id="tagInput" class="input-tag" placeholder="Add Tag..." maxlength="15">
-        </div>
+        <select name="types" id="phototypes">
+            <option value="">Wildlife</option>
+            <option value="">Portrait</option>
+            <option value="">Macro</option>
+            <option value="">B&W</option>
+        </select>
 
 
         <div class="studio">
@@ -111,6 +121,10 @@
             <label for="languages">Language</label>
             <input type="text" id="languages2" maxlength="23">
         </div>
+        
+
+        <label for="portfolioo" class="portfoliotitle">Portfolio</label>
+        <input aria-placeholder="Upload portfolio" type="file" name="file12" id="portfolio" accept="application/pdf"></input>
 
         <a href="perfil.html">
         <div class="enviar">
@@ -139,7 +153,6 @@
                 const profile = JSON.parse(localStorage.getItem("profile"));
                 document.getElementById('firstname').value = profile.firstname;
                 document.getElementById('firstLastname').value = profile.firstLastName;
-
             }
             
         }

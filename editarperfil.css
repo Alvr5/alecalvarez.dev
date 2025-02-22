@@ -6,12 +6,12 @@ body{
     background-image: url(Wave\ SVG.jpg);
     background-size: cover;
     width: 1536px;
-    height: 1000px;
+    height: 1300px;
 }
 
 .fondo .fondocarta{
     width: 800px;
-    height: 800px;
+    height: 1100px;
     background-color: white;
     position: absolute;
     left: 340px;
@@ -174,7 +174,7 @@ body{
 .Country{
     position: absolute;
     left: 420px;
-    top: 535px;
+    top: 685px;
 }
 
 .Country label{
@@ -206,7 +206,7 @@ body{
 .City{
     position: absolute;
     left: 530px;
-    top: 535px;
+    top: 685px;
 }
 
 .City label{
@@ -239,7 +239,7 @@ body{
 .Adress{
     position: absolute;
     left: 680px;
-    top: 535px;
+    top: 685px;
 }
 
 .Adress label{
@@ -272,7 +272,7 @@ body{
 .PostalCode{
     position: absolute;
     left: 890px;
-    top: 535px;
+    top: 685px;
 }
 
 .PostalCode label{
@@ -300,8 +300,8 @@ body{
 
 .Phonenumber{
     position: absolute;
-    left: 420px;
-    top: 615px;
+    left: 680px;
+    top: 772px;
 }
 
 .Phonenumber label{
@@ -329,10 +329,56 @@ body{
 
 
 
+.Email{
+    position: relative;
+    left: 420px;
+    top: 615px;
+}
+
+.Email label{
+    display: block;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
+.Email input{
+    padding: 10px 10px 10px 10px;
+    background: #80808045;
+    border: coral;
+    border-radius: 5px;
+    width: 226px;
+    margin-top: 10px;
+    color: #0000006b;
+}
+
+.Email .asterisco{
+    color: red;
+    position: absolute;
+    left: 43px;
+    /* top: 0px; */
+}
+
+
+#phototypes{
+    position: absolute;
+    top: 885px;
+    left: 676px;
+    background: #00B1A4;
+    color: white;
+    padding: 7px 54px 10px 10px;
+    border-radius: 5px;
+    border: transparent;
+    /* text-align: left; */
+    width: 200px;
+}
+
+
+
+
+
 .experience{
     position: absolute;
-    left: 630px;
-    top: 615px;
+    left: 420px;
+    top: 855px;
 }
 
 .experience label{
@@ -345,7 +391,7 @@ body{
     background: #80808045;
     border: coral;
     border-radius: 5px;
-    width: 176px;
+    width: 244px;
     margin-top: 10px;
     color: #0000006b;
 }
@@ -363,8 +409,8 @@ body{
 
 .Bio{
     position: absolute;
-    left: 820px;
-    top: 615px;
+    left: 420px;
+    top: 535px;
 }
 
 .Bio label{
@@ -379,6 +425,8 @@ body{
     color: #0000006b;
     margin-top: 10px;
     border-radius: 5px;
+    width: 580px;
+    height: 90px;
 }
 
 .Bio .asterisco{
@@ -401,7 +449,7 @@ body{
     padding: 10px;
     border-radius: 10px;
     width: 492px;
-    position: absolute;
+    position: relative;
     top: 720px;
     left: 420px;
 }
@@ -435,9 +483,9 @@ outline: 0;
 }
 
 #etiquetatitulo{
-    position: absolute;
-    top: 690px;
-    left: 421px;
+    position: relative;
+    top: 637px;
+    left: 676px;
     font-family: sans-serif;
     color: #00B1A4;
 }
@@ -454,13 +502,29 @@ outline: 0;
 
 
 
+#portfolio{
+    position: absolute;
+    top: 970px;
+    left: 420px;
+    width: 242px;
+    height: 30px;
+    background: #80808045;
+    border: transparent;
+    border-radius: 5px;
+}
 
-
+.portfoliotitle{
+    position: absolute;
+    top: 945px;
+    left: 420px;
+    font-family: sans-serif;
+    color: #00B1A4;
+}
 
 .studio{
     position: absolute;
-    left: 420px;
-    top: 775px;
+    left: 889px;
+    top: 855px;
 }
 
 .studio label{
@@ -489,8 +553,8 @@ outline: 0;
 
 .languages{
     position: absolute;
-    left: 620px;
-    top: 775px;
+    left: 416px;
+    top: 1020px;
 }
 
 .languages label{
@@ -519,8 +583,8 @@ outline: 0;
 
 .enviar{
     position: absolute;
-    top: 803px;
-    left: 840px;
+    top: 1113px;
+    left: 415px;
 }
 
 .enviar button{
@@ -530,6 +594,7 @@ outline: 0;
     padding: 10px 60px;
     border-radius: 5px;
     cursor: pointer;
+    width: 650px;
 }
 
 
