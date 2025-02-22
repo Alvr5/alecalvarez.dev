@@ -50,11 +50,22 @@
     <img id="foto" src="Group 95 (1).jpg" alt="Profile Picture" style="width: 150px; height: 150px;">
 
     
-    <button id="done">Done</button>
+    <button id="done" onclick="sendEmail()" >Done</button>
 
 </div>
 </body>
 <script>
+
+
+
+function sendEmail() {
+        alert('Datos enviados!')
+    };
+    
+
+
+//-------------------------------------------------------------------------------
+
    document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem("profile")) {
         const profile = JSON.parse(localStorage.getItem("profile"));

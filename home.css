@@ -1,0 +1,99 @@
+body{
+    margin: 0;
+}
+
+.fondo{
+    background-color: #BDBDBD;
+    height: 700px;
+    width: 1536px;
+}
+
+#home{
+    position: absolute;
+    left: 230px;
+    top: 90px;
+    background: #d2d2d26e;
+    padding: 20px 60px;
+    border-radius: 20px 20px 0px 0px;
+    color: white;
+    font-family: sans-serif;
+}
+
+.fondo2{
+    background: #d2d2d26e;
+    position: absolute;
+    top: 165px;
+    left: 230px;
+    height: 251px;
+    width: 1190px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.create{
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    font-size: 50px;
+    width: 400px;
+    color: white;
+    font-family: sans-serif;
+}
+
+.blurredonda{
+    background: #00B1A4;
+    height: 300px;
+    width: 300px;
+    border-radius: 100%;
+    filter: blur(41px);
+    position: absolute;
+    top: 340px;
+    left: 130px;
+}
+
+#eclipse1{
+    position: absolute;
+    left: 580px;
+    top: 120px;
+    scale: 0.6;
+}
+
+#eclipse2{
+    position: absolute;
+    left: 830px;
+    top: 120px;
+    scale: 0.6;
+}
+
+.imagen1{
+    position: absolute;
+    left: 640px;
+    scale: 0.6;
+    top: 15px;
+}
+
+.imagen2{
+    position: absolute;
+    left: 890px;
+    top: 40px;
+    scale: 0.6;
+    position: absolute;
+    left: 890px;
+    scale: 0.6;
+    top: 43px;
+}
+
+#client{
+    position: absolute;
+    left: 696px;
+    top: 160px;
+    color: white;
+    font-family: sans-serif;
+}
+
+#photographer{
+    position: absolute;
+    left: 920px;
+    top: 160px;
+    color: white;
+    font-family: sans-serif;
+}
