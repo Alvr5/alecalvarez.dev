@@ -1,0 +1,260 @@
+main{
+    background-image: url(assets/background.png);
+    height: 730px;
+    width: auto;
+    background-size: cover;
+  animation: lento 2s ease-in-out;
+
+}
+
+main .logo{
+    scale: 0.2;
+    position: absolute;
+    left: 400px;
+    top: 170px;
+    /* text-shadow: 0px 0px 20px white; */
+}
+main .logoregistro{
+    position: absolute;
+    left: 705px;
+    top: 75px;
+}
+
+main .logoiniciosesion{
+    position: absolute;
+    left: 685px;
+    top: 75px;
+}
+main .entrar{
+        justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 695px;
+    top: 440px;
+    background: transparent;
+    border: 2px solid white;
+    padding: 5px;
+    width: 120px;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+main .entrar:hover{
+    background-color: white;
+    color: black;
+    transition: 0.5s;
+}
+
+main .iniciarsesiontitulo{
+    color: white;
+    top: 170px;
+    font-family: sans-serif;
+    font-size: 50px;
+    text-align: center;
+}
+.form{
+    position: absolute;
+    width: 400px;
+    left: 540px;
+    top: 220px;
+    background: #000000b3;
+    padding: 30px;
+    height: 300px;
+    border-radius: 15px;
+    height: 375px;
+}
+
+#formulario2{
+       position: absolute;
+    width: 430px;
+    left: 510px;
+    top: 220px;
+    background: #000000b3;
+    padding: 30px;
+    height: 300px;
+    border-radius: 15px;
+    height: 305px;
+}
+
+.form label{
+    color: white;
+    font-family: sans-serif;
+}
+
+.form .nombreusuarios{
+       display: block;
+    text-align: center;
+    margin: 10px;
+    width: max-content;
+    position: relative;
+    left: 55px;
+    font-size: 13px;
+    font-weight: lighter;
+}
+
+.form .emailabel{
+       display: block;
+    text-align: center;
+    margin: 10px;
+    width: max-content;
+    position: relative;
+    left: 54px;
+    font-size: 13px;
+}
+
+form input{
+       margin-left: 66px;
+    margin-bottom: 10px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    border: transparent;
+    background: #80808069;
+    color: white;
+    width: 250px;
+}
+body{
+    margin: 0;
+}
+
+form button{
+    background: white;
+    padding: 10px 30px;
+    border-radius: 5px;
+    position: relative;
+    left: 65px;
+    width: 274px;
+    top: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+form .tengocuenta{
+    color: white;
+    font-size: 12px;
+    font-family: sans-serif;
+    position: relative;
+    left: 114px;
+    width: max-content;
+    top: 25px;
+}
+
+form .iniciarsesion{
+    color: white;
+    position: absolute;
+    top: 378px;
+    left: 240px;
+    font-size: 10px;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+form .notengocuenta{
+        color: white;
+    font-size: 12px;
+    font-family: sans-serif;
+    position: relative;
+    left: 116px;
+    width: max-content;
+    top: 20px;
+}
+
+form .registrarse{
+     color: white;
+    font-size: 10px;
+    font-family: sans-serif;
+    position: absolute;
+    left: 255px;
+    top: 299px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* PRINCIPAL */
+
+.saludar{
+        font-size: 20px;
+    font-family: sans-serif;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 2px solid black;
+    width: max-content;
+    position: absolute;
+    font-weight: 200;
+    left: 80px;
+    top: 60px;
+}
+@keyframes lento {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.inicioenlace{
+          width: max-content;
+    position: absolute;
+    left: 420px;
+    top: 70px;
+    font-family: sans-serif;
+}
+
+.galeriaenlace{
+       width: max-content;
+    position: absolute;
+    left: 560px;
+    top: 70px;
+    font-family: sans-serif;
+}
+
+.logonegro{
+    position: absolute;
+    left: 680px;
+    top: 55px;
+}
+
+.salidasenlace{
+      width: max-content;
+    position: absolute;
+    left: 860px;
+    top: 70px;
+    font-family: sans-serif;
+}
+
+.gruposenlace{
+        width: max-content;
+    position: absolute;
+    left: 1000px;
+    top: 70px;
+    font-family: sans-serif;
+}
+
+.tituloproximassalidas{
+    padding: 20px;
+    position: relative;
+    top: 150px;
+    left: 60px;
+    width: 1410px;
+}
+
+.textoproximassalidas{
+        font-size: 30px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.salidas .collserola{
+        position: relative;
+    top: 110px;
+    left: 40px;
+    box-shadow: 0px 0px 38px #00000042;
+    border-radius: 20px;
+}
+
+li{
+    list-style: none;
+}

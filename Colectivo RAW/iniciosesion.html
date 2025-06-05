@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <main>
+      <img src="assets/logo2.png" class="logoregistro" alt="">
+
+    <form id="formulario2" class="form">
+      <h2 class="iniciarsesiontitulo">INICIAR SESIÓN</h2>
+
+      <label for="nombreusuario" class="nombreusuarios">Nombre de usuario</label>
+      <input type="text" id="nombre" required />
+
+      <button type="submit" class="iniciosesionbutton">Iniciar Sesión</button>
+
+      <p class="notengocuenta">¿No tienes cuenta?</p>
+      <a href="Registro.html">
+        <p class="registrarse">Registrarme</p>
+      </a>
+    </form>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCHTXXIXmEWsTbvOKtarjhc3_C4WYW1wFg",
+      authDomain: "modify-f9b1c.firebaseapp.com",
+      projectId: "modify-f9b1c",
+      storageBucket: "modify-f9b1c.appspot.com",
+      messagingSenderId: "681418689727",
+      appId: "1:681418689727:web:e7d3766394fd772a814a0a",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("formulario2");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+
+      const docRef = doc(db, "usuarios", nombre);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        // Usuario existe, redirigir
+        window.location.href = `principal.html?usuario=${encodeURIComponent(nombre)}`;
+      } else {
+        // Usuario no existe, mostrar alerta y no redirigir
+        alert("Este usuario no está registrado ❌");
+      }
+    });
+  </script>
+</body>
+</html>

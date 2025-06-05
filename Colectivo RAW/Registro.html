@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colectivo RAW/registro</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <main>
+      <img src="assets/logo2.png" class="logoregistro" alt="">
+       <form id="formulario" class="form">
+  <h2 class="iniciarsesiontitulo">REGISTRO</h2>
+
+  <label for="nombreusuario" class="nombreusuarios">Nombre de usuario *</label>
+  <input type="text" id="nombre" required>
+
+  <label class="emailabel">Correo electrónico (no obligatorio)</label>
+  <input type="email" id="correo">
+
+  <button type="submit" class="Registrarmebutton">Registrarme</button>
+
+  <p class="tengocuenta">Ya tengo cuenta</p>
+  <a href="iniciosesion.html">
+  <p class="iniciarsesion">Iniciar sesión</p>
+  </a>
+</form>
+        </a>
+    </main>
+    <script type="module">import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCHTXXIXmEWsTbvOKtarjhc3_C4WYW1wFg",
+  authDomain: "modify-f9b1c.firebaseapp.com",
+  projectId: "modify-f9b1c",
+  storageBucket: "modify-f9b1c.appspot.com",
+  messagingSenderId: "681418689727",
+  appId: "1:681418689727:web:e7d3766394fd772a814a0a"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const form = document.getElementById("formulario");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const correo = document.getElementById("correo").value;
+
+  const docRef = doc(db, "usuarios", nombre);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    alert("Este nombre de usuario ya está registrado ❌");
+    return;
+  }
+
+  try {
+    await setDoc(docRef, { nombre, correo });
+    form.reset();
+    window.location.href = `iniciosesion.html?usuario=${encodeURIComponent(nombre)}`;
+  } catch (error) {
+    console.error("Error al guardar:", error);
+    alert("Hubo un error ❌");
+  }
+});
+</script>
+
+</body>
+</html>

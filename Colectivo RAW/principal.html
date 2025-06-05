@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1 id="saludo" class="saludar">Hola!</h1>
+
+    <p class="inicioenlace">Inicio</p>
+    <p class="galeriaenlace">Galeria</p>
+    <img src="assets/logonegro.png" class="logonegro" alt="">
+    <p class="salidasenlace">Salidas</p>
+    <p class="gruposenlace">Grupos</p>
+
+    <div class="tituloproximassalidas">
+      <p class="textoproximassalidas">Proximas Salidas</p>
+    </div>
+
+    <div class="salidas">
+      <ul>
+        <li><img class="collserola" src="assets/imagenessalidas/Collserola.png" alt=""></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const usuario = params.get("usuario");
+
+    if (usuario) {
+      const saludo = document.getElementById("saludo");
+      saludo.textContent = `Hola, ${usuario}!`;
+    }
+  </script>
+</body>
+</html>
