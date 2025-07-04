@@ -127,6 +127,7 @@ form button{
     top: 10px;
     color: black;
     font-weight: bold;
+    cursor: pointer;
 }
 
 form .tengocuenta{
