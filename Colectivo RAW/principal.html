@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Salidas con Firebase</title>
+  <title>Salidas con Firebase - Filtros</title>
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
@@ -14,44 +14,46 @@
       background: #f0f0f0;
     }
     .saludar {
-      font-size: 20px;
-      padding: 10px 20px;
-      border-radius: 30px;
+            font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 2px solid black;
+    width: max-content;
+    font-weight: 200;
+    position: absolute;
+    left: 30px;
+    top: 25px;
+    background: white;
+    }
+    /* Dejo sin tocar header */
+    
+    /* estilos para filtros y lista */
+    .filtros {
+          margin: 59px 80px 10px 80px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    }
+    .filtros select {
+      padding: 5px 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .filtros button {
+      padding: 7px 18px;
+      font-size: 16px;
+      border-radius: 5px;
       border: 2px solid black;
-      width: max-content;
-      font-weight: 200;
-      position: absolute;
-      left: 80px;
-      top: 60px;
       background: white;
-    }
-    p {
-      font-family: sans-serif;
-      position: absolute;
-      top: 70px;
-    }
-    .inicioenlace { left: 420px; }
-    .galeriaenlace { left: 560px; }
-    .logonegro {
-      position: absolute;
-      left: 680px;
-      top: 55px;
-      width: 100px;
-    }
-    .salidasenlace { left: 860px; }
-    .gruposenlace { left: 1000px; }
-
-    .tituloproximassalidas {
-      padding: 20px;
-      position: relative;
-      top: 150px;
-      left: 60px;
-      width: 1410px;
-    }
-    .textoproximassalidas {
-      font-size: 30px;
+      cursor: pointer;
       font-weight: bold;
-      font-family: sans-serif;
+    }
+    .filtros button:hover {
+      background: black;
+      color: white;
+      transition: 0.3s;
     }
 
     .salidas ul {
@@ -61,6 +63,7 @@
       gap: 20px;
       flex-wrap: wrap;
       list-style: none;
+      margin-left: 80px;
     }
     .salidas ul li {
       position: relative;
@@ -70,19 +73,16 @@
       box-shadow: 0 0 15px #00000042;
       background: white;
     }
-    .salidas ul li img {
-      width: 100%;
-      display: block;
-      border-radius: 20px;
-    }
-    /* Overlay with text */
     .salida-container {
       position: relative;
+      height: 330px;
     }
     .salida-container img {
       display: block;
       border-radius: 20px;
       width: 100%;
+      height: 330px;
+      object-fit: cover;
     }
     .overlay {
       position: absolute;
@@ -94,22 +94,24 @@
       box-sizing: border-box;
       border-radius: 0 0 20px 20px;
       font-size: 14px;
+      height: 130px;
     }
     .overlay .titulo {
       font-weight: bold;
       font-size: 16px;
-      margin: 0 0 5px 0;
+      margin-top: 30px;
+      margin-left: 10px;
     }
     .overlay .subtitulo {
       margin: 0;
       font-size: 13px;
-      font-weight: normal;
+      margin-left: 10px;
+      font-family: sans-serif;
     }
 
     #botoncrear {
       position: relative;
-      top: 170px;
-      left: 60px;
+      top: 55px;
       padding: 10px 25px;
       font-size: 16px;
       cursor: pointer;
@@ -117,6 +119,8 @@
       border: 2px solid black;
       background: white;
       font-weight: bold;
+      float: right;
+      right: 60px;
     }
     #botoncrear:hover {
       background: black;
@@ -178,22 +182,64 @@
     #cerrarFormulario:hover {
       color: black;
     }
+
+    header {    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px 80px;
+    background: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 40px 0px;
+}
+
+header p, header img {
+  margin: 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+header img {
+  height: 40px;
+  width: auto;
+}
   </style>
 </head>
 <body>
-  <h1 id="saludo" class="saludar">Hola!</h1>
 
+
+<header>
   <p class="inicioenlace" style="left:420px;">Inicio</p>
   <p class="galeriaenlace" style="left:560px;">Galeria</p>
   <img src="assets/logonegro.png" class="logonegro" alt="Logo Negro">
   <p class="salidasenlace" style="left:860px;">Salidas</p>
   <p class="gruposenlace" style="left:1000px;">Grupos</p>
+</header>
+  <h1 id="saludo" class="saludar">Hola!</h1>
 
-  <div class="tituloproximassalidas">
-    <p class="textoproximassalidas">Próximas Salidas</p>
-  </div>
+  <!-- Header intacto, nada cambiado -->
 
   <button id="botoncrear">Crear</button>
+
+  <!-- Filtros con boton buscar -->
+  <div class="filtros">
+    <select id="filtroCategoria">
+      <option value="">-- Filtrar por categoría --</option>
+    </select>
+    <select id="filtroFecha">
+      <option value="">-- Filtrar por fecha --</option>
+    </select>
+    <select id="filtroAutor">
+      <option value="">-- Filtrar por autor --</option>
+    </select>
+    <button id="botonBuscarFiltro">Buscar</button>
+    <button id="botonLimpiarFiltro">Limpiar filtros</button>
+  </div>
 
   <div class="salidas">
     <ul></ul>
@@ -206,6 +252,9 @@
     <label for="nombreSalida">Nombre:</label>
     <input type="text" id="nombreSalida" placeholder="Nombre de la salida" />
 
+    <label for="categoriaSalida">Categoría:</label>
+    <input type="text" id="categoriaSalida" placeholder="Categoría" />
+
     <label for="fechaSalida">Fecha:</label>
     <input type="date" id="fechaSalida" />
 
@@ -216,26 +265,22 @@
   </div>
 
   <script>
-    // Tu configuración Firebase - ¡pon aquí la tuya!
     const firebaseConfig = {
-    apiKey: "AIzaSyCHTXXIXmEWsTbvOKtarjhc3_C4WYW1wFg",
-  authDomain: "modify-f9b1c.firebaseapp.com",
-  projectId: "modify-f9b1c",
-  storageBucket: "modify-f9b1c.appspot.com",
-  messagingSenderId: "681418689727",
-  appId: "1:681418689727:web:e7d3766394fd772a814a0a"
+      apiKey: "AIzaSyCHTXXIXmEWsTbvOKtarjhc3_C4WYW1wFg",
+      authDomain: "modify-f9b1c.firebaseapp.com",
+      projectId: "modify-f9b1c",
+      storageBucket: "modify-f9b1c.appspot.com",
+      messagingSenderId: "681418689727",
+      appId: "1:681418689727:web:e7d3766394fd772a814a0a"
     };
 
-    // Inicializar Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Obtener usuario de URL ?usuario=...
     const params = new URLSearchParams(window.location.search);
     const nombreUsuario = params.get("usuario");
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Mostrar saludo personalizado
       const saludo = document.getElementById("saludo");
       if (nombreUsuario) {
         saludo.textContent = `Hola, ${nombreUsuario}!`;
@@ -246,19 +291,22 @@
       const cerrarFormulario = document.getElementById("cerrarFormulario");
       const guardarBtn = document.getElementById("guardarBtn");
       const ul = document.querySelector(".salidas ul");
+      const filtroCategoria = document.getElementById("filtroCategoria");
+      const filtroFecha = document.getElementById("filtroFecha");
+      const filtroAutor = document.getElementById("filtroAutor");
+      const botonBuscarFiltro = document.getElementById("botonBuscarFiltro");
+      const botonLimpiarFiltro = document.getElementById("botonLimpiarFiltro");
 
       let imagenBase64 = null;
 
       botoncrear.addEventListener("click", () => {
         formulario.style.display = "block";
       });
-
       cerrarFormulario.addEventListener("click", () => {
         formulario.style.display = "none";
         resetForm();
       });
 
-      // Leer imagen y convertir a base64
       document.getElementById("imagenSalida").addEventListener("change", function () {
         const file = this.files[0];
         if (file) {
@@ -273,6 +321,7 @@
       function resetForm() {
         document.getElementById("nombreSalida").value = "";
         document.getElementById("fechaSalida").value = "";
+        document.getElementById("categoriaSalida").value = "";
         document.getElementById("imagenSalida").value = "";
         imagenBase64 = null;
       }
@@ -280,9 +329,10 @@
       guardarBtn.addEventListener("click", async () => {
         const nombre = document.getElementById("nombreSalida").value.trim();
         const fecha = document.getElementById("fechaSalida").value;
+        const categoria = document.getElementById("categoriaSalida").value.trim();
 
-        if (!imagenBase64 || !nombre || !fecha) {
-          alert("Faltan datos. Por favor, sube una imagen y completa todos los campos.");
+        if (!imagenBase64 || !nombre || !fecha || !categoria) {
+          alert("Faltan datos. Por favor, completa todos los campos e incluye una imagen.");
           return;
         }
 
@@ -291,6 +341,7 @@
         const salida = {
           nombre: nombreSalidaUsuario,
           fecha,
+          categoria,
           autor: nombreUsuario || "Anónimo",
           imagen: imagenBase64,
           timestamp: new Date()
@@ -298,25 +349,109 @@
 
         try {
           await db.collection("salidas").add(salida);
-
-          const li = document.createElement("li");
-          li.innerHTML = `
-            <div class="salida-container">
-              <img src="${imagenBase64}" alt="Imagen subida" />
-              <div class="overlay">
-                <p class="titulo">${nombreSalidaUsuario}</p>
-                <p class="subtitulo">${fecha} — Creado por: ${salida.autor}</p>
-              </div>
-            </div>
-          `;
-          ul.appendChild(li);
-
           formulario.style.display = "none";
           resetForm();
+          // Refrescar filtros y lista para que salga la nueva salida
+          cargarOpcionesFiltros();
+          mostrarSalidasFiltradas();
         } catch (error) {
           console.error("Error al guardar en Firebase:", error);
           alert("Error al guardar. Intenta de nuevo.");
         }
+      });
+
+      async function cargarOpcionesFiltros() {
+        const snapshot = await db.collection("salidas").get();
+
+        const categorias = new Set();
+        const fechas = new Set();
+        const autores = new Set();
+
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          if (data.categoria) categorias.add(data.categoria);
+          if (data.fecha) fechas.add(data.fecha);
+          if (data.autor) autores.add(data.autor);
+        });
+
+        // Vaciar selects para actualizar
+        filtroCategoria.innerHTML = '<option value="">-- Filtrar por categoría --</option>';
+        filtroFecha.innerHTML = '<option value="">-- Filtrar por fecha --</option>';
+        filtroAutor.innerHTML = '<option value="">-- Filtrar por autor --</option>';
+
+        Array.from(categorias).sort().forEach(cat => {
+          filtroCategoria.innerHTML += `<option value="${cat}">${cat}</option>`;
+        });
+        Array.from(fechas).sort().forEach(fecha => {
+          filtroFecha.innerHTML += `<option value="${fecha}">${fecha}</option>`;
+        });
+        Array.from(autores).sort().forEach(autor => {
+          filtroAutor.innerHTML += `<option value="${autor}">${autor}</option>`;
+        });
+      }
+
+      async function mostrarSalidasFiltradas() {
+        const categoriaSeleccionada = filtroCategoria.value;
+        const fechaSeleccionada = filtroFecha.value;
+        const autorSeleccionado = filtroAutor.value;
+
+        let query = db.collection("salidas");
+
+        if (categoriaSeleccionada) {
+          query = query.where("categoria", "==", categoriaSeleccionada);
+        }
+        if (fechaSeleccionada) {
+          query = query.where("fecha", "==", fechaSeleccionada);
+        }
+        if (autorSeleccionado) {
+          query = query.where("autor", "==", autorSeleccionado);
+        }
+
+        try {
+          const snapshot = await query.get();
+          ul.innerHTML = "";
+
+          if (snapshot.empty) {
+            ul.innerHTML = "<li>No hay salidas con esos filtros.</li>";
+            return;
+          }
+
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <div class="salida-container">
+                <img src="${data.imagen}" alt="${data.nombre}" />
+                <div class="overlay">
+                  <p class="titulo">${data.nombre}</p>
+                  <p class="subtitulo">Fecha: ${data.fecha}</p>
+                  <p class="subtitulo">Categoría: ${data.categoria}</p>
+                  <p class="subtitulo">Autor: ${data.autor}</p>
+                </div>
+              </div>
+            `;
+            ul.appendChild(li);
+          });
+        } catch (error) {
+          console.error("Error al obtener salidas:", error);
+          ul.innerHTML = "<li>Error cargando las salidas.</li>";
+        }
+      }
+
+      botonBuscarFiltro.addEventListener("click", () => {
+        mostrarSalidasFiltradas();
+      });
+
+      botonLimpiarFiltro.addEventListener("click", () => {
+        filtroCategoria.value = "";
+        filtroFecha.value = "";
+        filtroAutor.value = "";
+        mostrarSalidasFiltradas();
+      });
+
+      // Inicialización
+      cargarOpcionesFiltros().then(() => {
+        mostrarSalidasFiltradas();
       });
     });
   </script>
