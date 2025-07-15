@@ -1,0 +1,283 @@
+
+body{
+       margin: 0;
+    overflow-x: hidden;
+    height: 1670px;
+}
+
+header{
+    width: 1536px;
+    height: 70px;
+    position: fixed;
+    background-color: white;
+    z-index: 3;
+}
+
+header .left{
+    float: left;
+}
+
+header .left ul{
+    width: auto;
+    float: left;
+    margin-top: 26px;
+    font-family: sans-serif;
+    font-size: 15px;
+    right: 40px;
+    position: relative;
+}
+
+header .left ul li{
+display: inline-block;
+margin-left: 10px;
+
+}
+
+
+header .left ul li:hover{
+    text-decoration: underline;
+    transition: 1s;
+    cursor: pointer;
+}
+
+
+main .hero{
+        background-image: url(joyasimg.jpg);
+    height: 360px;
+    background-size: cover;
+    width: auto;
+    filter: brightness(0.4);
+    background-repeat: no-repeat;
+    background-position-y: -410px;
+}
+header p{
+       display: inline;
+    float: left;
+    margin: 23px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+header .menu{
+    float: left;
+}
+
+
+main h1{
+    position: absolute;
+    top: 80px;
+    z-index: 1;
+    color: white;
+    font-size: 60px;
+    font-family: sans-serif;
+    /* left: 430px; */
+    width: 1536px;
+    text-align: center;
+}
+
+main p{
+       position: absolute;
+    color: white;
+    z-index: 1;
+    /* left: 300px; */
+    width: 1536px;
+    text-align: center;
+    font-size: 20px;
+    font-family: sans-serif;
+    top: 190px;
+}
+
+main button{
+      position: absolute;
+    z-index: 1;
+    left: 640px;
+    top: 260px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px white;
+    border: transparent;
+}
+
+main #parrafohistoria{
+       top: 450px;
+    text-align: left;
+    color: black;
+    margin: 30px;
+    width: 1400px;
+    font-size: 18px;
+    float: left;
+    width: 1350px;
+    text-align: center;
+    left: 40px;
+}
+
+main h2{
+    font-family: sans-serif;
+    font-size: 35px;
+    text-align: center;
+}
+
+main #colecciones{
+         position: relative;
+    top: 110px;
+    margin-top: 70px;
+}
+
+main .botoncomprar{
+        width: 100px;
+    height: 30px;
+    background: black;
+    position: relative;
+    left: 45px;
+    border-radius: 5px;
+    color: white;
+    padding: ç;
+    text-align: center;
+    padding-top: 10px;
+    font-family: sans-serif;
+    top: 15px;
+
+}
+
+main .grid{
+        width: auto;
+    position: relative;
+    top: 130px;
+    height: 330px;
+    display: grid;
+    float: left;
+    display: block;
+    /* margin-left: 20px; */
+}
+
+main .grid .elemento{
+        display: inline-block;
+    width: 200px;
+    height: auto;
+    margin-left: 80px;
+}
+
+main .grid .elemento img{
+       width: 200px;
+    margin-bottom: 10px;
+    height: 200px;
+    border-radius: 5px;
+}
+
+main .elemento label{
+    font-family: sans-serif;
+    margin-left: 10px;
+}
+#nuestrahistoria{
+     margin-top: 40px;
+}
+
+#Testimonios .grid{
+      position: relative;
+    /* margin: 140px -10px; */
+    width: 1500px;
+}
+
+#Testimonios .grid .testimonio {
+    float: left;
+}
+
+#Testimonios .grid .testimonio img {
+       float: left;
+    margin-left: 180px;
+    border-radius: 10px;
+}
+
+
+#Testimonios .grid .testimonio p{
+       color: black;
+    width: 150px;
+    margin-left: 185px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-top: 25px;
+}
+
+#testimoniostitulo{
+    color: black;
+    font-weight: bold;
+    position: relative;
+    top: 70px;
+}
+
+#Testimonios{
+      position: absolute;
+    top: 1030px;
+}
+
+.testimonio #flecha{
+       position: relative;
+    top: 40px;
+    cursor: pointer;
+}
+.testimonio .resena{
+    display: none;
+}
+
+.testimonio .resena p{
+          position: relative;
+    top: 30px;
+    box-shadow: 0px 0px 20px #0000004d;
+    /* font-size: 25px; */
+    padding: 10px;
+    border-radius: 15px;
+}
+
+footer{
+        background: black;
+    width: 1536px;
+    height: 100px;
+    z-index: 1;
+    position: absolute;
+    top: 1710px;
+}
+
+footer h3{
+        color: white;
+    font-family: sans-serif;
+    position: relative;
+    left: 20px;
+    top: 25px;
+    text-align: center;
+}
+
+.pantallaarticulo{
+       background-color: white;
+    width: 1450px;
+    height: 410px;
+    z-index: 2;
+    display: none;
+    position: absolute;
+    box-shadow: 0px 0px 10px #0000004d;
+    border-radius: 10px;
+    left: 30px;
+}
+
+.pantallaarticulo .left{
+        width: 560px;
+    height: 410px;
+}
+
+.pantallaarticulo .right{
+        float: right;
+    position: absolute;
+    top: 330px;
+    z-index: 3;
+    right: 0px;
+    width: 700px;
+    /* left: 0; */
+    height: 300px;
+    top: 0px;
+}
+
+.pantallaarticulo .left .img{
+        width: 560px;
+    height: 410px;
+}

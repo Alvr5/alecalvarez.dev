@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luz de Luna</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <style>
+        
+body{
+       margin: 0;
+    overflow-x: hidden;
+    height: 1670px;
+}
+
+header{
+    width: 1536px;
+    height: 70px;
+    position: fixed;
+    background-color: white;
+    z-index: 3;
+}
+
+header .left{
+    float: left;
+}
+
+header .left ul{
+    width: auto;
+    float: left;
+    margin-top: 26px;
+    font-family: sans-serif;
+    font-size: 15px;
+    right: 40px;
+    position: relative;
+}
+
+header .left ul li{
+display: inline-block;
+margin-left: 10px;
+
+}
+
+
+header .left ul li:hover{
+    text-decoration: underline;
+    transition: 1s;
+    cursor: pointer;
+}
+
+
+main .hero{
+        background-image: url(joyasimg.jpg);
+    height: 360px;
+    background-size: cover;
+    width: auto;
+    filter: brightness(0.4);
+    background-repeat: no-repeat;
+    background-position-y: -410px;
+}
+header p{
+       display: inline;
+    float: left;
+    margin: 23px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+header .menu{
+    float: left;
+}
+
+
+main h1{
+    position: absolute;
+    top: 80px;
+    z-index: 1;
+    color: white;
+    font-size: 60px;
+    font-family: sans-serif;
+    /* left: 430px; */
+    width: 1536px;
+    text-align: center;
+}
+
+main p{
+       position: absolute;
+    color: white;
+    z-index: 1;
+    /* left: 300px; */
+    width: 1536px;
+    text-align: center;
+    font-size: 20px;
+    font-family: sans-serif;
+    top: 190px;
+}
+
+main button{
+      position: absolute;
+    z-index: 1;
+    left: 640px;
+    top: 260px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px white;
+    border: transparent;
+}
+
+main #parrafohistoria{
+       top: 450px;
+    text-align: left;
+    color: black;
+    margin: 30px;
+    width: 1400px;
+    font-size: 18px;
+    float: left;
+    width: 1350px;
+    text-align: center;
+    left: 40px;
+}
+
+main h2{
+    font-family: sans-serif;
+    font-size: 35px;
+    text-align: center;
+}
+
+main #colecciones{
+         position: relative;
+    top: 110px;
+    margin-top: 70px;
+}
+
+main .botoncomprar{
+        width: 100px;
+    height: 30px;
+    background: black;
+    position: relative;
+    left: 45px;
+    border-radius: 5px;
+    color: white;
+    padding: ç;
+    text-align: center;
+    padding-top: 10px;
+    font-family: sans-serif;
+    top: 15px;
+
+}
+
+main .grid{
+        width: auto;
+    position: relative;
+    top: 130px;
+    height: 330px;
+    display: grid;
+    float: left;
+    display: block;
+    /* margin-left: 20px; */
+}
+
+main .grid .elemento{
+        display: inline-block;
+    width: 200px;
+    height: auto;
+    margin-left: 80px;
+}
+
+main .grid .elemento img{
+       width: 200px;
+    margin-bottom: 10px;
+    height: 200px;
+    border-radius: 5px;
+}
+
+main .elemento label{
+    font-family: sans-serif;
+    margin-left: 10px;
+}
+#nuestrahistoria{
+     margin-top: 40px;
+}
+
+#Testimonios .grid{
+      position: relative;
+    /* margin: 140px -10px; */
+    width: 1500px;
+}
+
+#Testimonios .grid .testimonio {
+    float: left;
+}
+
+#Testimonios .grid .testimonio img {
+       float: left;
+    margin-left: 180px;
+    border-radius: 10px;
+}
+
+
+#Testimonios .grid .testimonio p{
+       color: black;
+    width: 150px;
+    margin-left: 185px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-top: 25px;
+}
+
+#testimoniostitulo{
+    color: black;
+    font-weight: bold;
+    position: relative;
+    top: 70px;
+}
+
+#Testimonios{
+      position: absolute;
+    top: 1030px;
+}
+
+.testimonio #flecha{
+       position: relative;
+    top: 40px;
+    cursor: pointer;
+}
+.testimonio .resena{
+    display: none;
+}
+
+.testimonio .resena p{
+          position: relative;
+    top: 30px;
+    box-shadow: 0px 0px 20px #0000004d;
+    /* font-size: 25px; */
+    padding: 10px;
+    border-radius: 15px;
+}
+
+footer{
+        background: black;
+    width: 1536px;
+    height: 100px;
+    z-index: 1;
+    position: absolute;
+    top: 1710px;
+}
+
+footer h3{
+        color: white;
+    font-family: sans-serif;
+    position: relative;
+    left: 20px;
+    top: 25px;
+    text-align: center;
+}
+
+.pantallaarticulo{
+       background-color: white;
+    width: 1450px;
+    height: 410px;
+    z-index: 2;
+    display: none;
+    position: absolute;
+    box-shadow: 0px 0px 10px #0000004d;
+    border-radius: 10px;
+    left: 30px;
+}
+
+.pantallaarticulo .left{
+        width: 560px;
+    height: 410px;
+}
+
+.pantallaarticulo .right{
+       float: right;
+    position: absolute;
+    top: 330px;
+    z-index: 3;
+    right: 59px;
+    width: 700px;
+    /* left: 0; */
+    height: 300px;
+    top: 0px;
+    width: 800px;
+}
+
+.pantallaarticulo .left .img{
+        width: 560px;
+    height: 410px;
+}
+
+.pantallaarticulo .close{
+          position: absolute;
+    z-index: 2;
+    color: white;
+    margin: 10px;
+    font-size: 15px;
+    font-family: sans-serif;
+    background: black;
+    /* padding: 10px; */
+    border-radius: 100px;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    /* margin-bottom: 20px; */
+}
+
+.pantallaarticulo .close:hover{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.pantallaarticulo .right #articuloNombre{
+    margin: 40px 0px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.pantallaarticulo .right #menos{
+        width: max-content;
+    padding: 5px 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    background: black;
+    color: white;
+     cursor: pointer;
+}
+
+.pantallaarticulo .right #numero{
+        width: max-content;
+    position: absolute;
+    left: 40px;
+    top: 115px;
+    font-family: sans-serif;
+}
+
+.pantallaarticulo .right #mas{
+        width: max-content;
+    position: absolute;
+    left: 62px;
+    top: 110px;
+    background: black;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+    </style>
+    <header>
+        <div class="left">
+            <div class="logo">
+                <p>Luz de Luna</p>    
+                <div class="menu">
+                    
+                    <ul>
+                        <li id="#Inicio"> <a href="index.html">Inicio</a></li>
+                        <li id="#Historia"><a href="#Historia">Nuestra historia</a></li>
+                        <li id="#Colecciones"><a href="#Colecciones">Colecciones</a></li>
+                        <li id="#Testimonios">Testimonios</li>
+                        <li id="#Contacto">Contacto</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <h1>Joyas personalizadas</h1>
+        <p>Personalizalas ahora en nuestras tiendas de Barcelona</p>
+        <button>Ver colecciones para personalizar</button>
+        <div class="hero"> 
+            <!-- Imagen de background -->
+        </div> 
+
+        <div id="Historia">
+            <div class="left">
+            </div>
+            <div class="lefthistoria">
+                <h2 id="nuestrahistoria">Nuestra Historia</h2>
+                <p id="parrafohistoria">
+                    Luz de Luna Joyas nace del deseo de crear belleza con las manos y con el alma.
+                    Inspiradas en la calma de la naturaleza, en los tonos suaves de la tierra y en  la magia de lo artesanal, cada una de nuestras piezas cuenta una historia.
+
+                    En nuestro pequeño taller, cada joya se trabaja con mimo, como si fuera única —porque lo es—. No seguimos tendencias: seguimos emociones. Creemos en la simplicidad con carácter, en lo atemporal, en lo que se hereda.
+
+                    Luz de Luna no es solo una marca. Es una forma de hacer las cosas con amor, con intención y con mucha luz.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div id="Colecciones">
+            <h2 id="colecciones">Colecciones</h2>
+            <div class="grid">
+                <div class="elemento">
+                    <img src="Joya1.jpg" alt="" class="imagen" onclick= mostrararticulo()>
+                    <label for="" id="nombre1">Joya circular mate platino</label>
+                    <div class="botoncomprar" onclick= comprar()>
+                        Comprar
+                    </div>
+                </div>
+                <div class="elemento">
+                    <img src="Taking center stage_ our top 3 Valentine’s Day gifting recs 💗 Kiara_ for the trendy galentine in your life Lev & Lev Small_ a wearable, dainty reminder of your love Medium Frida_ timeless pearls for the girls.jpg" alt="" class="imagen" onclick= mostrararticulo()>
+                      <label for="" id="nombre1">Pendientes de oro gotas</label>
+                    <div class="botoncomprar" onclick= comprar()>
+                        Comprar
+                    </div>
+                </div>
+                <div class="elemento">
+                    <img src="descarga (7).jpg" alt="" class="imagen" onclick= mostrararticulo()>
+                      <label for="" id="nombre1">Collar de oro con perla</label>
+                    <div class="botoncomprar" onclick=comprar()>
+                        Comprar
+                    </div>
+                </div>
+                <div class="elemento">
+                    <img src="1pc eenvoudige elegante strik decorring, geschikt voor dagelijks gebruik, cadeau voor vrouwen.jpg" alt="" class="imagen" onclick= mostrararticulo()>
+                      <label for="" id="nombre1">Anillo lazo de oro talla S</label>
+                    <div class="botoncomprar" onclick= comprar()>
+                        Comprar
+                    </div>
+                </div>
+                <div class="elemento">
+                    <img src="Joya1.jpg" alt="" class="imagen" onclick= mostrararticulo()>
+                      <label for="" id="nombre1">Joya circular mate platino</label>
+                    <div class="botoncomprar">
+                        Comprar
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Testimonios">
+            <h2 id="testimoniostitulo">Testimonios</h2>
+            <div class="grid">
+                <div class="testimonio">
+                    <img src="Imagenes/Jorge.jpg" alt="" height="200">
+                    <p>Jorge Peñiscolo</p>
+                    <p id="flecha">⬇️</p>
+                    <div class="resena">
+                        <p>¡Una experiencia increíble! El servicio fue rápido, el trato excelente y superaron todas mis expectativas. Sin duda, repetiré.</p>
+                    </div>
+                </div>
+                <div class="testimonio">
+                    <img src="Imagenes/Susana.jpg" alt="" height="200">
+                    <p>Paula Marcela</p>
+                    <p id="flecha">⬇️</p>
+                    <div class="resena">
+                        <p>Muy buen producto, cumple con lo prometido. La atención al cliente fue muy amable. Solo mejoraría los tiempos de entrega.</p>
+                    </div>
+                </div>
+                <div class="testimonio">
+                    <img src="Imagenes/Berta.jpg" alt="" height="200">
+                    <p>Berta Rosellón</p>
+                    <p id="flecha">⬇️</p>
+                    <div class="resena">
+                        <p>Me encantó el diseño y la facilidad de uso. Se nota que hay trabajo detrás. Lo recomiendo totalmente</p>
+                    </div>
+                </div>
+                <div class="testimonio">
+                    <img src="Imagenes/Marc Esteban.jpg" alt="" height="200">
+                    <p>Marc Esteban</p>
+                    <p id="flecha">⬇️</p>
+                    <div class="resena">
+                        <p>Está bien, pero hay margen de mejora. La funcionalidad básica es buena, pero encontré algunos detalles que se podrían pulir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+           <div class="pantallaarticulo" style="display: none;">
+            <div class="close">x</div>
+  <div class="left">
+    <div class="img" id="articuloImagen"></div> <!-- Aquí irá la imagen -->
+  </div>
+  <div class="right">
+    <div class="nombrearticulo" id="articuloNombre"></div>
+    <div id="menos" onclick= menos()>-</div>
+    <div id="numero">0</div>                   
+    <div id="mas">+</div>   
+    <button onclick= comprarcantidad()>Comprar</button>                 
+  </div>
+</div>
+
+        <footer>
+            <h3>Luz de Luna</h3>
+        </footer>
+
+        
+        
+    </body>
+</main>
+<script>
+const pantalladearticulo = document.querySelector(".pantallaarticulo");
+const botonesComprar = document.querySelectorAll(".botoncomprar");
+const articuloImagen = document.getElementById("articuloImagen");
+const articuloNombre = document.getElementById("articuloNombre");
+const cruzcerrar = document.querySelector(".close");
+
+let cantidad = 1;
+
+// Función para actualizar la cantidad mostrada
+function actualizarNumero() {
+    const numero = document.getElementById("numero");
+    numero.innerText = cantidad;
+}
+
+// Mostrar modal con información al hacer clic en una imagen
+const imagenes = document.querySelectorAll(".imagen");
+imagenes.forEach(imagen => {
+    imagen.addEventListener("click", () => {
+        const src = imagen.getAttribute("src");
+        const nombre = imagen.nextElementSibling?.textContent || "";
+
+        // Insertar la imagen en el div
+        articuloImagen.innerHTML = `<img src="${src}" style="width: 100%; height: 100%; object-fit: cover;">`;
+        articuloNombre.textContent = nombre;
+
+        // Mostrar el panel del artículo
+        pantalladearticulo.style.display = "block";
+
+        // Reiniciar cantidad cuando se abre el modal
+        cantidad = 1;
+        actualizarNumero();
+    });
+});
+
+// Cerrar modal al hacer clic en la X
+cruzcerrar.addEventListener("click", () => {
+    pantalladearticulo.style.display = "none";
+});
+
+// Control de botones + y -
+const masBtn = document.getElementById("mas");
+const menosBtn = document.getElementById("menos");
+
+masBtn.addEventListener("click", () => {
+    cantidad++;
+    actualizarNumero();
+});
+
+menosBtn.addEventListener("click", () => {
+    if (cantidad > 1) {
+        cantidad--;
+        actualizarNumero();
+    }
+});
+
+// Mostrar/ocultar reseñas en testimonios
+const flechas = document.querySelectorAll("#flecha");
+flechas.forEach(flecha => {
+    flecha.addEventListener("click", () => {
+        const resena = flecha.nextElementSibling;
+        if (resena && resena.classList.contains("resena")) {
+            resena.style.display = resena.style.display === "block" ? "none" : "block";
+        }
+    });
+});
+
+// Función para manejar la compra desde el modal
+function comprarcantidad() {
+    alert(`Has comprado ${cantidad} unidad(es) de "${articuloNombre.textContent}"`);
+    pantalladearticulo.style.display = "none";
+}
+
+// Asignar función comprar a los botones Comprar de cada artículo (si quieres que también funcionen fuera del modal)
+botonesComprar.forEach(boton => {
+    boton.addEventListener("click", () => {
+        alert("Función comprar no implementada para este botón. Usa la imagen para abrir detalles.");
+    });
+});
+
+</script>
+</html>
