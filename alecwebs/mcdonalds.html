@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mc Donalds pantalla</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="cta-p">
+    <h2><b>HEY</b></h2>
+    <h2>what's up?</h2>
+  </div>
+  
+  <p class="my-order-p"><b>My Order</b></p>
+
+  <div class="container-items">
+    <div class="item">
+      <img src="20fd72945c4f693bbac33f2f670fd1c6-removebg-preview.png" alt="">
+      <p class="item-p">Combo Meal</p>
+    </div>
+    <div class="item">
+      <img src="20fd72945c4f693bbac33f2f670fd1c6-removebg-preview.png" alt="">
+      <p class="item-p">Burgers & Sandwiches</p>
+    </div>
+    <div class="item">
+      <img src="https://i.pinimg.com/736x/d0/2b/34/d02b34cc3e19ca4fede6bd70ab208055.jpg" alt="">
+      <p class="item-p">Happy Meal</p>
+    </div>
+    <div class="item">
+      <img src="https://i.pinimg.com/736x/d0/2b/34/d02b34cc3e19ca4fede6bd70ab208055.jpg" alt="">
+      <p class="item-p">Beverages</p>
+    </div>
+    <div class="item">
+      <img src="https://i.pinimg.com/736x/d0/2b/34/d02b34cc3e19ca4fede6bd70ab208055.jpg" alt="">
+      <p class="item-p">Chicken</p>
+    </div>
+    <div class="item">
+      <img src="https://i.pinimg.com/736x/d0/2b/34/d02b34cc3e19ca4fede6bd70ab208055.jpg" alt="">
+      <p class="item-p">Snacks & Sides</p>
+    </div>
+  </div>
+
+  <script>const items = document.querySelectorAll(".item");
+
+items.forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    item.classList.toggle("active");
+  });
+});
+  </script>
+</body>
+</html>
