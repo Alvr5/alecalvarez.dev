@@ -65,7 +65,7 @@ body {
 }
 
 
-@media (max-width : 480px) {
+@media (max-width : 550px) {
 
     .cta-p{
             height: auto;
@@ -81,5 +81,6 @@ body {
     width: 370px;
     text-align: center;
     }
+
 
 }
