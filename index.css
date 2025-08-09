@@ -1,5 +1,6 @@
 .cta-p {
-    margin: 40px;
+           margin: 60px 0px;
+    text-align: center;
 }
 
 .cta-p h2 {
@@ -9,18 +10,29 @@
 }
 
 .my-order-p {
-       margin: 40px 40px 20px 40px;
+        margin: 50px 40px 20px 40px;
     font-family: sans-serif;
     font-size: 1.3em;
+    text-align: center;
+    background: white;
+    padding: 10px;
+    border-radius: 20px;
+}
+.my-order-p b{
+           padding: 10px;
+    border-radius: 10px;
 }
 
 body {
     margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
 }
 
 .container-items {
-     margin: 10px 40px 40px 40px;
-    width: 300px;
+    margin: 10px 40px 40px 40px;
+    width: auto;
 }
 
 .container-items .item {
@@ -35,7 +47,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     align-items: center;
-    box-shadow: 0px 0px 8px 2px rgb(0 0 0 / 5%);
+    border: 2px solid black;
 }
 .container-items .item img{
     width: 100px;
@@ -49,5 +61,5 @@ body {
 .item.active {
   background-color: red;
   color: white;
-  box-shadow: 0px 0px 10px red;
+    border: 2px solid red;
 }
