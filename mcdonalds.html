@@ -5,18 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mc Donalds pantalla</title>
   <link rel="stylesheet" href="mcdonalds.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
   <img class="logo" src="mcdonalds.png" alt="" height="20" width="20">
-  <div class="menu-slide"></div>
+  
+  <div class="menu-slide">
+    <div class="menu-slide-close">x</div>
+    <ul class="menu-slide-ul">
+      <li class="menu-slide-li">Sobre nosotros</li>
+      <li class="menu-slide-li">Ofertas</li>
+      <li class="menu-slide-li">Nuestros locales</li>
+      <li class="menu-slide-li">Contactar</li>
+    </ul>
+  </div>
+
   <div class="menu">
     <i class="fa-solid fa-bars"></i>
   </div>
+
   <div class="cta-p">
     <h2><b id="hey-p">HEY</b></h2>
     <h2>what's up?</h2>
@@ -25,7 +33,7 @@
   <p class="my-order-p"><b>Order here</b>
   <br>
     👇
-</p>
+  </p>
 
   <div class="container-items">
     <div class="item">
@@ -38,7 +46,7 @@
     </div>
     <div class="item">
       <img src="d02b34cc3e19ca4fede6bd70ab208055-removebg-preview.png" alt="">
-      <p class="item-p">Happy Meal</p>
+      <p class="item-p">Doble cheesburger</p>
     </div>
     <div class="item">
       <img src="d02b34cc3e19ca4fede6bd70ab208055-removebg-preview.png" alt="">
@@ -54,21 +62,57 @@
     </div>
   </div>
 
-  <script>const items = document.querySelectorAll(".item");
+  <div class="comprar-items-button">
+    <button id="comprar-button">Comprar articulos</button>
+  </div>
 
-items.forEach(item => {
-  item.addEventListener('click', (e) => {
-    e.preventDefault();
-    item.classList.toggle("active");
-  });
+  <script>
+    // Seleccionar todos los items
+    const items = document.querySelectorAll('.item');
+
+    items.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        item.classList.toggle("active");
+      });
+    });
+
+    // Menú desplegable
+    const menuBtn = document.querySelector(".menu");
+    const menuSlide = document.querySelector(".menu-slide");
+    const menuSlideClose = document.querySelector(".menu-slide-close");
+
+    menuBtn.addEventListener("click", () => {
+      menuSlide.classList.remove("desactive");
+      menuSlide.classList.add("active");
+    });
+
+    menuSlideClose.addEventListener("click", (e) => {
+      menuSlide.classList.remove("active");
+      menuSlide.classList.add("desactive");
+    });
+
+    // Botón de comprar
+    const comprarButton = document.querySelector("#comprar-button");
+comprarButton.addEventListener("click", () => {
+  const itemsActivos = Array.from(items)
+    .filter(item => item.classList.contains("active"));
+
+  if (itemsActivos.length > 0) {
+    const nombres = itemsActivos.map(item =>
+      item.querySelector(".item-p").textContent.trim()
+    );
+
+    alert("Se ha comprado los siguientes artículos:\n- " + nombres.join("\n- "));
+
+    // Quitar la clase "active" después de la compra
+    itemsActivos.forEach(item => item.classList.remove("active"));
+  } else {
+    alert("No has seleccionado ningún artículo.");
+  }
 });
-  const menuBtn = document.querySelector(".menu");
-  const menuSlide = document.querySelector(".menu-slide");
-
-  menuBtn.addEventListener("click", () => {
-    menuSlide.classList.toggle("active");
-  });
 
   </script>
+
 </body>
 </html>
