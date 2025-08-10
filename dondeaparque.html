@@ -1,20 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DondeAparqueApp</title>
+    <title>¿Dónde Aparqué?</title>
     <link rel="stylesheet" href="dondeaparque.css">
-    <link rel="shortcut icon" href="3D Car Icon Vehicle and Transportation Logo Illustration _ Premium AI-generated image.png" style="object-fit: contain;" type="image/x-icon">
+    <link rel="shortcut icon" href="3D Car Icon Vehicle and Transportation Logo Illustration _ Premium AI-generated image.png" type="image/x-icon">
+
+    <!-- Leaflet.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
+
     <main>
-        <H1 class="dondeaparque-h1">¿Donde Aparque?</H1>
-        <p class="descripcion-p">Encuentra tu vehiculo con un click</p>
+        <h1 class="dondeaparque-h1">¿Dónde Aparqué?</h1>
+        <p class="descripcion-p">Encuentra tu vehículo con un clic</p>
+
         <div class="imagen-home">
-            <img src="3D Car Icon Vehicle and Transportation Logo Illustration _ Premium AI-generated image.png" alt="">
+            <img src="3D Car Icon Vehicle and Transportation Logo Illustration _ Premium AI-generated image.png" alt="Auto">
         </div>
+
         <button id="guardar-button">Guardar localización de mi coche</button>
+        <button id="ver-mapa-button">Ver ubicación en el mapa (Google Maps)</button>
+        <button id="mostrar-mapa-embed">Ver mapa embebido</button>
+
+        <!-- Mapa con Leaflet -->
+        <div id="map"></div>
     </main>
+
+    <!-- Leaflet.js Script -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        // Guardar ubicación del coche
+        document.getElementById('guardar-button').addEventListener('click', () => {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        localStorage.setItem('ubicacionCoche', JSON.stringify({ latitude, longitude }));
+                        alert(`Ubicación guardada:\nLatitud: ${latitude}\nLongitud: ${longitude}`);
+                    },
+                    (error) => {
+                        alert('Error al obtener la ubicación: ' + error.message);
+                    }
+                );
+            } else {
+                alert('La geolocalización no está disponible en este navegador.');
+            }
+        });
+
+        // Ver ubicación en Google Maps
+        document.getElementById('ver-mapa-button').addEventListener('click', () => {
+            const ubicacion = JSON.parse(localStorage.getItem('ubicacionCoche'));
+            if (ubicacion) {
+                const { latitude, longitude } = ubicacion;
+                const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                window.open(url, '_blank');
+            } else {
+                alert('No hay una ubicación guardada todavía.');
+            }
+        });
+
+        // Mostrar mapa embebido con Leaflet
+        document.getElementById('mostrar-mapa-embed').addEventListener('click', () => {
+            const ubicacion = JSON.parse(localStorage.getItem('ubicacionCoche'));
+            const mapContainer = document.getElementById('map');
+
+            if (ubicacion) {
+                const { latitude, longitude } = ubicacion;
+
+                mapContainer.style.display = 'block';
+
+                // Si el mapa ya fue inicializado, evitar duplicarlo
+                if (window.mapaLeaflet) {
+                    window.mapaLeaflet.setView([latitude, longitude], 16);
+                    return;
+                }
+
+                window.mapaLeaflet = L.map('map').setView([latitude, longitude], 16);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(window.mapaLeaflet);
+
+                L.marker([latitude, longitude]).addTo(window.mapaLeaflet)
+                    .bindPopup('Aquí está tu coche')
+                    .openPopup();
+            } else {
+                alert('No hay una ubicación guardada todavía.');
+            }
+        });
+    </script>
 </body>
 </html>
