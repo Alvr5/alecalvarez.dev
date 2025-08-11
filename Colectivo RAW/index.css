@@ -1,5 +1,5 @@
 main{
-    background-image: url(assets/background.png);
+    background-image: url(background.png);
     height: 730px;
     width: auto;
     background-size: cover;
@@ -258,4 +258,66 @@ form .registrarse{
 
 li{
     list-style: none;
+}
+
+
+
+@media (max-width : 500px) {
+    main{
+    width: 860px;
+    height: 1480px;
+    background-size: contain;
+    }
+
+    main .logo{
+    left: -160px;
+    top: 40px;
+    }
+
+    main .entrar{
+    left: 130px;
+    top: 360px;
+    }
+
+   main .logoregistro{
+    left: 130px;
+    top: 100px;
+    }
+
+    #formulario{
+        left: 0px;
+    scale: 0.8;
+    width: 330px;
+    padding: 20px;
+    top: 200px;
+    }
+
+    .form .nombreusuarios{
+            left: 30px;
+    }
+
+    .form #nombre{
+            margin-left: 40px;
+    }
+
+    .form .emailabel{
+            left: 30px;
+    }
+
+    .form #correo{
+        margin-left: 40px;
+    }
+
+    .form .Registrarmebutton{
+            left: 40px;
+    }
+
+    .form .tengocuenta{
+            left: 70px;
+    }
+
+    .form .iniciarsesion{
+            left: 200px;
+    top: 370px;
+    }
 }
