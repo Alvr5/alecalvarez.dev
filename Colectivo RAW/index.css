@@ -262,13 +262,18 @@ li{
 
 
 
-@media (max-width : 500px) {
+@media (max-width : 376px) {
+
+    body{
+        max-width: 373px;
+    }
     main{
-        width: 860px;
-    height: 670px;
-    background-size: 1000px;
+        overflow: hidden;
+    background-size: 1050px 670px;
     background-repeat: no-repeat;
     background-position-x: -280px;
+    max-width: 373px;
+    max-height: 670px;
     }
 
     main .logo{
