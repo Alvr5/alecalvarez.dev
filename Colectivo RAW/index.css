@@ -66,7 +66,7 @@ main .iniciarsesiontitulo{
 }
 
 #formulario2{
-       position: absolute;
+    position: absolute;
     width: 430px;
     left: 510px;
     top: 220px;
@@ -262,37 +262,37 @@ li{
 
 
 
-@media (max-width : 376px) {
+@media (max-width : 480px) {
 
     body{
-        max-width: 373px;
+    max-width: 480px;
     }
     main{
-        overflow: hidden;
+    overflow: hidden;
     background-size: 1050px 670px;
     background-repeat: no-repeat;
     background-position-x: -280px;
-    max-width: 373px;
+    max-width: 480px;
     max-height: 670px;
     }
 
     main .logo{
-    left: -160px;
+    left: -115px;
     top: 40px;
     }
 
     main .entrar{
-    left: 130px;
+    left: 180px;
     top: 360px;
     }
 
    main .logoregistro{
-    left: 130px;
+    left: 185px;
     top: 100px;
     }
 
     #formulario{
-        left: 0px;
+    left: 55px;
     scale: 0.8;
     width: 330px;
     padding: 20px;
@@ -324,7 +324,7 @@ li{
     }
 
     .form .iniciarsesion{
-            left: 200px;
-    top: 370px;
+    left: 185px;
+    top: 368px;
     }
 }
