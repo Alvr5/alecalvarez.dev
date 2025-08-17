@@ -78,24 +78,23 @@
       height: 330px;
     }
     .salida-container img {
-       display: block;
-    border-radius: 20px;
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    object-position: bottom;
+      display: block;
+      border-radius: 20px;
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
     }
     .overlay {
-         position: absolute;
-    bottom: 0;
-    background: rgb(0 0 0);
-    color: white;
-    width: 100%;
-    padding: 0px 5px;
-    box-sizing: border-box;
-    border-radius: 0 0 20px 20px;
-    font-size: 14px;
-    height: 140px;
+      position: absolute;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 0 0 20px 20px;
+      font-size: 14px;
+      height: 130px;
     }
     .overlay .titulo {
       font-weight: bold;
@@ -210,45 +209,15 @@ header img {
   width: auto;
 }
 
-.salidas{
-      margin-top: 40px;
-}
-
-@media (max-width:480px) {
-   #headerprincipal{
-        width: 100%;
-    height: 280px;
-    display: block;
-    text-align: center;
-    line-height: 60px;
-    }
-
-  .saludar{
-    position: absolute;
-    top: 130px;
-    }
-
-    .filtros{
-     margin: 119px 80px 10px 80px;
-    }
-
-    #botoncrear{
-          left: 136px;
-    position: absolute;
-    width: max-content;
-    top: 400px;
-    }
-
-    .salidas ul{
-          margin-left: 60px;
-    }
+.filtrosgaleria{
+    display: none;
 }
   </style>
 </head>
 <body>
 
 
-<header id="headerprincipal">
+<header>
   <p class="inicioenlace" style="left:420px;"><a href="principal.html">Inicio</a></p>
   <p class="galeriaenlace" style="left:560px;"><a href="galeria.html">Galeria</a></p>
   <img src="assets/logonegro.png" class="logonegro" alt="Logo Negro">
@@ -262,7 +231,7 @@ header img {
   <button id="botoncrear">Crear</button>
 
   <!-- Filtros con boton buscar -->
-  <div class="filtros">
+  <div class="filtrosgaleria">
     <select id="filtroCategoria">
       <option value="">-- Filtrar por categoría --</option>
     </select>
@@ -300,9 +269,7 @@ header img {
   </div>
 
   <script>
-
-    //FIREBASE CODIGO
-    const firebaseConfig = { //API FIREBASE
+    const firebaseConfig = {
       apiKey: "AIzaSyCHTXXIXmEWsTbvOKtarjhc3_C4WYW1wFg",
       authDomain: "modify-f9b1c.firebaseapp.com",
       projectId: "modify-f9b1c",
@@ -311,13 +278,11 @@ header img {
       appId: "1:681418689727:web:e7d3766394fd772a814a0a"
     };
 
-    firebase.initializeApp(firebaseConfig); //Inicia la API
-    const db = firebase.firestore(); // Declara que la base de datos va a ser la store de firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-
-    //Coger nombre de usuario de el inicio de sesiom
-    const params = new URLSearchParams(window.location.search); // Crea una busqueda de la ventana
-    const nombreUsuario = params.get("usuario"); // Coge el nombre de usuario
+    const params = new URLSearchParams(window.location.search);
+    const nombreUsuario = params.get("usuario");
 
     document.addEventListener("DOMContentLoaded", () => {
       const saludo = document.getElementById("saludo");

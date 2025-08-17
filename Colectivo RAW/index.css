@@ -1,5 +1,5 @@
 main{
-    background-image: url(background.png);
+    background-image: url(assets/background.png);
     height: 730px;
     width: auto;
     background-size: cover;
@@ -66,7 +66,7 @@ main .iniciarsesiontitulo{
 }
 
 #formulario2{
-    position: absolute;
+       position: absolute;
     width: 430px;
     left: 510px;
     top: 220px;
@@ -262,69 +262,55 @@ li{
 
 
 
-@media (max-width : 480px) {
-
-    body{
-    max-width: 480px;
-    }
-    main{
-    overflow: hidden;
-    background-size: 1050px 670px;
-    background-repeat: no-repeat;
-    background-position-x: -280px;
-    max-width: 480px;
-    max-height: 670px;
-    }
-
-    main .logo{
-    left: -115px;
-    top: 40px;
-    }
-
+@media (max-width:480px) {
     main .entrar{
-    left: 180px;
-    top: 360px;
+            left: 125px;
+    top: 330px;
+    }
+    main .logo{
+            scale: 0.3;
+    left: 0px;
+    width: 100%;
+    text-align: center;
     }
 
-   main .logoregistro{
-    left: 185px;
-    top: 100px;
+    main{
+    width: 100%;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position-x: -320px;
+    overflow: hidden;
     }
 
-    #formulario{
-    left: 55px;
-    scale: 0.8;
-    width: 330px;
-    padding: 20px;
-    top: 200px;
+    main #formulario{
+            left: -35px;
+    /* width: 270px; */
+    scale: 0.7;
+    /* right: 200px; */
+    top: 150px;
+    }
+    html{
+        overflow: hidden;
     }
 
-    .form .nombreusuarios{
-            left: 30px;
+    main .logoregistro{
+             left: 127px;
     }
 
-    .form #nombre{
-            margin-left: 40px;
+    main #formulario2{
+            left: -55px;
+    scale: 0.7;
     }
 
-    .form .emailabel{
-            left: 30px;
+    form .notengocuenta{
+            color: white;
+    font-size: 15px;
+    font-family: sans-serif;
+    position: relative;
+    left: 60px;
+    width: max-content;
+    top: 15px;
     }
 
-    .form #correo{
-        margin-left: 40px;
-    }
-
-    .form .Registrarmebutton{
-            left: 40px;
-    }
-
-    .form .tengocuenta{
-            left: 70px;
-    }
-
-    .form .iniciarsesion{
-    left: 185px;
-    top: 368px;
-    }
+   
 }
