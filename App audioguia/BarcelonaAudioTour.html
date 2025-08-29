@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcelona Audio Tour</title>
+    <link rel="stylesheet" href="BarcelonaAudioTour.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="logo">
+            <p class="logo-p">Barcelona Audio Tour</p>
+        </div>
+
+        <select name="idiomas" id="languages">
+            <option value="Spanish">Spanish</option>
+            <option value="English">English</option>
+        </select>
+
+        <div class="sitios">
+            <div class="sitio" data-audio="torregloriess.mp3" data-audio="torreglories-en.mp3">
+                <img src="torreagbaricon.png" alt="">
+                <div class="agbar-name">Torre Glòries</div>
+            </div>
+
+            <div class="sitio" data-audio="sagradafamilia.mp3" data-audio="sagradafamilia-en.mp3">
+                <img src="sagradafamilia.png" alt="">
+                <div class="sagradafamilia">Sagrada Familia</div>
+            </div>
+
+            <div class="sitio" data-audio="La Casa Batlló.mp3" data-audio="La Casa Batlló-en.mp3">
+                <img src="icons8-casa-batlló-48.png" style="filter: invert();"  alt="">
+                <div class="casabatllo">Casa Batlló</div>
+            </div>
+        </div>
+
+        <audio style="display: none;" id="player" controls></audio>
+    </main>
+
+    <script>
+        const sitios = document.querySelectorAll(".sitio");
+        const audio = document.getElementById("player");
+        const selectIdioma = document.getElementById("languages");
+
+        sitios.forEach(sitio => {
+            sitio.addEventListener("click", () => {
+                let audioSrc = sitio.dataset.audio;
+
+                if (selectIdioma.value === "English") {
+                    audioSrc = audioSrc.replace(".mp3", "-en.mp3");
+                }
+
+                audio.src = audioSrc;
+                audio.play().catch(err => console.log("El navegador bloqueó la reproducción automática:", err));
+            });
+        });
+
+        // Cambiar idioma del audio actual si ya está reproduciéndose
+        selectIdioma.addEventListener("change", () => {
+            if (!audio.src) return;
+            let currentSrc = audio.src.split('/').pop();
+
+            if (selectIdioma.value === "English") {
+                currentSrc = currentSrc.replace(".mp3", "-en.mp3");
+            } else {
+                currentSrc = currentSrc.replace("-en.mp3", ".mp3");
+            }
+
+            audio.src = currentSrc;
+            audio.play().catch(err => console.log(err));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+@media (max-width:480px) {
+    
+
+main{
+        background-color: #005F73;
+    height: 667px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+}
+body{
+    margin: 0;
+}
+
+.logo{
+    position: absolute;
+    z-index: 1;
+    /* left: 200px; */
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.logo-p{
+    color: white;
+   font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+.sitios{
+        position: relative;
+    top: 70px;
+    height: 570px;
+}
+.sitios .sitio{
+       border: 1px solid white;
+    width: 343px;
+    margin-left: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.sitios .sitio img{
+      width: 70px;
+    left: 20px;
+    position: relative;
+    display: inline-block;
+    scale: 0.8;
+}
+
+.sitios .sitio .agbar-name{
+        color: white;
+    font-family: sans-serif;
+    display: inline-block;
+    top: 30px;
+    position: absolute;
+    left: 90px;
+}
+
+.sitios .sitio .sagradafamilia{
+    position: absolute;
+    left: 95px;
+    font-family: sans-serif;
+    color: white;
+    top: 116px;
+}
+
+.sitios .sitio .casabatllo{
+         position: absolute;
+    left: 95px;
+    font-family: sans-serif;
+    color: white;
+    top: 201px;
+}
+/* Estilo del selector */
+#google_translate_element select {
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+select{
+        position: relative;
+    top: 65px;
+    left: 145px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+}
