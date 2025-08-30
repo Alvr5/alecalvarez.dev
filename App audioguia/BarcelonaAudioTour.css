@@ -2,14 +2,16 @@
     
 
 main{
-        background-color: #005F73;
+          background-color: #005F73;
     height: 667px;
     width: 100%;
     position: absolute;
     top: 0px;
+    overflow: hidden;
 }
 body{
     margin: 0;
+    overflow: hidden;
 }
 
 .logo{
@@ -28,49 +30,63 @@ body{
 }
 
 .sitios{
-        position: relative;
-    top: 70px;
-    height: 570px;
+       position: relative;
+    top: 90px;
+    height: auto;
+    /* text-align: center; */
+    left: 30px;
 }
 .sitios .sitio{
        border: 1px solid white;
-    width: 343px;
-    margin-left: 10px;
-    border-radius: 5px;
+    width: 315px;
+    /* margin-left: 10px; */
+    border-radius: 10px;
     margin-top: 10px;
+    background: white;
+    color: black;
+    height: 60px;
 }
 
-.sitios .sitio img{
-      width: 70px;
-    left: 20px;
-    position: relative;
-    display: inline-block;
-    scale: 0.8;
+.sitios .sitio .imagensitio{
+       width: 13%;
+    left: 10px;
+    position: absolute;
+    /* display: inline-block; */
+    top: 6px;
+    border-radius: 10px;
 }
 
 .sitios .sitio .agbar-name{
-        color: white;
-    font-family: sans-serif;
-    display: inline-block;
-    top: 30px;
+        display: inline-block;
+    top: 19px;
     position: absolute;
-    left: 90px;
+    left: 75px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 20px;
 }
 
 .sitios .sitio .sagradafamilia{
+        display: inline-block;
+    top: 91px;
     position: absolute;
-    left: 95px;
-    font-family: sans-serif;
-    color: white;
-    top: 116px;
+    left: 73px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 20px;
 }
 
 .sitios .sitio .casabatllo{
-         position: absolute;
-    left: 95px;
-    font-family: sans-serif;
-    color: white;
-    top: 201px;
+        display: inline-block;
+    top: 161px;
+    position: absolute;
+    left: 73px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-size: 20px;
 }
 /* Estilo del selector */
 #google_translate_element select {
@@ -80,12 +96,137 @@ body{
     font-family: 'Montserrat', sans-serif;
     cursor: pointer;
 }
-
-select{
-        position: relative;
-    top: 65px;
-    left: 145px;
+select {
+      appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    top: 85px;
+    left: 35px;
     padding: 5px 10px;
     border-radius: 5px;
+    width: 63px;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    color: black;
+    background: #fff url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+    background-size: 16px;
+    /* border: 1px solid #ccc; */
+}
+
+
+select option {
+  font-family: "Inter", sans-serif !important;
+  font-weight: 700 !important;
+  color: black !important;
+}
+
+.fondoimagenes{
+    height: 667px;
+}
+
+.fondoimagenes .casabatllofondo{
+      width: 374px;
+    object-fit: cover;
+    object-position: top;
+    height: 300px;
+    top: -80px;
+    position: absolute;
+}
+
+.fondoimagenes .torreagbarfondo{
+       width: 375px;
+    object-fit: cover;
+    object-position: top;
+    height: 300px;
+    position: absolute;
+    top: 219px;
+    left: 0;
+}
+
+.fondoimagenes .sagradafamiliafondo{
+        width: 375px;
+    object-fit: cover;
+    object-position: top;
+    height: 300px;
+    position: absolute;
+    top: 465px;
+    left: 0px;
+}
+.fondonegro{
+        z-index: 2;
+    height: 667px;
+    width: 100%;
+    background: #00000096;
+    position: absolute;
+}
+
+.logomainfondo{
+         z-index: 3;
+    position: absolute;
+    left: 90px;
+    top: 120px;
+}
+
+h1{
+        color: white;
+    font-family: sans-serif;
+    /* width: 230px; */
+    text-align: center;
+    font-size: 21px;
+    top: 160px;
+    position: absolute;
+    left: 0px;
+}
+
+.botonentrar{
+        color: black;
+    background-color: white;
+    padding: 10px 30px;
+    position: absolute;
+    z-index: 3;
+    border: transparent;
+    border-radius: 5px;
+    top: 410px;
+    left: 145px;
+}
+
+.reproductor{
+      background-color: black;
+    width: 60px;
+    height: 58px;
+    border-radius: 50%;
+    position: relative;
+    left: 250px;
+    scale: 0.7;
+}
+
+.iconplay{
+        position: absolute;
+    /* z-index: 3; */
+    scale: 1;
+    /* top: 23px; */
+    z-index: 7;
+    left: 276px;
+    margin-top: 23px;
+}
+
+.imagensitiosagradafamilia{
+        /* scale: 0.6; */
+    z-index: 1;
+    position: absolute;
+    /* left: -370px; */
+    /* top: 79px; */
+    width: 50px;
+    height: 50px;
+    left: 7px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 6px;
+}
+
+.sitio-active{
+    box-shadow: 0px 0px 10px white;
 }
 }
+

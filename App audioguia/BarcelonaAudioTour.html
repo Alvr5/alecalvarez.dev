@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barcelona Audio Tour</title>
     <link rel="stylesheet" href="BarcelonaAudioTour.css">
+    <link rel="shortcut icon" href="Group 3 (1).png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="Group 3 (1).png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <main>
@@ -17,62 +17,83 @@
         </div>
 
         <select name="idiomas" id="languages">
-            <option value="Spanish">Spanish</option>
-            <option value="English">English</option>
+            <option value="Spanish">ES</option>
+            <option style="font-family: Inter, sans-serif;" value="English">EN</option>
         </select>
 
         <div class="sitios">
-            <div class="sitio" data-audio="torregloriess.mp3" data-audio="torreglories-en.mp3">
-                <img src="torreagbaricon.png" alt="">
+            <div class="sitio" data-audio-es="torregloriess.mp3" data-audio-en="torregloriess-en.mp3">
+                <img class="imagensitio" src="imagenesbackground/torreagbarfondo.jpg" alt="Torre Glòries">
                 <div class="agbar-name">Torre Glòries</div>
+                <img src="Vector.png" class="iconplay" alt="Play">
+                <div class="reproductor"></div>
             </div>
 
-            <div class="sitio" data-audio="sagradafamilia.mp3" data-audio="sagradafamilia-en.mp3">
-                <img src="sagradafamilia.png" alt="">
+            <div class="sitio" data-audio-es="sagradafamilia.mp3" data-audio-en="sagradafamilia-en.mp3">
+                <img class="imagensitiosagradafamilia" src="imagenesbackground/sagradafamiliafondo.jpg" alt="Sagrada Familia">
                 <div class="sagradafamilia">Sagrada Familia</div>
+                <img src="Vector.png" class="iconplay" alt="Play">
+                <div class="reproductor"></div>
             </div>
 
-            <div class="sitio" data-audio="La Casa Batlló.mp3" data-audio="La Casa Batlló-en.mp3">
-                <img src="icons8-casa-batlló-48.png" style="filter: invert();"  alt="">
+            <div class="sitio" data-audio-es="La Casa Batlló.mp3" data-audio-en="La Casa Batlló-en.mp3">
+                <img class="imagensitiosagradafamilia" src="imagenesbackground/casabatllofondo.jpg" alt="Casa Batlló">
                 <div class="casabatllo">Casa Batlló</div>
+                <img src="Vector.png" class="iconplay" alt="Play">
+                <div class="reproductor"></div>
             </div>
         </div>
 
         <audio style="display: none;" id="player" controls></audio>
     </main>
 
-    <script>
-        const sitios = document.querySelectorAll(".sitio");
-        const audio = document.getElementById("player");
-        const selectIdioma = document.getElementById("languages");
+   <script>
+    const sitios = document.querySelectorAll(".sitio");
+    const playButtons = document.querySelectorAll(".iconplay");
+    const audio = document.getElementById("player");
+    const selectIdioma = document.getElementById("languages");
 
-        sitios.forEach(sitio => {
-            sitio.addEventListener("click", () => {
-                let audioSrc = sitio.dataset.audio;
+    playButtons.forEach(play => {
+        play.addEventListener("click", () => {
+            const sitio = play.closest(".sitio");
 
-                if (selectIdioma.value === "English") {
-                    audioSrc = audioSrc.replace(".mp3", "-en.mp3");
-                }
+            // 1️⃣ Quitar 'sitio-active' de todos los sitios
+            sitios.forEach(s => s.classList.remove("sitio-active"));
 
-                audio.src = audioSrc;
-                audio.play().catch(err => console.log("El navegador bloqueó la reproducción automática:", err));
-            });
+            // 2️⃣ Añadir 'sitio-active' solo al sitio clicado
+            sitio.classList.add("sitio-active");
+
+            // 3️⃣ Seleccionar el audio según idioma
+            let audioSrc = (selectIdioma.value === "English") 
+                ? sitio.dataset.audioEn 
+                : sitio.dataset.audioEs;
+
+            console.log("Audio seleccionado:", audioSrc); // depuración
+
+            // 4️⃣ Reproducir audio
+            audio.src = audioSrc;
+            audio.play().catch(err => console.log("Error de reproducción:", err));
         });
+    });
 
-        // Cambiar idioma del audio actual si ya está reproduciéndose
-        selectIdioma.addEventListener("change", () => {
-            if (!audio.src) return;
-            let currentSrc = audio.src.split('/').pop();
+    // Cambiar idioma del audio actual si ya se está reproduciendo
+    selectIdioma.addEventListener("change", () => {
+        if (!audio.src) return;
+        const currentSitio = [...sitios].find(sitio =>
+            sitio.dataset.audioEs === audio.src.split('/').pop() || 
+            sitio.dataset.audioEn === audio.src.split('/').pop()
+        );
 
-            if (selectIdioma.value === "English") {
-                currentSrc = currentSrc.replace(".mp3", "-en.mp3");
-            } else {
-                currentSrc = currentSrc.replace("-en.mp3", ".mp3");
-            }
+        if (currentSitio) {
+            let newSrc = (selectIdioma.value === "English") 
+                ? currentSitio.dataset.audioEn 
+                : currentSitio.dataset.audioEs;
+            
+            audio.src = newSrc;
+            audio.play().catch(err => console.log("Error de reproducción:", err));
+        }
+    });
+</script>
 
-            audio.src = currentSrc;
-            audio.play().catch(err => console.log(err));
-        });
-    </script>
 </body>
 </html>
