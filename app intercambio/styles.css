@@ -1,0 +1,172 @@
+@media (max-width: 500px) {
+  
+
+
+header{
+      height: 667px;
+    width: 100%;
+    background-color: #3A86FF;
+    padding: 20px;
+    overflow: hidden;
+}
+
+body{
+  margin: 0;
+  overflow: hidden;
+}
+
+.h1-time{
+          -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    color: transparent;
+    text-align: center;
+    top: 30px;
+    /* margin-top: 30px; */
+    position: relative;
+    top: 190px;
+    font-size: 50px;
+    left: -20px;
+}
+
+p{
+       color: white;
+    font-family: sans-serif;
+    text-align: center;
+    position: relative;
+    top: 170px;
+    width: 210px;
+    left: 66px;
+    font-size: 20px;
+    font-weight: bold;
+    /* text-decoration: underline; */
+}
+
+button{
+       background: white;
+    border: transparent;
+    padding: 10px 40px;
+    border-radius: 5px;
+    /* text-align: center; */
+    position: relative;
+    top: 190px;
+    left: 110px;
+}
+
+#flechas{
+    width: 320px;
+    position: absolute;
+    top: 230px;
+    left: 25px;
+    z-index: 1;
+}
+
+.h2-swap{
+      position: relative;
+    left: 115px;
+    top: 145px;
+    font-size: 45px;
+    color: white;
+    font-family: sans-serif;
+}
+
+.fotografia{
+      position: absolute;
+    left: -100px;
+    width: 260px;
+    top: 60px;
+    z-index: 0;
+}
+
+.imagenplantas{
+      position: absolute;
+    top: 0px;
+    left: 250px;
+    scale: 0.7;
+    transform: rotate(
+339deg);
+}
+
+.imagenseñora{
+      position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 490px;
+}
+
+.ediciondevideo{
+       position: absolute;
+    z-index: 1;
+    left: 280px;
+    top: 530px;
+    width: 99px;
+}
+
+.background{
+     background-color: #3A86FF;
+    height: 667px;
+}
+
+.logo1{
+      text-align: center;
+    /* margin-top: 30px; */
+    padding-top: 30px;
+}
+
+.logo1 img{
+  width: 70px;
+}
+
+.bienvenida{
+       width: 300px;
+    margin-left: 20px;
+    color: white;
+    font-family: sans-serif;
+    margin-top: 25px;
+}
+.bienvenida-p{
+       position: static;
+    width: max-content;
+    text-align: left;
+    font-size: 16px;
+    margin: 5px 0px;
+}
+
+.bienvenida h1{
+      margin: 10px  0px 0px 0px;
+}
+
+.imagenfondoregistro{
+      width: 100%;
+}
+
+#registrarse-button-mainpage{
+     position: absolute;
+    top: 520px;
+    width: 210px;
+    left: 86px;
+    color: blue;
+}
+
+#login-button-mainpage{
+       position: absolute;
+    top: 570px;
+    width: 210px;
+    left: 86px;
+    position: absolute;
+    top: 580px;
+    width: 210px;
+    left: 86px;
+    color: white;
+    background: transparent;
+    border: 2px solid white;
+}
+
+
+
+
+
+
+
+
+
+}
