@@ -1,6 +1,5 @@
 <?php
-session_start(); // Iniciar sesión
-
+// Conexión a MySQL
 $servername = "localhost";
 $username = "root";
 $password = "Alecal051204@";
@@ -28,13 +27,11 @@ if ($password !== $password_confirm) {
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 // Insertar en la base de datos
-$stmt = $conn->prepare("INSERT INTO usuariostimeswap (nombre, password) VALUES (?, ?)");
+$stmt = $conn->prepare("INSERT INTO usuarios (nombre, password) VALUES (?, ?)");
 $stmt->bind_param("ss", $nombre, $hashed_password);
 
 if ($stmt->execute()) {
-    $_SESSION['usuario'] = $nombre; // Guardar el nombre en la sesión
-    header("Location: bienvenido.php"); // Redirigir
-    exit();
+    echo "Usuario registrado correctamente.";
 } else {
     echo "Error: " . $stmt->error;
 }
