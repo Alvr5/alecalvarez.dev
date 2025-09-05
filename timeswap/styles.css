@@ -162,20 +162,21 @@ button{
 }
 
 .logoregistro-page img{
-     width: 140px;
+    width: 140px;
     /* text-align: center; */
     /* align-items: center; */
     /* align-self: center; */
     align-content: center;
     position: relative;
-    left: 75px;
+    left: 130px;
+    top: 10px;
 }
 
 .creatucuenta-p{
-      font-weight: lighter;
+    font-weight: lighter;
     position: absolute;
-    top: 140px;
-    left: 40px;
+    top: 135px;
+    left: 70px;
     font-size: 15px;
     width: max-content;
 }
@@ -190,9 +191,10 @@ button{
 }
 
 form{
-      position: relative;
+       position: relative;
     top: 40px;
-    left: 40px;
+    left: 106px;
+    scale: 1.2;
 }
 
 form input{

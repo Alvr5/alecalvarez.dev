@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="background">
+    <div class="background">º
         <div class="logo1">
 <img src="Group 6.png" alt="">
         </div>
@@ -24,4 +24,11 @@
         <button id="login-button-mainpage">Iniciar sesión</button>
     </div>
 </body>
+<script>
+    const botonregistro = document.getElementById("registrarse-button-mainpage");
+
+    botonregistro.addEventListener("click", (e) =>{
+        window.location.href = "registro-page.html";
+    })
+</script>
 </html>

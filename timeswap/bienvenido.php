@@ -1,52 +1,54 @@
 <?php
-session_start(); // Iniciar sesión
+session_start();
 
-// Comprobar si hay usuario registrado
 if (!isset($_SESSION['usuario'])) {
     header("Location: registro.html");
     exit();
 }
 
-$usuario = $_SESSION['usuario'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['imagen'])) {
+    $carpetaDestino = 'uploads/';
+    if (!is_dir($carpetaDestino)) {
+        mkdir($carpetaDestino, 0777, true);
+    }
+
+    $nombreArchivo = basename($_FILES['imagen']['name']);
+    $rutaArchivo = $carpetaDestino . time() . '_' . $nombreArchivo;
+
+    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaArchivo)) {
+        // Guardar info en archivo o base de datos (aquí usamos archivo JSON simple)
+        $archivoHabilidades = 'habilidades.json';
+        $habilidades = [];
+
+        if (file_exists($archivoHabilidades)) {
+            $habilidades = json_decode(file_get_contents($archivoHabilidades), true);
+        }
+
+        $habilidades[] = [
+            'usuario' => $_SESSION['usuario'],
+            'imagen' => $rutaArchivo,
+            'nombre' => $_POST['nombre']
+        ];
+
+        file_put_contents($archivoHabilidades, json_encode($habilidades));
+
+        header("Location: feed.php");
+        exit();
+    } else {
+        echo "Error al subir la imagen.";
+    }
+}
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Bienvenido</title>
-</head>
-<body style="
-    margin: 0;
-    height: 667px;
-    width: 100%;
-    background: #3A86FF;
+
+<form method="POST" enctype="multipart/form-data" style="
+    scale: 3;
+    position: absolute;
+    left: 350px;
+    top: 240px;
 ">
-    <h1 style="
-    margin: 50px 50px;
-    font-size: 50px;
-    font-family: sans-serif;
-    color: white;
- ">Bienvenido <?php echo htmlspecialchars($usuario); ?>!</h1>
-
- <div class="feed" style="
-    width: 700px;
-    height: 1090px;
-    margin-left: 40px;
-    border-radius: 30px;
-    background: white;
-" >
-
-<div class="imagenhabilidad"  style="
-    width: 700px;
-    height: 1090px;
-    /* margin-left: 40px; */
-    border-radius: 30px;
-    background: red;
-"><img style="
-    width: 700px;
-    height: 1090px;
-    border-radius: 20px;
-" src="" alt=""></div>
- </div>
-</body>
-</html>
+    <label>Nombre de la habilidad:</label><br>
+    <input type="text" name="nombre" required><br><br>
+    <label>Selecciona imagen:</label><br>
+    <input type="file" name="imagen" accept="image/*" required><br><br>
+    <button type="submit">Subir</button>
+</form>
