@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-color: #3A86FF; width: 375px; height: 667px; overflow: hidden;">
+    <div class="logoregistro-page">
+        <img src="favicon.png" alt="">
+        <p class="creatucuenta-p">Crea tu cuenta</p>
+
+        <form action="datosusuarios.php" method="POST">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" required>
+
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" id="password" required>
+
+            <label for="password_confirm">Confirmar Contraseña</label>
+            <input type="password" name="password_confirm" id="password_confirm" required>
+
+            <button type="submit">Registrarme</button>
+        </form>
+    </div>
+</body>
+</html>
