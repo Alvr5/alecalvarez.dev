@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Otro más?</title>
+    <link rel="stylesheet" href="otromas.css">
+</head>
+<body id="otromasmainbody">
+    <p id="cuantosvanajugar">¿Cuántos jugadores van a jugar?</p>
+    <input id="numerojugadores" placeholder="Nº de Jugadores" type="number" width="100">
+    <div id="contenedor"></div>
+
+    <p id="Categorias" style="position: relative; left: 25px; color: white; font-family: sans-serif; top: 15px;">
+        Selecciona las categorías que quieras realizar
+    </p>
+
+    <ul>
+        <li>Verdad o Reto</li>
+        <li>Especial Festivo</li>
+        <li>Picante</li>
+        <li>Equilibrio Extranjero</li>
+        <li>Fortnite</li>
+        <li>Anime</li>
+    </ul>
+
+    <button>Jugar ></button>
+
+    <script>
+        const inputJugadores = document.getElementById("numerojugadores");
+        const contenedor = document.getElementById("contenedor");
+
+        inputJugadores.addEventListener("input", () => {
+            contenedor.innerHTML = "";
+
+            const cantidad = parseInt(inputJugadores.value);
+
+            if (!isNaN(cantidad) && cantidad > 1 && cantidad <= 10) {
+                for (let i = 1; i <= cantidad; i++) {
+                    const nuevoInput = document.createElement("input");
+                    nuevoInput.type = "text";
+                    nuevoInput.className = "nombreJugador"; // <- cambio id por class
+                    nuevoInput.placeholder = `Nombre del jugador ${i}`;
+                    contenedor.appendChild(nuevoInput);
+                    contenedor.appendChild(document.createElement("br"));
+                }
+            } else if (cantidad > 10) {
+                contenedor.innerHTML = "<p style='color:red;background: white;width: 200px;text-align: center;border-radius: 5px;padding: 10px;left: 65px;position: relative;font-weight: bold;font-family: sans-serif;'>No podéis ser tantos, el juego todavía no está preparado</p>";
+            } else {
+                contenedor.innerHTML = "<p style='color:red;background: white;width: 200px;text-align: center;border-radius: 5px;padding: 10px;left: 65px;position: relative;font-weight: bold;font-family: sans-serif;'>Tienen que jugar más de 1 jugador</p>";
+            }
+        });
+
+        // Selección de categorías
+        const categorias = document.querySelectorAll("#otromasmainbody ul li");
+        categorias.forEach(categoria => {
+            categoria.addEventListener("click", () => {
+                categoria.classList.toggle("seleccionado");
+            });
+        });
+
+        // Botón siguiente
+        const botonsiguiente = document.querySelector("button");
+        botonsiguiente.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const jugadores = [...document.querySelectorAll(".nombreJugador")].map(input => input.value).filter(v => v.trim() !== "");
+            const categoriasSeleccionadas = [...document.querySelectorAll("li.seleccionado")].map(li => li.textContent);
+
+            // Construir parámetros
+            const params = new URLSearchParams();
+            params.set("numeroJugadores", jugadores.length);
+            jugadores.forEach((jugador, i) => params.set(`jugador${i+1}`, jugador));
+            params.set("categorias", categoriasSeleccionadas.join(","));
+
+            // Redirigir con parámetros
+            window.location.href = "Mainpage.html?" + params.toString();
+        });
+    </script>
+</body>
+</html>

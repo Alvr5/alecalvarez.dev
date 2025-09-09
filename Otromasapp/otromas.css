@@ -1,0 +1,166 @@
+body{
+    margin: 0;
+    overflow: hidden;
+}
+.background{
+      height: 667px;
+    background-color: #FF4343;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+.logo{
+      text-align: center;
+    align-content: center;
+    position: relative;
+    top: 80px;
+    scale: 0.8;
+}
+
+.comenzar-button{
+    text-align: center;
+}
+
+.comenzar-button button{
+        background: white;
+    padding: 10px 40px;
+    border: transparent;
+    border-radius: 5px;
+    position: relative;
+    top: 230px;
+    color: #FF4343;
+    font-family: sans-serif;
+}
+
+
+.background .instrucciones-h1{
+        margin: 0;
+    position: relative;
+    left: 85px;
+    top: 20px;
+    font-family: sans-serif;
+    color: white;
+}
+
+.background .comosejuega-h2{
+        position: relative;
+    top: 50px;
+    left: 116px;
+    font-family: sans-serif;
+    color: white;
+    font-size: 17px;
+}
+
+details{
+     position: relative;
+    margin-top: 20px;
+    text-align: center;
+    background: white;
+    padding: 10px 20px;
+    width: 230px;
+    left: 60px;
+    border-radius: 10px;
+    top: 60px;
+    font-family: sans-serif;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+details summary{
+    font-weight: bold;
+}
+details ul{
+    padding-left: 0px;
+
+}
+details li{
+     list-style: none;
+    text-align: left;
+    line-height: 26px;
+    text-align: center;
+}
+
+.siguiente-button1{
+        position: absolute;
+    top: 545px;
+    left: 89px;
+    padding: 10px 20px;
+    border: transparent;
+    border-radius: 5px;
+    background: white;
+    width: 200px;
+}
+
+#cuantosvanajugar{
+        font-family: sans-serif;
+    margin: 40px 55px;
+    font-weight: bold;
+    width: max-content;
+    color: white;
+}
+#otromasmainbody{
+       background-color: #FF4343;
+    overflow-y: auto;
+    width: 370px;
+    height: 610px;
+    padding: 10px;
+}
+
+#otromasmainbody input{
+        position: relative;
+    left: 80px;
+    border: transparent;
+    padding: 10px 10px;
+    border-radius: 5px;
+    color: red;
+}
+
+#inputnombrejugador{
+        position: relative;
+    left: 80px;
+    border: transparent;
+    padding: 10px 10px;
+    border-radius: 5px;
+    color: red;
+    margin-top: 9px;
+}
+
+#otromasmainbody ul{
+       list-style: none;
+    margin: 40px 0px;
+    position: absolute;
+    left: -20px;
+}
+
+
+#otromasmainbody ul li{
+       display: inline-block;
+    /* margin-left: 20px; */
+    padding: 12px 20px;
+    background-color: transparent;
+    border: 1.5px solid white;
+    border-radius: 10px;
+    /* line-height: 20px; */
+    margin-bottom: 20px;
+    color: white;
+    font-family: sans-serif;
+    margin-left: 10px;
+}
+
+#otromasmainbody ul li.seleccionado{
+    background-color: white;
+    color: #FF4343;
+    box-shadow: 0px 0px 10px white;
+}
+
+#otromasmainbody button{
+        position: relative;
+    top: 240px;
+    left: 265px;
+    background: white;
+    border: transparent;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}

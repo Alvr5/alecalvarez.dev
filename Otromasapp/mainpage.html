@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page</title>
+</head>
+<body style="background: red; color: white;">
+  <h1 style="font-size: 60px; font-family: sans-serif; text-align: center;">
+    ¡Bienvenidos a ¿Otro mas?!
+  </h1>
+
+  <div id="info" style="font-size: 30px; text-align: center;"></div>
+
+  <!-- Contenedor donde se mostrarán los retos -->
+  <div id="retos" style="/* border: 2px solid white; */padding: 20px;margin: 20px;border-radius: 15px;/* background: white; */color: red;font-family: sans-serif;height: 570px;align-content: center;text-align: center;font-size: 60px;overflow: hidden;"></div>
+
+  <script>
+    // ======================
+    // INFO DE JUGADORES Y CATEGORÍAS
+    // ======================
+    const params = new URLSearchParams(window.location.search);
+
+    const numeroJugadores = params.get("numeroJugadores");
+    const categorias = params.get("categorias")?.split(",") || [];
+
+    // Guardamos jugadores en un array
+    const jugadores = [];
+    for (let i = 1; i <= numeroJugadores; i++) {
+      jugadores.push(params.get("jugador" + i));
+    }
+
+    let infoHtml = `<p style="font-family: sans-serif;">Juegan <b>${numeroJugadores}</b> personas:</p><ul>`;
+    jugadores.forEach(jugador => {
+      infoHtml += `<li style="list-style: none; padding: 10px 20px; background: white; color: red; border-radius: 20px; width: max-content; display: inline-block; font-size: 50px; font-family: sans-serif; margin-right: 20px;">${jugador}</li>`;
+    });
+    infoHtml += "</ul>";
+
+    infoHtml += `<p style="font-family: sans-serif; margin-top: 80px; width: 860px; font-size: 46px; position: relative; left: 50px;">
+      Categorías seleccionadas: ${categorias.join(", ")}
+    </p>`;
+
+    document.getElementById("info").innerHTML = infoHtml;
+
+    // ======================
+    // RETOS
+    // ======================
+    const container = document.getElementById("retos");
+
+    const retos = [
+      { nombre: "Reto", descripcion: "Haz un gesto de un personaje que porte una espada", categoria: "Anime" },
+      { nombre: "Reto", descripcion: "Nombra un Akatsuki en 5 segundos si no bebes", categoria: "Anime" },
+      { nombre: "Reto", descripcion: "Di tres palabras en Japones en 20 segundos", categoria: "Anime" },
+      { nombre: "Reto", descripcion: "Nombra un Akatsuki en 5 segundos si no bebes", categoria: "Anime" },
+      { nombre: "Desafío rápido", descripcion: "Haz 10 saltos en un pie sin perder el equilibrio", categoria: "Verdad o Reto" },
+      { nombre: "Desafío rápido", descripcion: "Haz 10 saltos en un pie sin perder el equilibrio", categoria: "Verdad o Reto" }
+    ];
+
+    // Filtrar retos por las categorías seleccionadas
+    const retosFiltrados = retos.filter(reto => categorias.includes(reto.categoria));
+
+    retosFiltrados.forEach((reto) => {
+      // Jugador aleatorio
+      const jugadorAleatorio = jugadores[Math.floor(Math.random() * jugadores.length)];
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.cssText = `
+        position: absolute;
+        top: 680px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 850px;
+        background: white;
+        color: red;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 40px;
+        padding: 20px;
+        cursor: grab;
+      `;
+      card.innerHTML = `
+        <p style="font-size:30px;">Categoría: ${reto.categoria}</p>
+        <h2>${reto.nombre}</h2>
+        <p>${reto.descripcion}</p>
+        <p style="margin-top:20px;font-size:35px;color:black;"><b>Le toca a:</b> ${jugadorAleatorio}</p>
+      `;
+
+      let offsetX = 0;
+      let offsetY = 0;
+      let isDragging = false;
+
+      const startDrag = (e) => {
+        isDragging = true;
+        offsetX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+        offsetY = e.type.includes("mouse") ? e.clientY : e.touches[0].clientY;
+        card.style.transition = "none";
+      };
+
+      const drag = (e) => {
+        if (!isDragging) return;
+        const x = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+        const y = e.type.includes("mouse") ? e.clientY : e.touches[0].clientY;
+        const deltaX = x - offsetX;
+        const deltaY = y - offsetY;
+        card.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${deltaX*0.1}deg)`;
+      };
+
+      const endDrag = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const x = e.type.includes("mouse") ? e.clientX : e.changedTouches[0].clientX;
+        const deltaX = x - offsetX;
+        card.style.transition = "transform 0.3s ease";
+        if (deltaX > 100) {
+          card.style.transform = "translate(1000px, 0) rotate(30deg)";
+          setTimeout(() => container.removeChild(card), 300);
+        } else if (deltaX < -100) {
+          card.style.transform = "translate(-1000px, 0) rotate(-30deg)";
+          setTimeout(() => container.removeChild(card), 300);
+        } else {
+          card.style.transform = "translateX(-50%)";
+        }
+      };
+
+      card.addEventListener("mousedown", startDrag);
+      card.addEventListener("mousemove", drag);
+      card.addEventListener("mouseup", endDrag);
+      card.addEventListener("mouseleave", endDrag);
+
+      card.addEventListener("touchstart", startDrag);
+      card.addEventListener("touchmove", drag);
+      card.addEventListener("touchend", endDrag);
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

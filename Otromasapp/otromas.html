@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Otro mas?</title>
+    <link rel="shortcut icon" href="Plugin icon - 1.png" type="image/x-icon">
+    <link rel="stylesheet" href="otromas.css">
+</head>
+<body>
+    <div class="background">
+        <div class="logo">
+            <img src="Group 14.svg" alt="">
+        </div>
+
+        <div class="comenzar-button"><button>Comenzar</button></div>
+    </div>
+</body>
+
+<script>
+    const botoncomenzar = document.querySelector(".comenzar-button button");
+
+    botoncomenzar.addEventListener("click", (e) =>{
+        e.preventDefault();
+        window.location.href = "instrucciones.html";
+    })
+</script>
+</html>
