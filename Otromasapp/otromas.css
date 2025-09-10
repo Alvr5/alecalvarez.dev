@@ -1,3 +1,5 @@
+@media (max-width: 480px) {
+
 body{
      margin: 0;
     text-align: center;
@@ -168,4 +170,6 @@ details li{
     padding: 10px 20px;
     border-radius: 5px;
     margin-bottom: 30px;
+}
+
 }
