@@ -73,6 +73,14 @@
             jugadores.forEach((jugador, i) => params.set(`jugador${i+1}`, jugador));
             params.set("categorias", categoriasSeleccionadas.join(","));
 
+          if (!jugadores || jugadores.length === 0) {
+              botonsiguiente.style.display = "none"; // <- cuidado, es con "="
+  alert("No hay ningún jugador puesto, no puedes avanzar");
+  return
+}
+else{
+    botonsiguiente.style.display = "block";
+}
             // Redirigir con parámetros
             window.location.href = "mainpage.html?" + params.toString();
         });
