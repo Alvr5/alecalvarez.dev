@@ -6,13 +6,13 @@
 </head>
 <body style="background: red; color: white;">
   <h1 style="font-size: 60px; font-family: sans-serif; text-align: center;">
-    ¡Bienvenidos a ¿Otro mas?!
+    ¡Bienvenidos a ¿Otro mas?! 
   </h1>
 
-  <div id="info" style="font-size: 30px; text-align: center;"></div>
+  <div id="info" style="font-size: 30px;text-align: center;height: 110px;"></div>
 
   <!-- Contenedor donde se mostrarán los retos -->
-  <div id="retos" style="/* border: 2px solid white; */padding: 20px;margin: 20px;border-radius: 15px;/* background: white; */color: red;font-family: sans-serif;height: 570px;align-content: center;text-align: center;font-size: 60px;overflow: hidden;height: 1030px;"></div>
+  <div id="retos" style="padding: 20px;margin: 20px;border-radius: 15px;color: red;font-family: sans-serif;align-content: center;text-align: center;font-size: 60px;overflow: hidden;height: 1030px;"></div>
 
   <script>
   // ======================
@@ -29,10 +29,16 @@
     jugadores.push(params.get("jugador" + i));
   }
 
-  let infoHtml = `<p style="font-family: sans-serif;">Juegan <b>${numeroJugadores}</b> personas:</p><ul>`;
+  let infoHtml = `<p style="font-family: sans-serif;text-align: left;font-size: 35px;background: white;width: 310px;padding: 20px 20px;border-radius: 315px;color: red;margin-left: 50px;display: inline;">
+    Juegan <b>${numeroJugadores}</b> personas:
+  </p><ul style="display: inline;">`;
+
   jugadores.forEach(jugador => {
-    infoHtml += `<li style="list-style: none; padding: 10px 20px; background: white; color: red; border-radius: 20px; width: max-content; display: inline-block; font-size: 50px; font-family: sans-serif; margin-right: 20px;">${jugador}</li>`;
+    infoHtml += `<li style="list-style: none;padding: 10px 20px;background: red;color: white;border-radius: 20px;width: max-content;display: inline-block;font-size: 50px;font-family: sans-serif;margin-right: 20px;margin-top: 50px;">
+      ${jugador}
+    </li>`;
   });
+
   infoHtml += "</ul>";
 
   infoHtml += `<p style="font-family: sans-serif; margin-top: 80px; width: 860px; font-size: 46px; position: relative; left: 50px;">
@@ -47,98 +53,154 @@
   const container = document.getElementById("retos");
 
   const retos = [
+
+  //ANIME
     { nombre: "Reto", descripcion: "Haz un gesto de un personaje que porte una espada", categoria: "Anime" },
     { nombre: "Reto", descripcion: "Nombra un Akatsuki en 5 segundos si no bebes", categoria: "Anime" },
     { nombre: "Reto", descripcion: "Di tres palabras en Japones en 20 segundos", categoria: "Anime" },
-    { nombre: "Reto", descripcion: "Nombra un Akatsuki en 5 segundos si no bebes", categoria: "Anime" },
-    { nombre: "Reto", descripcion: "Haz 10 saltos en un pie sin perder el equilibrio", categoria: "Verdad o Reto" },
+    { nombre: "Reto", descripcion: "Nombra 5 protagonistas del anime en 10 segundos", categoria: "Anime" },
+    { nombre: "Reto", descripcion: "Haz una jojo pose con la persona de la derecha,si se niega o si no sabeis bebeis los dos", categoria: "Anime" },
+    { nombre: "Reto", descripcion: "Haz el gesto de invocacion de naruto para llamar al sapo,si no lo sabes bebes", categoria: "Anime" },
+    { nombre: "Reto", descripcion: "En esta ronda hasta que acabe deberas actuar como Sasuke Uchiha si las personas consideran que lo has hecho mal bebes.", categoria: "Anime" },
+    { nombre: "Reto", descripcion: "Inventate un nombre para un bankai si las personas consideran que es bueno nadie bebe si no bebes", categoria: "Anime" },
+    { nombre: "Reto", descripcion: "Nombra 3 titanes en 7 segundos ", categoria: "Anime" },
+    { nombre: "Reto", descripcion: "Tu y la persona que tienes delante debereis actuar como si fuerais pareja en un anime toda la ronda,si se niegan bebeis dos.", categoria: "Anime" },
+
+    //VERDAD O RETO
     { nombre: "Reto", descripcion: "Haz 10 saltos en un pie sin perder el equilibrio", categoria: "Verdad o Reto" }
   ];
 
-  // Filtrar retos por las categorías seleccionadas
   const retosFiltrados = retos.filter(reto => categorias.includes(reto.categoria));
 
-  retosFiltrados.forEach((reto) => {
-    // Jugador aleatorio
-    const jugadorAleatorio = jugadores[Math.floor(Math.random() * jugadores.length)];
-
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style.cssText = `
-         position: absolute;
-    top: 1120px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 850px;
-    background: white;
-    color: red;
-    border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 40px;
-    padding: 20px;
-    cursor: grab;
+  // 👉 Caso 1: no hay retos desde el inicio
+  if (retosFiltrados.length === 0) {
+    const mensaje = document.createElement("div");
+    mensaje.style.cssText = `
+      font-size: 40px;
+      text-align: center;
+      background: white;
+      color: red;
+      padding: 40px;
+      border-radius: 15px;
     `;
-    card.innerHTML = `
-      <p style="font-size:30px;">Categoría: ${reto.categoria}</p>
-      <h2>${reto.nombre}</h2>
-      <p>${reto.descripcion}</p>
-      <p style="margin-top:20px;font-size:35px;color:black;"><b>Le toca a:</b> ${jugadorAleatorio}</p>
-    `;
+    mensaje.innerHTML = `<p>No hay más cartas, reinicia la app 🔄</p>`;
+    container.appendChild(mensaje);
+  } else {
+    retosFiltrados.forEach((reto) => {
+      const jugadorAleatorio = jugadores[Math.floor(Math.random() * jugadores.length)];
 
-    let offsetX = 0;
-    let offsetY = 0;
-    let isDragging = false;
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.cssText = `
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 850px;
+        background: white;
+        color: red;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 40px;
+        padding: 20px;
+        cursor: grab;
+        left: 490px;
+        top: 930px;
+      `;
+      card.innerHTML = `
+        <p style="font-size:30px;">Categoría: ${reto.categoria}</p>
+        <h2>${reto.nombre}</h2>
+        <p>${reto.descripcion}</p>
+        <p style="margin-top:20px;font-size:35px;color:black;"><b>Le toca a:</b> ${jugadorAleatorio}</p>
+      `;
 
-    const startDrag = (e) => {
-      isDragging = true;
-      offsetX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
-      offsetY = e.type.includes("mouse") ? e.clientY : e.touches[0].clientY;
-      card.style.transition = "none";
-    };
+      let offsetX = 0;
+      let offsetY = 0;
+      let isDragging = false;
 
-    const drag = (e) => {
-      if (!isDragging) return;
-      const x = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
-      const y = e.type.includes("mouse") ? e.clientY : e.touches[0].clientY;
-      const deltaX = x - offsetX;
-      const deltaY = y - offsetY;
-      card.style.transform = `translate(calc(-50% + ${deltaX}px), calc(-50% + ${deltaY}px)) rotate(${deltaX * 0.1}deg)`;
-    };
+      const startDrag = (e) => {
+        isDragging = true;
+        offsetX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+        offsetY = e.type.includes("mouse") ? e.clientY : e.touches[0].clientY;
+        card.style.transition = "none";
+      };
 
-    const endDrag = (e) => {
-      if (!isDragging) return;
-      isDragging = false;
-      const x = e.type.includes("mouse") ? e.clientX : e.changedTouches[0].clientX;
-      const deltaX = x - offsetX;
-      card.style.transition = "transform 0.3s ease";
-      if (deltaX > 100) {
-        card.style.transform = "translate(1000px, 0) rotate(30deg)";
-        setTimeout(() => container.removeChild(card), 300);
-      } else if (deltaX < -100) {
-        card.style.transform = "translate(-1000px, 0) rotate(-30deg)";
-        setTimeout(() => container.removeChild(card), 300);
-      } else {
-        card.style.transform = "translate(-50%, -50%)";
-      }
-    };
+      const drag = (e) => {
+        if (!isDragging) return;
+        const x = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+        const y = e.type.includes("mouse") ? e.clientY : e.touches[0].clientY;
+        const deltaX = x - offsetX;
+        const deltaY = y - offsetY;
+        card.style.transform = `translate(calc(-50% + ${deltaX}px), calc(-50% + ${deltaY}px)) rotate(${deltaX * 0.1}deg)`;
+      };
 
-    card.addEventListener("mousedown", startDrag);
-    card.addEventListener("mousemove", drag);
-    card.addEventListener("mouseup", endDrag);
-    card.addEventListener("mouseleave", endDrag);
+      const endDrag = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const x = e.type.includes("mouse") ? e.clientX : e.changedTouches[0].clientX;
+        const deltaX = x - offsetX;
+        card.style.transition = "transform 0.3s ease";
+        if (deltaX > 100) {
+          card.style.transform = "translate(1000px, 0) rotate(30deg)";
+          setTimeout(() => {
+            container.removeChild(card);
 
-    card.addEventListener("touchstart", startDrag);
-    card.addEventListener("touchmove", drag);
-    card.addEventListener("touchend", endDrag);
+            // 👉 Caso 2: se acaban todas las cartas
+            if (container.querySelectorAll(".card").length === 0) {
+              const mensaje = document.createElement("div");
+              mensaje.style.cssText = `
+                font-size: 40px;
+                text-align: center;
+                background: white;
+                color: red;
+                padding: 40px;
+                border-radius: 15px;
+              `;
+              mensaje.innerHTML = `<p>No hay más cartas, reinicia la app 🔄</p>`;
+              container.appendChild(mensaje);
+            }
+          }, 300);
+        } else if (deltaX < -100) {
+          card.style.transform = "translate(-1000px, 0) rotate(-30deg)";
+          setTimeout(() => {
+            container.removeChild(card);
 
-    container.appendChild(card);
-  });
+            // 👉 Caso 2: se acaban todas las cartas
+            if (container.querySelectorAll(".card").length === 0) {
+              const mensaje = document.createElement("div");
+              mensaje.style.cssText = `
+                font-size: 40px;
+                text-align: center;
+                background: white;
+                color: red;
+                padding: 40px;
+                border-radius: 15px;
+              `;
+              mensaje.innerHTML = `<p>No hay más cartas, reinicia la app 🔄</p>`;
+              container.appendChild(mensaje);
+            }
+          }, 300);
+        } else {
+          card.style.transform = "translate(-50%, -50%)";
+        }
+      };
+
+      card.addEventListener("mousedown", startDrag);
+      card.addEventListener("mousemove", drag);
+      card.addEventListener("mouseup", endDrag);
+      card.addEventListener("mouseleave", endDrag);
+
+      card.addEventListener("touchstart", startDrag);
+      card.addEventListener("touchmove", drag);
+      card.addEventListener("touchend", endDrag);
+
+      container.appendChild(card);
+    });
+  }
 </script>
 
 </body>
