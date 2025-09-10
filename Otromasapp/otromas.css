@@ -1,13 +1,13 @@
 body{
-    margin: 0;
-    overflow: hidden;
+     margin: 0;
+    text-align: center;
 }
 .background{
-      height: 667px;
+        height: 667px;
     background-color: #FF4343;
     overflow: hidden;
     overflow-y: auto;
-    padding-bottom: 20px;
+    padding-bottom: 180px;
 }
 
 .logo{
@@ -35,18 +35,20 @@ body{
 
 
 .background .instrucciones-h1{
-        margin: 0;
+       margin: 0;
     position: relative;
-    left: 85px;
-    top: 20px;
+    /* left: 85px; */
+    top: 36px;
     font-family: sans-serif;
     color: white;
+    width: 100%;
+    text-align: center;
 }
 
 .background .comosejuega-h2{
-        position: relative;
+      position: relative;
     top: 50px;
-    left: 116px;
+    /* left: 116px; */
     font-family: sans-serif;
     color: white;
     font-size: 17px;
@@ -82,14 +84,16 @@ details li{
 }
 
 .siguiente-button1{
-        position: absolute;
-    top: 545px;
-    left: 89px;
+        position: relative;
+    top: 75px;
+    /* left: 89px; */
     padding: 10px 20px;
     border: transparent;
     border-radius: 5px;
     background: white;
     width: 200px;
+    margin-bottom: 110px;
+    /* text-align: center; */
 }
 
 #cuantosvanajugar{
@@ -108,8 +112,8 @@ details li{
 }
 
 #otromasmainbody input{
-        position: relative;
-    left: 80px;
+    position: relative;
+    /* left: 80px; */
     border: transparent;
     padding: 10px 10px;
     border-radius: 5px;
@@ -129,8 +133,9 @@ details li{
 #otromasmainbody ul{
        list-style: none;
     margin: 40px 0px;
-    position: absolute;
-    left: -20px;
+    position: relative;
+    text-align: center;
+    right: 28px;
 }
 
 
@@ -155,9 +160,9 @@ details li{
 }
 
 #otromasmainbody button{
-        position: relative;
-    top: 240px;
-    left: 265px;
+       position: relative;
+    /* top: 240px; */
+    left: 110px;
     background: white;
     border: transparent;
     padding: 10px 20px;
