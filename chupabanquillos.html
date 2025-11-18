@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chupabanquillos</title>
+<style>
+    body {
+        margin: 0;
+        height: 300vh; /* espacio extra para scroll */
+    }
+
+    main {
+        background-image: url("Desktop\ -\ 3\ \(2\).png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Texto con borde visible */
+    .title-stroke {
+            font-size: 120px;
+    font-family: sans-serif;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    z-index: 2;
+    text-align: center;
+    }
+
+    /* Texto de fondo */
+    .title-behind {
+          font-size: 120px;
+    font-family: sans-serif;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 0;
+    text-align: center;
+    }
+
+    /* Pelota animada */
+    #pelota {
+       width: 499px;
+    height: 330px;
+    background-image: url("com-speed-unscreen.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    position: fixed;
+    top: 65%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    scale: 1.5;
+    }
+
+    .logo {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+</head>
+<body>
+
+<main>
+    <!-- Header -->
+    <img class="logo" src="Purple_Minimalist_Bat_Logo-removebg-preview (2).png" alt=""> 
+    <p style="color: white; font-family: sans-serif; position: absolute; top: 35px; font-weight: bold; display: inline-block; font-size: 20px;">CHUPABANQUILLOS</p>
+    <p style="position: absolute; top: 40px; left: 430px; color: white; font-family: sans-serif;">Inicio</p>
+    <p style="position: absolute; top: 40px; left: 520px; color: white; font-family: sans-serif;">Partidos</p>
+    <p style="position: absolute; top: 40px; left: 620px; color: white; font-family: sans-serif;">Sobre nosotros</p>
+    <p style="position: absolute; right: 60px; border: 2px solid white; padding: 10px 20px; border-radius: 10px; top: 30px; color: white; font-family: sans-serif;">Contactar</p>
+
+    <!-- Texto y pelota -->
+    <h2 class="title title-stroke">CHUPABANQUILLOS</h2>
+    <div id="pelota"></div>
+    <h2 class="title title-behind">CHUPABANQUILLOS</h2>
+</main>
+
+
+
+<script>
+const pelota = document.getElementById('pelota');
+const totalFrames = 4;   // Número de frames del spritesheet
+const frameWidth = 500;   // Ancho de cada frame en px
+const stopScroll = 2000;   // Punto donde la pelota deja de estar fija
+
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const progress = scrollY / maxScroll;
+
+    // Animación del spritesheet con scroll
+    const currentFrame = Math.floor(progress * (totalFrames - 1));
+    pelota.style.backgroundPosition = `-${currentFrame * frameWidth}px 0`;
+
+    // Control del desplazamiento final
+    if(scrollY < stopScroll){
+        pelota.style.position = 'fixed';
+        pelota.style.top = '55%';
+    } else {
+        pelota.style.position = 'relative';
+        pelota.style.display = "none";
+        pelota.style.top = stopScroll + 'px';
+    }
+});
+</script>
+
+</body>
+</html>
