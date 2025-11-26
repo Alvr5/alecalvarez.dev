@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creación de Eventos Deportivos</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Crear Evento Deportivo</h1>
+    <button id="loginBtn">Login con Google</button>
+<button id="logoutBtn" style="display:none;">Cerrar sesión</button>
+
+    <form id="eventoForm">
+      <input type="text" id="nombre" placeholder="Nombre del evento" required>
+      <input type="date" id="fecha" required>
+      <input type="text" id="ubicacion" placeholder="Ubicación" required>
+      <select id="tipo" required>
+        <option value="">Selecciona tipo de deporte</option>
+        <option value="futbol">Fútbol</option>
+        <option value="basket">Baloncesto</option>
+        <option value="carrera">Carrera</option>
+        <option value="otro">Otro</option>
+      </select>
+      <button type="submit">Crear Evento</button>
+    </form>
+    <div id="mensaje"></div>
+    <h2>Eventos creados</h2>
+    <ul id="listaEventos"></ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
