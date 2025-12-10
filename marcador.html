@@ -1,39 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marcador</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+  #marcador { font-size: 60px; margin-bottom: 20px; }
+  .equipos { display: flex; justify-content: center; align-items: center; gap: 50px; margin-bottom: 20px; }
+  .equipos img { width: 100px; height: 100px; object-fit: contain; }
+</style>
 </head>
 <body>
 
-<h1 id="marcador" style="font-size:60px;text-align:center;">0 - 0</h1>
+<h1 id="marcador">0 - 0</h1>
+<div class="equipos">
+  <div>
+    <img id="logoLocal" src="" alt="Logo Local">
+    <h2 id="nombreLocal">Equipo Local</h2>
+  </div>
+  <div>
+    <img id="logoVisitante" src="" alt="Logo Visitante">
+    <h2 id="nombreVisitante">Equipo Visitante</h2>
+  </div>
+</div>
+<p id="minutos">Minuto: 0</p>
 
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
-<script>
-const firebaseConfig = {
-    apiKey: "AIzaSyD8q4VpdWTHHhFpH7Ed4_xM8IL6QSC7exo",
-    authDomain: "chupabanquillos.firebaseapp.com",
-    databaseURL: "https://chupabanquillos-default-rtdb.firebaseio.com", 
-    projectId: "chupabanquillos",
-    storageBucket: "chupabanquillos.firebasestorage.app",
-    messagingSenderId: "54734922934",
-    appId: "1:54734922934:web:496ba56e943306d6cb7217",
-    measurementId: "G-FYKY29K27P"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
-db.ref("marcador").on("value", snap=>{
-  const d = snap.val() || {local:0, visitante:0};
-  document.getElementById("marcador").innerText = `${d.local} - ${d.visitante}`;
-});
+  const firebaseConfig = {
+      apiKey: "AIzaSyD8q4VpdWTHHhFpH7Ed4_xM8IL6QSC7exo",
+      authDomain: "chupabanquillos.firebaseapp.com",
+      databaseURL: "https://chupabanquillos-default-rtdb.firebaseio.com", 
+      projectId: "chupabanquillos",
+      storageBucket: "chupabanquillos.firebasestorage.app",
+      messagingSenderId: "54734922934",
+      appId: "1:54734922934:web:496ba56e943306d6cb7217",
+      measurementId: "G-FYKY29K27P"
+  };
 
-firebase.auth().signInAnonymously()
-  .then(() => console.log("Autenticado"))
-  .catch(err => console.error(err));
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const auth = getAuth();
 
+  signInAnonymously(auth)
+    .then(() => console.log("Autenticado"))
+    .catch(err => console.error(err));
+
+  const marcadorRef = ref(db, "marcador");
+
+  onValue(marcadorRef, (snap) => {
+    const d = snap.val() || {};
+    document.getElementById("marcador").innerText = `${d.local || 0} - ${d.visitante || 0}`;
+    document.getElementById("nombreLocal").innerText = d.nombreLocal || "Equipo Local";
+    document.getElementById("nombreVisitante").innerText = d.nombreVisitante || "Equipo Visitante";
+    document.getElementById("logoLocal").src = d.logoLocal || "";
+    document.getElementById("logoVisitante").src = d.logoVisitante || "";
+    document.getElementById("minutos").innerText = `Minuto: ${d.minutos || 0}`;
+  });
 </script>
 
 </body>

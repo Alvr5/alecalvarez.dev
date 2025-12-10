@@ -14,84 +14,77 @@
 
 <h2>Panel de Control del Marcador</h2>
 
-<!-- PUNTOS -->
 <h3>Puntuación</h3>
 Local: 
 <button onclick="sumar('local',1)">+1</button>
 <button onclick="sumar('local',-1)">-1</button><br>
-
 Visitante: 
 <button onclick="sumar('visitante',1)">+1</button>
 <button onclick="sumar('visitante',-1)">-1</button><br><br>
 
-<!-- MINUTOS -->
 <h3>Minutos jugados</h3>
 <button onclick="sumar('minutos',1)">+1 minuto</button>
 <button onclick="sumar('minutos',-1)">-1 minuto</button><br><br>
 
-<!-- NOMBRES DE EQUIPOS -->
 <h3>Nombres de equipos</h3>
 <input id="nombreLocal" placeholder="Nombre Local">
 <button onclick="setDato('nombreLocal', document.getElementById('nombreLocal').value)">Guardar</button><br>
-
 <input id="nombreVisitante" placeholder="Nombre Visitante">
 <button onclick="setDato('nombreVisitante', document.getElementById('nombreVisitante').value)">Guardar</button><br><br>
 
-<!-- LOGOS -->
 <h3>Logos por URL</h3>
 <input id="logoLocal" placeholder="URL Logo Local">
 <button onclick="setDato('logoLocal', document.getElementById('logoLocal').value)">Guardar</button><br>
-
 <input id="logoVisitante" placeholder="URL Logo Visitante">
 <button onclick="setDato('logoVisitante', document.getElementById('logoVisitante').value)">Guardar</button><br><br>
 
-
-<!-- RESET -->
 <h3>Reiniciar partida</h3>
 <button style="background:red;color:white;" onclick="reset()">RESET TOTAL</button>
 
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
-<script>
-const firebaseConfig = {
-    apiKey: "AIzaSyD8q4VpdWTHHhFpH7Ed4_xM8IL6QSC7exo",
-    authDomain: "chupabanquillos.firebaseapp.com",
-    databaseURL: "https://chupabanquillos-default-rtdb.firebaseio.com", 
-    projectId: "chupabanquillos",
-    storageBucket: "chupabanquillos.firebasestorage.app",
-    messagingSenderId: "54734922934",
-    appId: "1:54734922934:web:496ba56e943306d6cb7217",
-    measurementId: "G-FYKY29K27P"
-};
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+  import { getDatabase, ref, get, set, runTransaction } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+  const firebaseConfig = {
+      apiKey: "AIzaSyD8q4VpdWTHHhFpH7Ed4_xM8IL6QSC7exo",
+      authDomain: "chupabanquillos.firebaseapp.com",
+      databaseURL: "https://chupabanquillos-default-rtdb.firebaseio.com", 
+      projectId: "chupabanquillos",
+      storageBucket: "chupabanquillos.firebasestorage.app",
+      messagingSenderId: "54734922934",
+      appId: "1:54734922934:web:496ba56e943306d6cb7217",
+      measurementId: "G-FYKY29K27P"
+  };
 
-function sumar(campo, num){
-  db.ref("marcador/"+campo).get().then(s=>{
-    db.ref("marcador/"+campo).set(s.val() + num);
-  });
-}
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const auth = getAuth();
 
-function setDato(campo, valor){
-  db.ref("marcador/"+campo).set(valor);
-}
+  signInAnonymously(auth)
+    .then(() => console.log("Autenticado"))
+    .catch(err => console.error(err));
 
-function reset(){
-  db.ref("marcador").set({
-    local: 0,
-    visitante: 0,
-    minutos: 0,
-    nombreLocal: "Equipo Local",
-    nombreVisitante: "Equipo Visitante",
-    logoLocal: "",
-    logoVisitante: ""
-  });
-}
-firebase.auth().signInAnonymously()
-  .then(() => console.log("Autenticado"))
-  .catch(err => console.error(err));
+  function sumar(campo, num){
+    const campoRef = ref(db, "marcador/" + campo);
+    runTransaction(campoRef, current => (current || 0) + num);
+  }
 
+  function setDato(campo, valor){
+    set(ref(db, "marcador/" + campo), valor);
+  }
+
+  function reset(){
+    set(ref(db, "marcador"), {
+      local: 0,
+      visitante: 0,
+      minutos: 0,
+      nombreLocal: "Equipo Local",
+      nombreVisitante: "Equipo Visitante",
+      logoLocal: "",
+      logoVisitante: ""
+    });
+  }
 </script>
 
 </body>
