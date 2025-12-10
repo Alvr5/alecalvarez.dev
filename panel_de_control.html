@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Control</title>
+<style>
+    body { font-family: Arial; padding: 20px; }
+    button { margin: 5px; padding: 10px; font-size: 16px; }
+    input { padding: 5px; margin: 5px; width: 200px; }
+</style>
+</head>
+<body>
+
+<h2>Panel de Control del Marcador</h2>
+
+<!-- PUNTOS -->
+<h3>Puntuación</h3>
+Local: 
+<button onclick="sumar('local',1)">+1</button>
+<button onclick="sumar('local',-1)">-1</button><br>
+
+Visitante: 
+<button onclick="sumar('visitante',1)">+1</button>
+<button onclick="sumar('visitante',-1)">-1</button><br><br>
+
+<!-- MINUTOS -->
+<h3>Minutos jugados</h3>
+<button onclick="sumar('minutos',1)">+1 minuto</button>
+<button onclick="sumar('minutos',-1)">-1 minuto</button><br><br>
+
+<!-- NOMBRES DE EQUIPOS -->
+<h3>Nombres de equipos</h3>
+<input id="nombreLocal" placeholder="Nombre Local">
+<button onclick="setDato('nombreLocal', document.getElementById('nombreLocal').value)">Guardar</button><br>
+
+<input id="nombreVisitante" placeholder="Nombre Visitante">
+<button onclick="setDato('nombreVisitante', document.getElementById('nombreVisitante').value)">Guardar</button><br><br>
+
+<!-- LOGOS -->
+<h3>Logos por URL</h3>
+<input id="logoLocal" placeholder="URL Logo Local">
+<button onclick="setDato('logoLocal', document.getElementById('logoLocal').value)">Guardar</button><br>
+
+<input id="logoVisitante" placeholder="URL Logo Visitante">
+<button onclick="setDato('logoVisitante', document.getElementById('logoVisitante').value)">Guardar</button><br><br>
+
+
+<!-- RESET -->
+<h3>Reiniciar partida</h3>
+<button style="background:red;color:white;" onclick="reset()">RESET TOTAL</button>
+
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyD8q4VpdWTHHhFpH7Ed4_xM8IL6QSC7exo",
+    authDomain: "chupabanquillos.firebaseapp.com",
+    databaseURL: "https://chupabanquillos-default-rtdb.firebaseio.com", 
+    projectId: "chupabanquillos",
+    storageBucket: "chupabanquillos.firebasestorage.app",
+    messagingSenderId: "54734922934",
+    appId: "1:54734922934:web:496ba56e943306d6cb7217",
+    measurementId: "G-FYKY29K27P"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function sumar(campo, num){
+  db.ref("marcador/"+campo).get().then(s=>{
+    db.ref("marcador/"+campo).set(s.val() + num);
+  });
+}
+
+function setDato(campo, valor){
+  db.ref("marcador/"+campo).set(valor);
+}
+
+function reset(){
+  db.ref("marcador").set({
+    local: 0,
+    visitante: 0,
+    minutos: 0,
+    nombreLocal: "Equipo Local",
+    nombreVisitante: "Equipo Visitante",
+    logoLocal: "",
+    logoVisitante: ""
+  });
+}
+firebase.auth().signInAnonymously()
+  .then(() => console.log("Autenticado"))
+  .catch(err => console.error(err));
+
+</script>
+
+</body>
+</html>

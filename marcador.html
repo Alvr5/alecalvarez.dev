@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcador</title>
+</head>
+<body>
+
+<h1 id="marcador" style="font-size:60px;text-align:center;">0 - 0</h1>
+
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyD8q4VpdWTHHhFpH7Ed4_xM8IL6QSC7exo",
+    authDomain: "chupabanquillos.firebaseapp.com",
+    databaseURL: "https://chupabanquillos-default-rtdb.firebaseio.com", 
+    projectId: "chupabanquillos",
+    storageBucket: "chupabanquillos.firebasestorage.app",
+    messagingSenderId: "54734922934",
+    appId: "1:54734922934:web:496ba56e943306d6cb7217",
+    measurementId: "G-FYKY29K27P"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+db.ref("marcador").on("value", snap=>{
+  const d = snap.val() || {local:0, visitante:0};
+  document.getElementById("marcador").innerText = `${d.local} - ${d.visitante}`;
+});
+
+firebase.auth().signInAnonymously()
+  .then(() => console.log("Autenticado"))
+  .catch(err => console.error(err));
+
+</script>
+
+</body>
+</html>
