@@ -3,64 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marcador</title>
+<title>Marcador de Baloncesto</title>
 <style>
-  body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-  #marcador { font-size: 60px; margin-bottom: 20px; }
+  body { font-family: Arial; text-align: center; padding: 30px; background:#f5f5f5; }
+  #marcador { font-size: 80px; margin-bottom: 10px; }
   .equipos { display: flex; justify-content: center; align-items: center; gap: 50px; margin-bottom: 20px; }
-  .equipos img { width: 100px; height: 100px; object-fit: contain; }
+  .equipos div { text-align: center; }
+  .equipos img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px; }
+  #tiempo { font-size: 50px; margin-bottom: 40px; }
+  .controls { text-align: center; }
+  .controls button, .controls input { margin: 5px; padding: 10px 15px; font-size: 16px; }
 </style>
 </head>
 <body>
 
 <h1 id="marcador">0 - 0</h1>
+
 <div class="equipos">
   <div>
     <img id="logoLocal" src="" alt="Logo Local">
-    <h2 id="nombreLocal">Equipo Local</h2>
+    <h2 id="nombreLocal">Local</h2>
   </div>
   <div>
     <img id="logoVisitante" src="" alt="Logo Visitante">
-    <h2 id="nombreVisitante">Equipo Visitante</h2>
+    <h2 id="nombreVisitante">Visitante</h2>
   </div>
 </div>
-<p id="minutos">Minuto: 0</p>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
-  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+<p id="tiempo">12:00</p>
 
-  const firebaseConfig = {
-      apiKey: "AIzaSyD8q4VpdWTHHhFpH7Ed4_xM8IL6QSC7exo",
-      authDomain: "chupabanquillos.firebaseapp.com",
-      databaseURL: "https://chupabanquillos-default-rtdb.firebaseio.com", 
-      projectId: "chupabanquillos",
-      storageBucket: "chupabanquillos.firebasestorage.app",
-      messagingSenderId: "54734922934",
-      appId: "1:54734922934:web:496ba56e943306d6cb7217",
-      measurementId: "G-FYKY29K27P"
+<div class="controls">
+  <h3>Puntos Local</h3>
+  <button onclick="sumar('local',1)">+1</button>
+  <button onclick="sumar('local',2)">+2</button>
+  <button onclick="sumar('local',3)">+3</button>
+  <button onclick="sumar('local',-1)">-1</button><br>
+
+  <h3>Puntos Visitante</h3>
+  <button onclick="sumar('visitante',1)">+1</button>
+  <button onclick="sumar('visitante',2)">+2</button>
+  <button onclick="sumar('visitante',3)">+3</button>
+  <button onclick="sumar('visitante',-1)">-1</button><br>
+
+  <h3>Nombres y logos</h3>
+  <input id="inputNombreLocal" placeholder="Nombre Local">
+  <button onclick="setDato('nombreLocal', document.getElementById('inputNombreLocal').value)">Guardar</button><br>
+  <input id="inputNombreVisitante" placeholder="Nombre Visitante">
+  <button onclick="setDato('nombreVisitante', document.getElementById('inputNombreVisitante').value)">Guardar</button><br>
+  <input id="inputLogoLocal" placeholder="URL Logo Local">
+  <button onclick="setDato('logoLocal', document.getElementById('inputLogoLocal').value)">Guardar</button><br>
+  <input id="inputLogoVisitante" placeholder="URL Logo Visitante">
+  <button onclick="setDato('logoVisitante', document.getElementById('inputLogoVisitante').value)">Guardar</button><br>
+
+  <h3>Tiempo</h3>
+  <button onclick="iniciarTiempo()">Iniciar</button>
+  <button onclick="pausarTiempo()">Pausar</button>
+  <button onclick="resetTiempo()">Reiniciar a 12:00</button><br>
+
+  <h3>RESET TOTAL</h3>
+  <button style="background:red;color:white;" onclick="reset()">RESET TOTAL</button>
+</div>
+
+<script>
+  // Datos iniciales
+  let marcador = {
+    local: 0,
+    visitante: 0,
+    nombreLocal: "Local",
+    nombreVisitante: "Visitante",
+    logoLocal: "",
+    logoVisitante: ""
   };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  const auth = getAuth();
+  let tiempoSegundos = 12 * 60; // 12 minutos
+  let timer = null;
 
-  signInAnonymously(auth)
-    .then(() => console.log("Autenticado"))
-    .catch(err => console.error(err));
+  function actualizarPantalla() {
+    document.getElementById("marcador").innerText = `${marcador.local} - ${marcador.visitante}`;
+    document.getElementById("nombreLocal").innerText = marcador.nombreLocal;
+    document.getElementById("nombreVisitante").innerText = marcador.nombreVisitante;
+    document.getElementById("logoLocal").src = marcador.logoLocal;
+    document.getElementById("logoVisitante").src = marcador.logoVisitante;
 
-  const marcadorRef = ref(db, "marcador");
+    let min = Math.floor(tiempoSegundos / 60);
+    let seg = tiempoSegundos % 60;
+    document.getElementById("tiempo").innerText = `${min}:${seg.toString().padStart(2,'0')}`;
+  }
 
-  onValue(marcadorRef, (snap) => {
-    const d = snap.val() || {};
-    document.getElementById("marcador").innerText = `${d.local || 0} - ${d.visitante || 0}`;
-    document.getElementById("nombreLocal").innerText = d.nombreLocal || "Equipo Local";
-    document.getElementById("nombreVisitante").innerText = d.nombreVisitante || "Equipo Visitante";
-    document.getElementById("logoLocal").src = d.logoLocal || "";
-    document.getElementById("logoVisitante").src = d.logoVisitante || "";
-    document.getElementById("minutos").innerText = `Minuto: ${d.minutos || 0}`;
-  });
+  function sumar(campo, puntos) {
+    marcador[campo] += puntos;
+    if(marcador[campo] < 0) marcador[campo] = 0; // No puede ser negativo
+    actualizarPantalla();
+  }
+
+  function setDato(campo, valor) {
+    marcador[campo] = valor;
+    actualizarPantalla();
+  }
+
+  function reset() {
+    marcador = {
+      local: 0,
+      visitante: 0,
+      nombreLocal: "Local",
+      nombreVisitante: "Visitante",
+      logoLocal: "",
+      logoVisitante: ""
+    };
+    resetTiempo();
+    actualizarPantalla();
+  }
+
+  function iniciarTiempo() {
+    if (timer) return; // Ya está corriendo
+    timer = setInterval(() => {
+      if (tiempoSegundos > 0) {
+        tiempoSegundos--;
+        actualizarPantalla();
+      }
+    }, 1000);
+  }
+
+  function pausarTiempo() {
+    clearInterval(timer);
+    timer = null;
+  }
+
+  function resetTiempo() {
+    tiempoSegundos = 12 * 60;
+    actualizarPantalla();
+  }
+
+  actualizarPantalla();
 </script>
 
 </body>
