@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team Up</title>
+  <link rel="shortcut icon" href="Logo.jpeg" type="image/x-icon">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #19D660, #000000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth-card {
+      background: #fff;
+      width: 360px;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .auth-card h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      font-weight: 600;
+      color: #777;
+    }
+
+    .tab.active {
+      color: #5f2c82;
+      border-bottom: 2px solid #5f2c82;
+    }
+
+    .form {
+      display: none;
+    }
+
+    .form.active {
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #19D660;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: black;
+      color: white;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .logo{
+            width: 90px;
+    position: relative;
+    left: 110px;
+    margin-bottom: 40px;
+    top: 17px;
+    }
+
+    #nombre{
+        width: 130px;
+        display: inline-block;
+    }
+
+    #apellido{
+          width: 56%;
+    display: inline-block;
+    }
+
+
+
+    @media (max-width: 768px) {
+      .auth-card {
+    scale: 0.8;
+      }
+      
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="auth-card">
+    <img class="logo" src="Frame 44.svg" alt="">
+
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('signin')">Sign In</div>
+      <div class="tab" onclick="showTab('signup')">Sign Up</div>
+    </div>
+
+    <!-- SIGN IN -->
+    <div id="signin" class="form active">
+      <input type="email" id="signin-email" placeholder="Email" required>
+<input type="password" id="signin-password" placeholder="Contraseña" autocomplete="current-password">
+      <button onclick="signIn()">Iniciar sesión</button>
+      <button onclick="signInWithGoogle()" style="margin-top:10px; background:#4285F4;">
+  Iniciar Sesión con Google
+</button>
+      <div style="text-decoration: underline; font-size: 10px; padding: 10px; width: 100%; text-align: center;" onclick="resetPassword()">No me acuerdo de la contraseña</div>
+      <div id="signin-message" class="message"></div>
+    </div>
+
+    <!-- SIGN UP -->
+    <div id="signup" class="form">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="apellido" placeholder="Apellido">
+    <input type="email" id="signup-email" placeholder="Email">
+    <!-- CAMBIO: id correcto para Sign Up -->
+    <input type="password" id="signup-password" placeholder="Contraseña" autocomplete="new-password">
+    <label for="fotoperfil">Foto de perfil</label>
+    <input type="file" name="fotoperfil" id="profile-pic" accept="image/*">
+    <button onclick="signUp()">Crear cuenta</button>
+    <button onclick="signInWithGoogle()" style="margin-top:10px; background:#4285F4;">
+  Registrarme con Google
+</button>
+    <div id="signup-message" class="message"></div>
+</div>
+  </div>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBFOll1h7F6FdvdD9LLv_ISXTU_fsrk_OI",
+      authDomain: "teamupweb-f557f.firebaseapp.com",
+      projectId: "teamupweb-f557f",
+      storageBucket: "teamupweb-f557f.firebasestorage.app",
+      messagingSenderId: "414127226738",
+      appId: "1:414127226738:web:582977425b3e0c6736a7eb",
+      measurementId: "G-JT24JBPTBF"
+    };
+
+    
+    firebase.initializeApp(firebaseConfig);
+   var auth = firebase.auth();
+var db = firebase.firestore();
+var storage = firebase.storage();
+    
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().languageCode = 'it';
+
+    // UI tabs
+    function showTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+
+      document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+      document.getElementById(tab).classList.add('active');
+    }
+
+    // Sign Up
+function signUp() {
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  const nombre = document.getElementById('nombre').value;
+  const apellido = document.getElementById('apellido').value;
+  const mensaje = document.getElementById('signup-message');
+  const profilePic = document.getElementById('profile-pic').files[0];
+
+  if(email === "" || password === "" || nombre === "") {
+    mensaje.innerText = "Por favor, completa todos los campos";
+    mensaje.style.color = "red";
+    return;
+  }
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      const db = firebase.firestore();
+
+      // Si seleccionó foto, subir a Storage
+      if(profilePic) {
+        const storageRef = firebase.storage().ref('profilePics/' + user.uid);
+        storageRef.put(profilePic)
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => {
+            // Guardar todo en Firestore y actualizar perfil de Auth
+            db.collection('users').doc(user.uid).set({
+              nombre,
+              apellido,
+              email,
+              photoURL: url
+            });
+            return user.updateProfile({ photoURL: url });
+          })
+          .then(() => {
+            mensaje.innerText = "Cuenta creada correctamente con foto ✅";
+            mensaje.style.color = "green";
+            showTab('signin');
+          })
+          .catch(err => {
+            console.error(err);
+            mensaje.innerText = "Error al subir foto: " + err.message;
+            mensaje.style.color = "red";
+          });
+      } else {
+        // Si no hay foto, solo guardar datos
+        db.collection('users').doc(user.uid).set({
+          nombre,
+          apellido,
+          email
+        })
+        .then(() => {
+          mensaje.innerText = "Cuenta creada correctamente ✅";
+          mensaje.style.color = "green";
+          showTab('signin');
+        })
+        .catch(err => {
+          console.error(err);
+          mensaje.innerText = "Error: " + err.message;
+          mensaje.style.color = "red";
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      if (err.code === "auth/email-already-in-use") {
+        mensaje.innerText = "Este correo ya está registrado. Inicia sesión.";
+      } else if (err.code === "auth/weak-password") {
+        mensaje.innerText = "La contraseña debe tener al menos 6 caracteres.";
+      } else {
+        mensaje.innerText = "Error: " + err.message;
+      }
+      mensaje.style.color = "red";
+    });
+}
+
+
+
+
+    // Sign In
+    function signIn() {
+      const email = document.getElementById('signin-email').value;
+      const password = document.getElementById('signin-password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(user => {
+          document.getElementById('signin-message').innerText =
+            `Bienvenido ${user.user.email}`;
+            document.location.href = "dashboard.html";
+        })
+        .catch(err => {
+            if (email == "" || password == "") {
+                document.getElementById('signin-message').innerText = "Por favor, complete todos los campos";
+                return;
+            }
+        });
+    }
+
+
+    function signInWithGoogle() {
+  auth.signInWithPopup(provider)
+    .then((result) => {
+      const user = result.user;
+
+      // Guardar usuario en Firestore si no existe
+      db.collection("users").doc(user.uid).set({
+        nombre: user.displayName || "",
+        email: user.email,
+        photoURL: user.photoURL || "",
+        provider: "google"
+      }, { merge: true });
+
+      // Redirigir
+      window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Error al iniciar sesión con Google");
+    });
+}
+
+
+    function resetPassword() {
+  const email = document.getElementById('signin-email').value;
+  const mensaje = document.getElementById('signin-message');
+
+  if (email === "") {
+    mensaje.innerText = "Introduce tu email para recuperar la contraseña";
+    mensaje.style.color = "red";
+    return;
+  }
+
+  auth.sendPasswordResetEmail(email)
+    .then(() => {
+      mensaje.innerText = "Te hemos enviado un correo para restablecer tu contraseña 📩, revisa el apartado de SPAM!";
+      mensaje.style.color = "green";
+    })
+    .catch(err => {
+      if (err.code === "auth/user-not-found") {
+        mensaje.innerText = "No existe ninguna cuenta con ese correo";
+      } else if (err.code === "auth/invalid-email") {
+        mensaje.innerText = "El correo no es válido";
+      } else {
+        mensaje.innerText = "Error: " + err.message;
+      }
+      mensaje.style.color = "red";
+    });
+}
+
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log("Usuario logueado:", user.email);
+        // window.location.href = "/dashboard.html";
+      }
+    });
+  </script>
+
+</body>
+</html>

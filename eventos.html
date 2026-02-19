@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Team Up - Eventos</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <style>
+    header{
+      width: 99%;
+      position: absolute;
+      top: 0px;
+      padding: 10px;
+    }
+    header .left{ float:left; }
+    header .left img{
+      width: 80px;
+      margin: 30px 10px;
+    }
+    header .menu{
+      display:inline-block;
+      position:absolute;
+      top:43px;
+    }
+    header ul{
+      list-style:none;
+      display:inline-block;
+    }
+    header li{
+      display:inline-block;
+      margin-left:20px;
+      padding:10px;
+      cursor:pointer;
+    }
+    body{
+      margin:0;
+      background:#111;
+      color:white;
+      font-family:system-ui;
+    }
+    .card{
+      background:#222;
+      padding:20px;
+      border-radius:12px;
+      width:600px;
+      margin:200px auto 30px auto;
+    }
+    input{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:none;
+      margin-bottom:10px;
+    }
+    button{
+        padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+    background: green;
+    color: white;
+    }
+    .evento{
+           background: #333;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+    color: black;
+    margin-left: 30px;
+    font-family: sans-serif;
+    line-height: 22px;
+    display: inline-block;
+    }
+    #user-email{
+      position:absolute;
+      right:80px;
+      top:35px;
+    }
+
+    #cardeventos h2 {
+        width: 100%;
+    position: relative;
+    text-align: center;
+    right: 35px;
+    }
+
+   .ubicacion {
+    background: #19D660;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 5px;
+    /* position: absolute; */
+    /* top: 670px; */
+    position: relative;
+    bottom: 50px;
+    left: 190px;
+}
+
+
+    #cardeventos {
+    background: transparent !important;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    margin: 30px 40px 20px;
+}
+
+    @media (max-width: 768px) {
+
+  /* ===== HEADER ===== */
+  header {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+  }
+
+  header .left {
+      float: none;
+    text-align: center;
+    /* width: 100%; */
+    margin-left: 40px;
+    margin-top: 30px;
+  }
+
+  header .left img {
+    margin: 10px auto;
+    display: block;
+  }
+
+  header .menu {
+    position: static;
+    margin-top: 10px;
+  }
+
+  header ul {
+    padding: 0;
+  }
+
+  header li {
+    display: block;
+    margin: 8px 0;
+    text-align: center;
+  }
+
+  #user-email {
+    position: static;
+    display: block;
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  header button {
+    position: static;
+    display: block;
+    margin: 10px auto;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  input, button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ===== EVENTOS ===== */
+  .evento {
+        padding: 10px;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+  .evento button {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+   #cardeventos #lista-eventos{
+        position: relative;
+    right: 35px;
+  }
+}
+
+  </style>
+</head>
+
+<body style="overflow-x: hidden;">
+
+<header>
+  <div class="left">
+    <img src="Frame 44.svg">
+    <div class="menu">
+      <ul>
+        <a href="dashboard.html" style="color:white;text-decoration:none">
+          <li>Inicio</li>
+        </a>
+        <li style="background:#19D660;border-radius:8px;">Eventos</li>
+        <li>Sobre nosotros</li>
+        <a href="chats.html" style="color:white;text-decoration:none">
+          <li>💬 Chats</li>
+        </a>
+        <li>Contacto</li>
+      </ul>
+    </div>
+  </div>
+
+  <span id="user-email">Cargando...</span>
+  <button onclick="cerrarSesion()">Cerrar Sesión</button>
+</header>
+
+<div class="card">
+  <h2>Crear evento</h2>
+  <input id="titulo-evento" placeholder="Título del evento">
+  <input id="tipo-evento" placeholder="Tipo (ej: basket, fútbol)">
+  <input id="ubicacion-evento" placeholder="Ubicación">
+  <input id="fecha-evento" type="date" placeholder="Fecha del evento">
+  <button onclick="crearEvento()">Crear evento</button>
+</div>
+
+<div class="card" id="cardeventos">
+  <h2>Eventos disponibles</h2>
+  <div id="lista-eventos"></div>
+</div>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBFOll1h7F6FdvdD9LLv_ISXTU_fsrk_OI",
+    authDomain: "teamupweb-f557f.firebaseapp.com",
+    projectId: "teamupweb-f557f",
+    storageBucket: "teamupweb-f557f.appspot.com",
+    messagingSenderId: "414127226738",
+    appId: "1:414127226738:web:582977425b3e0c6736a7eb"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  // 🔐 Verificar usuario
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      window.location.href = "teamup.html";
+      return;
+    }
+    document.getElementById("user-email").innerText = user.email;
+    cargarEventos();
+  });
+
+  function cerrarSesion() {
+    auth.signOut().then(() => {
+      window.location.href = "teamup.html";
+    });
+  }
+
+  // Crear evento
+  async function crearEvento() {
+    try {
+      const user = auth.currentUser;
+      const nombre = document.getElementById("titulo-evento").value.trim();
+      const tipo = document.getElementById("tipo-evento").value.trim() || "basket";
+      const ubicacion = document.getElementById("ubicacion-evento").value.trim() || "Barcelona";
+      const fecha = document.getElementById("fecha-evento").value || new Date().toISOString().split('T')[0];
+      const evento = document.querySelectorAll(".evento");
+      const cardevento = document.getElementById("cardeventos");
+
+
+        cardevento.style.backgroundColor = "transparent";
+    
+      if (!nombre) return alert("Pon un título para el evento");
+
+      const nombreUsuario = user.displayName || "Usuario";
+      const emailUsuario = user.email;
+
+      const eventoData = {
+        creadoEn: firebase.firestore.FieldValue.serverTimestamp(),
+        creadoPor: user.uid,
+        emailUsuario: emailUsuario,
+        fecha: fecha,
+        nombre: nombre,
+        nombreUsuario: nombreUsuario,
+        tipo: tipo,
+        ubicacion: ubicacion,
+        members: [user.uid]
+      };
+
+      // 1️⃣ Crear evento
+      const eventoRef = await db.collection("eventos").add(eventoData);
+
+      // 2️⃣ Crear chat asociado
+      await db.collection("chats").doc(eventoRef.id).set({
+        title: nombre,
+        members: [user.uid],
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      document.getElementById("titulo-evento").value = "";
+      document.getElementById("tipo-evento").value = "";
+      document.getElementById("ubicacion-evento").value = "";
+      document.getElementById("fecha-evento").value = "";
+
+      alert("Evento y chat creados ✅");
+
+    } catch(err) {
+      console.error(err);
+      alert("Error al crear evento: " + err.message);
+    }
+  }
+
+  // Cargar eventos
+  function cargarEventos() {
+    const contenedor = document.getElementById("lista-eventos");
+
+    db.collection("eventos")
+      .orderBy("fecha", "asc") // mostrar primero los próximos eventos
+      .onSnapshot(snapshot => {
+        contenedor.innerHTML = "";
+
+        if (snapshot.empty) {
+          contenedor.innerHTML = "<p>No hay eventos disponibles</p>";
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const e = doc.data();
+          const div = document.createElement("div");
+          div.className = "evento";
+
+
+          div.innerHTML = `
+            <strong>${e.nombre}</strong><br>
+            📅 Fecha: ${e.fecha}<br>
+             <span class="ubicacion">📍 ${e.ubicacion}</span><br>
+            <button style="float: right; width: 100px;" onclick="unirseEvento('${doc.id}')">Unirse</button>
+          `;
+
+          
+
+         if (e.nombre.toLowerCase().includes("fútbol")) {
+  div.style.backgroundImage = "url('futbol.jpg')";
+  div.style.backgroundSize = "cover";
+}
+          contenedor.appendChild(div);
+        });
+      });
+  }
+
+  // Unirse a evento
+ async function unirseEvento(eventId) {
+  try {
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert("Debes iniciar sesión primero");
+      return;
+    }
+
+    const eventoRef = db.collection("eventos").doc(eventId);
+    const chatRef = db.collection("chats").doc(eventId);
+
+    // Añadir al evento
+    await eventoRef.update({
+      members: firebase.firestore.FieldValue.arrayUnion(user.uid)
+    });
+
+    // Crear el chat si no existe y añadir miembro
+    await chatRef.set({
+      members: firebase.firestore.FieldValue.arrayUnion(user.uid),
+      eventId: eventId,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+
+    alert("Te has unido al evento y al chat 💬");
+
+  } catch (err) {
+    console.error(err);
+    alert("Error al unirse al evento: " + err.message);
+  }
+}
+
+</script>
+
+</body>
+</html>

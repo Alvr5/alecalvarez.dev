@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Up - Chats</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js"></script>
+
+
+
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: white;
+      font-family: system-ui;
+    }
+
+    header {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+    }
+
+    .menu li {
+      cursor: pointer;
+    }
+
+    .menu li.active {
+      background: green;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+
+    .card {
+      background: #222;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 20px;
+      height: 75vh;
+    }
+
+    .evento {
+      background: #333;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .evento:hover {
+      background: #444;
+    }
+
+    #mensajes {
+      height: 100%;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+
+    .msg {
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 80%;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .msg.propia {
+    background: white;
+    color: green;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    max-width: 70%;
+    align-self: flex-end;
+  }
+
+  /* Mensajes de otros */
+  .msg.otra {
+    background: green;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    max-width: 70%;
+    align-self: flex-start;
+  }
+
+  #mensajes {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  @media (max-width: 768px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  header .menu ul {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  header .menu li {
+    display: block;
+    margin: 5px 0;
+  }
+
+  header #user-email {
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 20px;
+    gap: 15px;
+  }
+
+  .card > div {
+    width: 100%;
+  }
+
+  /* ===== LISTA DE CHATS ===== */
+  #lista-chats {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  /* ===== CHAT ===== */
+  #mensajes {
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #mensaje-input, button {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+  }
+
+  .msg.propia, .msg.otra {
+    max-width: 90%;
+  }
+
+  .evento {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <strong>Team Up</strong>
+
+  <div class="menu">
+    <ul>
+      <a href="dashboard.html">
+        <li>Eventos</li>
+      </a>
+      <li class="active">💬 Chats</li>
+    </ul>
+  </div>
+
+  <span id="user-email">Cargando...</span>
+</header>
+
+<div class="card">
+
+  <!-- LISTA DE CHATS -->
+  <div>
+    <h3>Mis chats</h3>
+    <div id="lista-chats"></div>
+  </div>
+
+  <!-- CHAT -->
+  <div>
+    <h3 id="chat-titulo">Selecciona un chat</h3>
+    <div id="mensajes"></div>
+
+    <input id="mensaje-input" placeholder="Escribe un mensaje">
+    <button onclick="enviarMensaje()">Enviar</button>
+  </div>
+
+</div>
+
+<script>
+  // 🔥 Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBFOll1h7F6FdvdD9LLv_ISXTU_fsrk_OI",
+    authDomain: "teamupweb-f557f.firebaseapp.com",
+    projectId: "teamupweb-f557f",
+    storageBucket: "teamupweb-f557f.appspot.com",
+    messagingSenderId: "414127226738",
+    appId: "1:414127226738:web:582977425b3e0c6736a7eb"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+const messaging = firebase.messaging();
+
+
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  let chatActivo = null;
+  let unsubscribe = null;
+
+  async function pedirPermisoNotificaciones() {
+  try {
+    await Notification.requestPermission();
+    console.log("Permiso de notificaciones concedido");
+    guardarTokenFCM(); // guardar el token en Firestore
+  } catch (e) {
+    console.log("Permiso denegado", e);
+  }
+}
+ // Llamar cuando el usuario esté logueado
+auth.onAuthStateChanged(user => {
+  if (!user) {
+    window.location.href = "teamup.html";
+    return;
+  }
+  document.getElementById("user-email").innerText = user.email;
+  cargarChats();
+  pedirPermisoNotificaciones(); // <-- aquí
+});;
+
+  // 📥 Cargar chats donde el user es miembro
+  // 📥 Cargar chats donde el user es miembro
+// 📥 Cargar chats donde el user es miembro
+function cargarChats() {
+  const uid = auth.currentUser.uid;
+  const contenedor = document.getElementById("lista-chats");
+
+  db.collection("chats")
+    .where("members", "array-contains", uid)
+    .onSnapshot(async snapshot => {
+      contenedor.innerHTML = "";
+
+      if (snapshot.empty) {
+        contenedor.innerHTML = "<p>No tienes chats aún</p>";
+        return;
+      }
+
+      for (const doc of snapshot.docs) {
+        const chat = doc.data();
+        const chatId = doc.id;
+
+        // Comprobar si el evento asociado existe
+        const eventoDoc = await db.collection("eventos").doc(chatId).get();
+        if (!eventoDoc.exists) {
+          console.log("Evento huérfano encontrado, borrando chat:", chatId);
+          await db.collection("chats").doc(chatId).delete();
+          continue; // saltar este chat
+        }
+
+        const div = document.createElement("div");
+        div.className = "evento";
+        div.innerText = chat.title || "Chat sin título";
+        div.onclick = () => abrirChat(chatId, chat.title);
+        contenedor.appendChild(div);
+      }
+    });
+
+
+}
+
+
+async function guardarTokenFCM() {
+  try {
+    const token = await messaging.getToken({
+      vapidKey: "BEfcJYkaJSFgAG1-ZyBpA5rdmvlQt4hgYtJATZeeiXwElTek-piGk5N_REcbkUy8d0BEX-uodzG_7oxLuN4iqBM"
+    });
+
+    if (token) {
+      await db.collection("users")
+        .doc(auth.currentUser.uid)
+        .set({
+          email: auth.currentUser.email,
+          fcmToken: token
+        }, { merge: true });
+    }
+  } catch (e) {
+    console.log("Error token FCM", e);
+  }
+}
+guardarTokenFCM();
+
+
+
+  // 💬 Abrir chat
+  // 💬 Abrir chat
+// 💬 Abrir chat
+function abrirChat(chatId, titulo) {
+  chatActivo = chatId;
+  document.getElementById("chat-titulo").innerText = titulo || "Chat";
+  const mensajes = document.getElementById("mensajes");
+  mensajes.innerHTML = "";
+
+  if (unsubscribe) unsubscribe();
+
+  unsubscribe = db.collection("chats")
+    .doc(chatId)
+    .collection("messages")
+    .orderBy("createdAt")
+    .onSnapshot(snapshot => {
+      mensajes.innerHTML = "";
+
+      snapshot.forEach(doc => {
+        const m = doc.data();
+        const p = document.createElement("div");
+        p.className = "msg";
+
+        // Estilos según quién envió el mensaje
+        if (m.userId === auth.currentUser.uid) {
+          p.classList.add("propia");
+        } else {
+          p.classList.add("otra");
+        }
+
+        p.innerHTML = `<strong>${m.userEmail}:</strong> ${m.text}`;
+        mensajes.appendChild(p);
+      });
+
+      mensajes.scrollTop = mensajes.scrollHeight;
+    });
+}
+
+
+
+  // ✉️ Enviar mensaje
+  function enviarMensaje() {
+  if (!chatActivo) return; // si no hay chat activo, no hace nada
+
+  const texto = document.getElementById("mensaje-input").value.trim();
+  if (!texto) return; // no enviar mensajes vacíos
+
+  db.collection("chats")
+    .doc(chatActivo)
+    .collection("messages")
+    .add({
+      text: texto,
+      userId: auth.currentUser.uid,
+      userEmail: auth.currentUser.email,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+  document.getElementById("mensaje-input").value = "";
+}
+
+</script>
+
+</body>
+</html>

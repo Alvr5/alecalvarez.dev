@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Up - Dashboard</title>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+  <style>
+    :root {
+      --primary-green: #008000;
+      --dark-bg: #111;
+      --card-bg: #222;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: white;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER & NAVIGATION ===== */
+    header {
+      width: 100%;
+      position: relative;
+      height: 600px; /* Altura fija para el video hero */
+      overflow: hidden;
+    }
+
+    header video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .logo img { width: 80px; }
+
+    .menu ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu li {
+      padding: 8px 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .menu li:hover { color: var(--primary-green); }
+
+    .user-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+    }
+
+    #profileImage {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-green);
+      cursor: pointer;
+      object-fit: cover;
+    }
+
+    .verificado-icon {
+          width: 20px;
+    position: absolute;
+    bottom: 0;
+    right: 45px;
+    display: none;
+    }
+
+    /* ===== SECCIONES ===== */
+    .content-wrapper {
+      padding: 50px;
+      color: #333;
+    }
+
+    .seccion1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 100px;
+    }
+
+    .seccion-text {
+      max-width: 500px;
+    }
+
+    .seccion-text h2 {
+      font-size: 3rem;
+      color: var(--primary-green);
+      line-height: 1.1;
+    }
+
+    .btn-main {
+      background: var(--primary-green);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .image-grid {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+
+    .image-grid img {
+      width: 250px;
+      border-radius: 15px;
+      position: absolute;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    #tennisniño { top: 0; left: 0; z-index: 2; }
+    #volleyimage { bottom: 0; right: 0; z-index: 1; }
+
+    /* ===== MODAL ===== */
+    #editProfileModal {
+      display: none;
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-content input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background: #333;
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-container { flex-direction: column; padding: 10px; }
+      .seccion-text h2 { font-size: 2rem; }
+      .image-grid { width: 100%; height: 300px; margin-top: 50px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <video autoplay muted loop playsinline>
+    <source src="WhatsApp Video 2026-01-22 at 10.32.14.mp4" type="video/mp4">
+  </video>
+  
+  <nav class="nav-container">
+    <div class="logo">
+      <img src="Frame 44.svg" alt="Logo">
+    </div>
+    
+    <div class="menu">
+      <ul>
+        <li style="background: var(--primary-green); border-radius: 5px;">Inicio</li>
+        <li><a href="eventos.html" style="color:white; text-decoration:none;">Eventos</a></li>
+        <li>Sobre nosotros</li>
+        <li><a href="chats.html" style="color:white; text-decoration:none;">💬 Chats</a></li>
+      </ul>
+    </div>
+
+    <div class="user-controls">
+      <p id="user-email" style="font-size: 0.8rem; margin-right: 10px;">Cargando...</p>
+      <img id="profileImage" src="Logo.jpeg" alt="Perfil">
+      <img src="verificado.png" class="verificado-icon" id="badgeVerificado">
+      <button onclick="logout()" style="background:none; border:none; cursor:pointer;">
+        <img src="arrow-right-from-bracket-solid-full (1).svg" width="20">
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="content-wrapper">
+  <section class="seccion1">
+    <div class="seccion-text">
+      <h2>JUEGA A TU DEPORTE FAVORITO CON OTROS</h2>
+      <p>Apúntate a eventos con amigos o conoce gente nueva en la pista.</p>
+      <a href="eventos.html" style="text-decoration:none; color:white;">
+        <button class="btn-main">Apuntarme a un evento</button>
+      </a>
+    </div>
+    
+    <div class="image-grid">
+      <img src="Rectangle 27.png" id="tennisniño" alt="Tenis">
+      <img src="Rectangle 28.png" id="volleyimage" alt="Voley">
+    </div>
+  </section>
+
+  <section style="text-align: center; max-width: 800px; margin: 0 auto; color: #444;">
+    <h2>Conecta con gente que se mueve como tú</h2>
+    <p>Entrenar solo a veces cuesta. Con Team Up encuentras personas cerca de ti con tus mismos intereses deportivos.</p>
+  </section>
+</main>
+
+<div id="editProfileModal">
+  <div class="modal-content">
+    <h3>Editar Perfil</h3>
+    <input type="text" id="edit-nombre" placeholder="Nombre">
+    <input type="text" id="edit-apellido" placeholder="Apellido">
+    <label style="font-size: 0.8rem; display: block; margin-top: 10px;">Foto de perfil:</label>
+    <input type="file" id="edit-photo" accept="image/*">
+    <button onclick="saveProfile()" class="btn-main" style="width: 100%; margin-top: 20px;">Guardar</button>
+    <button onclick="closeModal()" style="background:transparent; color: #ff4444; border:none; margin-top: 10px; cursor:pointer;">Cancelar</button>
+  </div>
+</div>
+
+<script>
+  // Configuración Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBFOll1h7F6FdvdD9LLv_ISXTU_fsrk_OI",
+    authDomain: "teamupweb-f557f.firebaseapp.com",
+    projectId: "teamupweb-f557f",
+    storageBucket: "teamupweb-f557f.appspot.com",
+    messagingSenderId: "414127226738",
+    appId: "1:414127226738:web:582977425b3e0c6736a7eb"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+
+  const profileImg = document.getElementById('profileImage');
+  const editModal = document.getElementById('editProfileModal');
+  const badgeVerificado = document.getElementById('badgeVerificado');
+
+  // Observador de Estado de Autenticación
+  auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+      window.location.href = "teamup.html";
+      return;
+    }
+
+    // Mostrar Email
+    document.getElementById("user-email").innerText = user.email;
+
+    // Lógica de Verificado
+    const admins = ["roviracorberalucas@gmail.com", "alec.alvarez.lobato@gmail.com"];
+    badgeVerificado.style.display = admins.includes(user.email) ? "block" : "none";
+
+    // Cargar datos de Firestore
+    const userRef = db.collection('users').doc(user.uid);
+    try {
+      const doc = await userRef.get();
+      if (doc.exists) {
+        profileImg.src = doc.data().photoURL || user.photoURL || 'Logo.jpeg';
+      } else {
+        // Crear documento si no existe
+        const [nombre, ...apellidoArr] = (user.displayName || "").split(" ");
+        const userData = {
+          nombre: nombre || "",
+          apellido: apellidoArr.join(" ") || "",
+          email: user.email,
+          photoURL: user.photoURL || ""
+        };
+        await userRef.set(userData);
+        profileImg.src = userData.photoURL || 'Logo.jpeg';
+      }
+    } catch (err) {
+      console.error("Error cargando perfil:", err);
+    }
+  });
+
+  // Funciones Modal
+  profileImg.onclick = () => editModal.style.display = 'flex';
+  function closeModal() { editModal.style.display = 'none'; }
+  window.onclick = (event) => { if (event.target == editModal) closeModal(); }
+
+  async function saveProfile() {
+    const user = auth.currentUser;
+    const file = document.getElementById('edit-photo').files[0];
+    const nombre = document.getElementById('edit-nombre').value;
+    const apellido = document.getElementById('edit-apellido').value;
+    
+    let url = profileImg.src;
+
+    try {
+      if (file) {
+        const ref = storage.ref(`profilePics/${user.uid}`);
+        await ref.put(file);
+        url = await ref.getDownloadURL();
+      }
+
+      await db.collection('users').doc(user.uid).update({
+        nombre: nombre,
+        apellido: apellido,
+        photoURL: url
+      });
+
+      profileImg.src = url;
+      alert("¡Perfil actualizado!");
+      closeModal();
+    } catch (err) {
+      alert("Error: " + err.message);
+    }
+  }
+
+  function logout() {
+    auth.signOut().then(() => window.location.href = "teamup.html");
+  }
+</script>
+
+</body>
+</html>
