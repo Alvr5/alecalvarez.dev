@@ -1,14 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Syncro</title>
+    <style>
+        /* ====== RESET Y BÁSICOS ====== */
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ====== HEADER ====== */
+        header {
+            background-image: url('18368956-microphone-5583565_1920.jpg');
+            width: 100%;
+            min-height: 60vh; /* Ajustado para mejor visibilidad */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        /* Capa oscura */
+        header .black {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        /* Contenedor de Navegación */
+        .nav-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        header img.logo-img {
+            height: 40px; /* Tamaño controlado */
+            width: auto;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        header li {
+            cursor: pointer;
+        }
+
+        header li button {
+            padding: 10px 20px;
+            background-color: #794CFF;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        header li button:hover {
+            background-color: #5e39cc;
+        }
+
+        /* Texto Central */
+        header p.hero-text {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(2rem, 5vw, 5rem); /* Tamaño fluido */
+            font-weight: bold;
+            text-align: center;
+            margin: auto 20px;
+            padding: 40px 0;
+        }
+
+        /* ====== MAIN ====== */
+        main {
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        main h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: purple;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        main p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        /* Formulario */
+        #collabForm {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        main input {
+            padding: 15px;
+            width: 100%;
+            max-width: 350px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+
+        main button {
+            padding: 15px 30px;
+            border: none;
+            background: purple;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Imagen decorativa */
+        .main-img {
+            display: block;
+            margin-top: 50px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ====== MEDIA QUERIES (Móviles) ====== */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            header ul {
+                font-size: 14px;
+                gap: 10px;
+            }
+
+            header p.hero-text {
+                font-size: 1.8rem;
+            }
+
+            main {
+                text-align: center;
+            }
+
+            main h2, main p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #collabForm {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Syncro</h1>
-        <p>Encuentra tu próxima colaboración</p>
+        <div class="black"></div>
+        
+        <nav class="nav-container">
+            <div class="logo-area">
+                <img src="syncro2 2.png" alt="Logo Syncro" class="logo-img">
+                <h1>Syncro</h1>
+            </div>
+            <ul>
+                <li>Inicio</li>
+                <li>¿Qué es?</li>
+                <li><button>Contacto</button></li>
+            </ul>
+        </nav>
+
+        <p class="hero-text">Encuentra tu próxima colaboración</p>
     </header>
+
+    <main>
+        <h2>Ser productor o artista y no tener con quien colaborar siempre ha sido un desafío</h2>
+        <p>Syncro te permite conectarte con otros profesionales de la industria musical para crear colaboraciones únicas. Ahora puedes ser de los primeros en aprovechar esta oportunidad.</p>
+
+        <form id="collabForm" action="https://formspree.io/f/mwpvboqg" method="POST">
+            <input type="email" name="email" placeholder="Tu email" required>
+            <input type="hidden" name="text" value="Quiero apuntarme a la lista de SYNCRO, la app!">
+            <button type="submit">¡Quiero colaborar!</button>
+        </form>
+
+        <img src="Group 38.png" alt="Colaboración" class="main-img">
+    </main>
+
+    <script>
+        const form = document.getElementById('collabForm');
+        form.addEventListener('submit', function(e) {
+            setTimeout(() => {
+                form.reset();
+            }, 100);
+        });
+    </script>
 </body>
 </html>
