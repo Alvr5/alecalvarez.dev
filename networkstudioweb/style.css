@@ -184,3 +184,21 @@ form{
     font-family: sans-serif;
     font-weight: bold;
 }
+
+@media (min-width: 1600px) {
+    header h2 {
+        font-size: 30px;
+        left: 20px;
+        top: 20px;
+    }
+
+    header ul {
+        gap: 15px;
+    }
+
+    #contacto{
+            /* float: right; */
+    right: 20px;
+    position: absolute;
+    }
+}
