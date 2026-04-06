@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Studio - NetCoins</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <img src="network rp logo.png" id="logo" alt="Network Studio Logo">
+    <div class="menu">
+        <ul>
+            <li><a href="index.html#home">Inicio</a></li>
+            <li><a href="index.html#about">FAQ</a></li>
+            <li><a href="netcoins.html">NetCoins</a></li>
+            <li id="contacto"><a href="index.html#contact">Contacto</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <h2>OBTÉN NETCOINS POR UN PRECIO ASEQUIBLE PARA PODER HACER DE TUS ROLES MÁS INMERSIVOS Y REALES</h2>
+
+    <div class="selectedbackground">
+        <div class="blur"></div>
+    </div>
+
+    <div class="netcoin">
+
+        <!-- MONEDA -->
+        <div class="coin">
+            <div class="face front">
+                <img src="netcoin.png" alt="">
+            </div>
+            <div class="face back">
+                <img src="netcoin.png" alt="">
+            </div>
+        </div>
+
+        <form id="compraForm" method="POST" action="https://api.web3forms.com/submit" redirect="https://networkstudioweb.github.io/compraexitosa.html">
+    <input type="hidden" name="access_key" value="56736b49-4806-4067-bfd6-ee4d03e07ab9">
+    <input type="text" name="NombreIC" placeholder="Pon tu nombre IC" required>
+    <input type="number" name="numerocoins" placeholder="Cantidad" min="10" max="1000" required>
+    <!-- input oculto para enviar el precio total -->
+    <input type="hidden" name="precio_total" id="precio_total">
+    <button type="submit">Adquirir NetCoins</button>
+</form>
+
+        <p>precio: <span id="price">0.00€</span></p>
+
+    </div>
+</main>
+
+<script>
+// Selecciones de elementos
+const quantityInput = document.querySelector('input[name="numerocoins"]');
+const priceDisplay = document.getElementById('price');
+const form = document.getElementById('compraForm');
+const precioTotalInput = document.getElementById('precio_total');
+
+// Función para actualizar precio en tiempo real
+function updatePrice() {
+    const quantity = parseInt(quantityInput.value);
+    const pricePerCoin = 0.10;
+
+    if (isNaN(quantity) || quantity < 10) {
+        priceDisplay.textContent = "0.00€";
+        precioTotalInput.value = "0.00";
+        return;
+    }
+
+    let validQuantity = quantity;
+    if (quantity > 1000) {
+        validQuantity = 1000;
+        quantityInput.value = 1000;
+        alert("La cantidad máxima de NetCoins es 1000.");
+    }
+
+    const totalPrice = validQuantity * pricePerCoin;
+    priceDisplay.textContent = `${totalPrice.toFixed(2)}€`;
+    precioTotalInput.value = totalPrice.toFixed(2); // se enviará al correo
+}
+
+// Escuchar cambios en el input de cantidad
+quantityInput.addEventListener('input', updatePrice);
+
+// Manejo del envío del formulario
+form.addEventListener('submit', async function(e) {
+    e.preventDefault(); // evitar recarga de página
+
+    const formData = new FormData(form);
+    const cantidad = parseInt(formData.get('numerocoins'));
+    const eurosquepagar = (cantidad * 0.10).toFixed(2);
+
+    // Validaciones
+    if (isNaN(cantidad) || cantidad < 10) {
+        alert("Introduce un número válido (mínimo 10).");
+        return;
+    }
+    if (cantidad > 1000) {
+        alert("La cantidad máxima es 1000 NetCoins.");
+        quantityInput.value = 1000;
+        updatePrice();
+        return;
+    }
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(`¡Compra realizada con éxito!\nCantidad: ${cantidad} NetCoins\nPrecio: ${eurosquepagar}€`);
+            form.reset();
+            priceDisplay.textContent = "0.00€";
+            precioTotalInput.value = "0.00€";
+        } else {
+            alert("Error al enviar la compra, intenta de nuevo.");
+            console.error(result);
+        }
+    } catch (error) {
+        console.error("Error al enviar el formulario:", error);
+        alert("Error al enviar la compra, intenta de nuevo.");
+    }
+});
+
+// Inicializar precio al cargar la página
+updatePrice();
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+body {
+    background-color: black;
+    margin: 0;
+}
+
+/* HEADER (lo dejo igual) */
+header {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    color: white;
+}
+
+#headerindex{
+       background-image: url(fondoheader.png);
+    height: 300px;
+    margin: 0;
+    padding: 20px;
+    background-size: cover;
+    align-items: start;
+    background-position-y: 590px;
+}
+
+header #logo {
+       width: 70px;
+    margin-left: 10px;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+header h2{
+        position: absolute;
+    left: 320px;
+    font-size: 50px;
+    font-family: sans-serif;
+    max-width: 1000px;
+    text-align: center;
+    top: 60px;
+    color: #FD9E00;
+    text-shadow: 0px 0px 20px black;
+    -webkit-text-stroke: 1px white;
+}
+
+header ul li {
+    padding: 7px 10px;
+    text-shadow: 0px 0px 5px black;
+}
+
+header ul li a {
+    color: white;
+    text-decoration: none;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+header ul li:hover {
+background-color: red;
+transition: 0.5s;
+border-radius: 5px;
+}
+
+
+header ul #contacto {
+    margin-left: 940px;
+    background-color: red;
+    border-radius: 5px;
+    text-shadow: none;
+    cursor: pointer;
+}
+
+/* 🔥 3D */
+main {
+    perspective: 1000px;
+}
+
+.netcoin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 580px;
+}
+
+/* moneda */
+.coin {
+    position: relative;
+    width: 200px;
+    height: 200px;
+
+    transform-style: preserve-3d;
+    animation: rotate 4s linear infinite;
+}
+
+/* caras */
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.face img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* frente */
+.front {
+    transform: rotateY(0deg);
+}
+
+
+.netcoin p {
+        color: white;
+    font-family: Josefin Sans, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+main h3{
+    color: white;
+    font-family: Josefin Sans, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+main h2{
+        color: white;
+    font-family: sans-serif;
+    max-width: 1190px;
+    text-align: center;
+    margin: 10px auto;
+    font-size: 40px;
+    margin-top: 90px;
+    color: white;
+}
+
+.selectedbackground{
+        width: 216px;
+    height: 43px;
+    background: orange;
+    position: absolute;
+    left: 380px;
+    top: 0px;
+    z-index: -1;
+}
+
+.blur{
+        width: 900px;
+    height: 900px;
+    border-radius: 50%;
+    background: orange;
+    filter: blur(341px);
+    position: absolute;
+    /* left: 0px; */
+}
+
+form{
+    display: contents;
+}
+
+.netcoin input {
+         width: 150px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px #0000003d;
+    text-align: center;
+}
+
+.netcoin button{
+        padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background: orange;
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+}
