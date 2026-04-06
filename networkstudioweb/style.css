@@ -187,11 +187,14 @@ form{
 
 @media (min-width: 1600px) {
     header h2 {
-        font-size: 49px;
-    left: 0;
-    top: 80px;
-    text-align: center;
-    max-width: 100%;
+      font-size: 49px;
+        position: absolute;    
+        top: 80px;
+        left: 50%;               
+        transform: translateX(-50%);
+        text-align: center;
+        max-width: 100%;
+        width: auto;
     }
 
     header ul {
