@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    
+    
+    <main class="admin-panel">
+        <header class="admin-header">
+            <h2>Panel de Gestión de Clientes</h2>
+        </header>
+        
+        <div class="kanban-board">
+            <div class="kanban-column" id="requests">
+                <h3>Solicitudes Nuevas</h3>
+                <div class="request-card">
+                    <p><strong>Juan Pérez</strong></p>
+                    <p>Proyecto: EP Detroit</p>
+                    <button class="btn-action">Ver Chat</button>
+                </div>
+            </div>
+            
+            <div class="kanban-column" id="active">
+                <h3>Clientes Activos</h3>
+                <div class="request-card active">
+                    <p><strong>Lil Drip</strong></p>
+                    <p>Estado: Enviando maqueta</p>
+                    <button class="btn-action">Gestionar</button>
+                </div>
+            </div>
+            
+            <div class="kanban-column" id="closed">
+                <h3>Ventas Cerradas</h3>
+            </div>
+        </div>
+        
+        <section class="chat-overlay">
+            <div class="chat-window">
+                <div class="chat-header">Chat con: Juan Pérez</div>
+                <div class="chat-messages" id="message-box">
+                    <div class="msg-received">Hola, ¿puedes hacerme un beat estilo 808 Melo?</div>
+                    <div class="msg-sent">¡Claro! Envíame una referencia.</div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Escribe un mensaje...">
+                    <button>Enviar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

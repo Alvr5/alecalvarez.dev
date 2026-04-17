@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeatMaker | Beats Exclusivos & Gestión Pro</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Configuración con tus credenciales de Supabase
+  const _supabase = supabase.createClient('https://xhsvauqkfdwcpschfahm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhoc3ZhdXFrZmR3Y3BzY2hmYWhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzODIxMjMsImV4cCI6MjA5MTk1ODEyM30.8xrBwIskpZbGa6gulWvRwPbrxgBD0cRxNwgmQvEld04');
+</script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">BEAT<span>MARKER</span></div>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#beats">Beats</a>
+            <a href="#pasos">Cómo funciona</a>
+            <a href="admin.html" class="admin-link">Panel Admin</a>
+        </nav>
+        <button class="btn-primary" onclick="location.href='#contacto'">Hablar conmigo</button>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="badge">Nuevos Beats cada semana</span>
+            <h1>Beats exclusivos y personalizados</h1>
+            <p>Eleva tu sonido al siguiente nivel con producciones a medida de alta calidad.</p>
+            <div class="hero-btns">
+                <a href="#beats" class="btn-primary">Explorar Catálogo</a>
+                <a href="#contacto" class="btn-secondary">Pedir Beat Único</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="beats" class="preview-beats">
+        <div class="section-title">
+            <h2>Beats Destacados</h2>
+            <p>Dale play y encuentra tu próximo hit</p>
+        </div>
+        
+        <div class="beats-grid">
+            <div class="beat-card">
+                <div class="beat-img" style="background-image: url('https://via.placeholder.com/300x300/1a1a1a/00ff88?text=TRAP')"></div>
+                <h4>Midnight Vibes</h4>
+                <span class="status available">Disponible</span>
+                <p class="genre">Trap / Melodic</p>
+                <button class="play-btn" onclick="playSong('Midnight Vibes', 'audio/beat1.mp3')">▶ Escuchar</button>
+            </div>
+
+            <div class="beat-card">
+                <div class="beat-img" style="background-image: url('https://via.placeholder.com/300x300/1a1a1a/00ff88?text=DRILL')"></div>
+                <h4>Gotham Streets</h4>
+                <span class="status sold">Vendido</span>
+                <p class="genre">Drill / UK</p>
+                <button class="play-btn" disabled>🚫 No disponible</button>
+            </div>
+
+            <div class="beat-card">
+                <div class="beat-img" style="background-image: url('https://via.placeholder.com/300x300/1a1a1a/00ff88?text=DETROIT')"></div>
+                <h4>Fast Life</h4>
+                <span class="status available">Uso Libre</span>
+                <p class="genre">Detroit / Type</p>
+                <button class="play-btn" onclick="playSong('Fast Life', 'audio/beat3.mp3')">▶ Escuchar</button>
+            </div>
+        </div>
+
+        <div class="center-btn">
+            <a href="beats.html" class="btn-text">Ver todos los beats →</a>
+        </div>
+    </section>
+
+    <section id="pasos" class="how-it-works">
+        <h2>¿Cómo conseguir tu beat?</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Elige o Pide</h3>
+                <p>Busca en el catálogo o solicita un beat desde cero con tus referencias.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Hablamos</h3>
+                <p>Nos ponemos en contacto por el chat interno para pulir detalles del sonido.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Recibes el Hit</h3>
+                <p>Una vez listo, recibes los archivos en alta calidad (WAV/Stems) y la licencia.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <h2>¿Listo para tu próximo tema?</h2>
+        <p>No dejes pasar la oportunidad de sonar profesional hoy mismo.</p>
+        <button class="btn-primary btn-large" onclick="location.href='#contacto'">Hablar conmigo ahora</button>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">BEATMARKER</div>
+            <div class="socials">
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+                <a href="#">Spotify</a>
+            </div>
+            <p class="copy">&copy; 2024 BeatMaker Studio. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="audio-player">
+        <div class="player-info">
+            <div class="track-name" id="current-track">Selecciona un beat...</div>
+            <div class="track-sub">Producción Exclusiva</div>
+        </div>
+        <div class="player-controls">
+            <audio id="main-audio"></audio>
+            <button class="ctrl-btn" id="play-pause-global">▶</button>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+        </div>
+        <div class="player-volume">
+            <span>Vol</span>
+            <input type="range" min="0" max="1" step="0.1" value="0.5">
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('main-audio');
+        const trackTitle = document.getElementById('current-track');
+
+        function playSong(name, src) {
+            trackTitle.innerText = "Reproduciendo: " + name;
+            audio.src = src;
+            audio.play();
+            document.getElementById('play-pause-global').innerText = "⏸";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2 id="auth-title">Iniciar Sesión</h2>
+            <p id="auth-subtitle">Entra para gestionar tus pedidos y chats</p>
+            
+            <form id="auth-form">
+                <div class="input-group">
+                    <label>Email</label>
+                <input type="email" id="email" placeholder="tu@email.com" required>
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit" class="btn-primary" id="btn-auth">Entrar</button>
+        </form>
+        
+        <p class="auth-switch">
+            ¿No tienes cuenta? <a href="#" id="toggle-auth">Regístrate aquí</a>
+        </p>
+    </div>
+</div>
+
+<script>
+    // Función para INICIAR SESIÓN
+    async function login(email, password) {
+        const { data, error } = await _supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
+        
+        if (error) alert("Error: " + error.message);
+        else window.location.href = "index.html";
+    }
+
+    // Función para REGISTRARSE
+    async function register(email, password) {
+        const { data, error } = await _supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
+        
+        if (error) alert("Error: " + error.message);
+        else alert("¡Revisa tu email para confirmar tu cuenta!");
+    }
+</script>
+</body>
+</html>
