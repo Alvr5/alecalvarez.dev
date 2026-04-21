@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alec Alvarez - Portafolio</title>
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        /* OCULTAR SUAVE */
+        .hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            position: absolute;
+        }
+
+        /* TRANSICIÓN TARJETAS */
+        .project {
+            transition: all 0.3s ease;
+        }
+
+        /* BOTÓN ACTIVO */
+        button.active {
+            background: #042EFF;
+            border: 1px solid white;
+            box-shadow: 0 0 10px #042EFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="blur"></div>
+    
+    <header>
+        <div class="menu">
+            <ul>
+                <li>Inicio</li>
+                <li>Sobre Mi</li>
+                <li>FAQ</li>
+                <li>Contacto</li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <h1>Construyo software a medida para startups y negocios que quieren crecer rápido.</h1>
+
+        <h2>Puedo construir las siguientes cosas para solucionar tus problemas</h2>
+
+        <div class="buttons">
+            <button id="allbutton">TODOS</button>
+            <button id="buttonapps">APPS ANDROID</button>
+            <button id="exebutton">.EXE</button>
+            <button id="webbutton">WEB</button>
+        </div>
+
+        <div class="projects" style="margin-top: 40px;">
+
+            <!-- WEB -->
+            <div class="project web">
+                <img src="networkstudio.png" alt="">
+                <h3 class="titulo">Network Studio</h3>
+                <p class="description">Web de un servidor de GTAV (FIVEM)</p>
+                <a href="https://alvr5.github.io/alecalvarez.dev/networkstudioweb/index.html">
+                    <button class="button-project">Ver proyecto</button>
+                </a>
+            </div>
+
+            <div class="project web">
+                <img src="Colectivoraw.png" alt="">
+                <h3 class="titulo">Colectivo RAW</h3>
+                <p class="description">Página web para encontrar salidas fotográficas</p>
+                <a href="https://alvr5.github.io/alecalvarez.dev/Colectivo%20RAW/">
+                    <button class="button-project">Ver proyecto</button>
+                </a>
+            </div>
+
+            <!-- APPS -->
+            <div class="project app">
+                <img src="teamup.png" style="object-position: top;" alt="">
+                <h3 class="titulo">Team Up</h3>
+                <p class="description">App de conexiones deportivas</p>
+                <a href="#">
+                    <button class="button-project">Ver proyecto</button>
+                </a>
+            </div>
+
+            <div class="project app">
+                <img src="syncro.png" style="object-position: top;" alt="">
+                <h3 class="titulo">Syncro</h3>
+                <p class="description">App para artistas y productores</p>
+                <a href="#">
+                    <button class="button-project">Ver proyecto</button>
+                </a>
+                <button class="button-project-programa" disabled style="opacity: 0.3; cursor: not-allowed;">
+                    Descargar APK
+                </button>
+            </div>
+
+            <!-- EXE -->
+            <div class="project exe">
+                <img src="Stickynotes.png" style="object-position: top;" alt="">
+                <h3 class="titulo">StickyNotes</h3>
+                <p class="description">App de escritorio para notas</p>
+                <a href="#">
+                    <button class="button-project">Ver proyecto</button>
+                </a>
+                <a href="stickynotes.zip">
+                    <button class="button-project-programa">
+                        Descargar programa
+                    </button>
+                </a>
+            </div>
+
+            <p id="no-projects" class="hidden">No hay proyectos</p>
+        </div>
+    </main>
+
+    <footer style="color: white; font-family: sans-serif; margin-top: 20px; justify-content: center; width: 100%; text-align: center;">
+        &copy; Derechos reservados por Alec Alvarez
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll(".buttons button");
+        const projects = document.querySelectorAll(".project");
+        const noProjectsMsg = document.getElementById("no-projects");
+
+        function filterProjects(type) {
+            let visibleCount = 0;
+
+            projects.forEach(project => {
+                const match = type === "all" || project.classList.contains(type);
+
+                if (match) {
+                    project.classList.remove("hidden");
+                    visibleCount++;
+                } else {
+                    project.classList.add("hidden");
+                }
+            });
+
+            noProjectsMsg.classList.toggle("hidden", visibleCount !== 0);
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+
+                buttons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                let type = "all";
+
+                if (button.id === "buttonapps") type = "app";
+                else if (button.id === "exebutton") type = "exe";
+                else if (button.id === "webbutton") type = "web";
+
+                filterProjects(type);
+            });
+        });
+
+        // Estado inicial
+        document.getElementById("allbutton").classList.add("active");
+        filterProjects("all");
+    </script>
+</body>
+</html>
