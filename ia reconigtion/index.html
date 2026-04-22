@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Facial MediaPipe</title>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 20px; background: #f0f2f5; }
+        .container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        video { border-radius: 8px; background: #000; margin-bottom: 10px; }
+        .form { display: flex; flex-direction: column; gap: 10px; }
+        input { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px; cursor: pointer; border: none; border-radius: 5px; font-weight: bold; }
+        .btn-pri { background: #007bff; color: white; }
+        .btn-sec { background: #6c757d; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FaceID Local</h1>
+        <video id="video" width="320" height="240" autoplay muted playsinline></video>
+        
+        <div class="form">
+            <input type="text" id="username" placeholder="Nombre de usuario">
+            <div class="actions">
+                <button id="btn-register" class="btn-sec">Registrar Nuevo</button>
+                <button id="btn-login" class="btn-pri">Iniciar Sesión</button>
+            </div>
+        </div>
+        <p id="info">Cargando IA de Google...</p>
+    </div>
+
+<script>
+    const video = document.getElementById('video');
+    const info = document.getElementById('info');
+    let faceLandmarker;
+    let runningMode = "VIDEO";
+
+    // Inicializar MediaPipe
+    async function init() {
+        try {
+            const vision = await tasksVision.FilesetResolver.forVisionTasks(
+                "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/wasm"
+            );
+            
+            faceLandmarker = await tasksVision.FaceLandmarker.createFromOptions(vision, {
+                baseOptions: {
+                    modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+                    delegate: "GPU"
+                },
+                outputFaceBlendshapes: true,
+                runningMode: runningMode,
+                numFaces: 1
+            });
+
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.onloadedmetadata = () => {
+                video.play();
+                info.innerText = "IA Lista. Colócate frente a la cámara.";
+            };
+        } catch (err) {
+            info.innerText = "Error: No se pudo iniciar la IA o la cámara.";
+            console.error(err);
+        }
+    }
+
+    // Nota: MediaPipe FaceLandmarker no da un "descriptor" único como face-api.
+    // Para un login simple, compararemos los puntos clave (landmarks) principales.
+    async function getFaceFeatures() {
+        if (!faceLandmarker) return null;
+        
+        const result = faceLandmarker.detectForVideo(video, performance.now());
+        if (result.faceLandmarks && result.faceLandmarks.length > 0) {
+            // Usamos los primeros 100 puntos como "firma" simplificada
+            return result.faceLandmarks[0].slice(0, 100); 
+        }
+        return null;
+    }
+
+    // Comparar rostros (Distancia Euclidiana simple)
+    function compareFaces(feat1, feat2) {
+        let distance = 0;
+        for (let i = 0; i < feat1.length; i++) {
+            distance += Math.sqrt(
+                Math.pow(feat1[i].x - feat2[i].x, 2) + 
+                Math.pow(feat1[i].y - feat2[i].y, 2)
+            );
+        }
+        return distance / feat1.length;
+    }
+
+    // REGISTRO
+    document.getElementById('btn-register').addEventListener('click', async () => {
+        const name = document.getElementById('username').value;
+        if (!name) return alert("Escribe un nombre");
+
+        const features = await getFaceFeatures();
+        if (features) {
+            let users = JSON.parse(localStorage.getItem('face_db_mp') || '[]');
+            users.push({ name: name, features: features });
+            localStorage.setItem('face_db_mp', JSON.stringify(users));
+            alert("Usuario registrado.");
+        } else {
+            alert("No se detecta rostro.");
+        }
+    });
+
+    // LOGIN
+    document.getElementById('btn-login').addEventListener('click', async () => {
+        const name = document.getElementById('username').value;
+        const users = JSON.parse(localStorage.getItem('face_db_mp') || '[]');
+        const userToFind = users.find(u => u.name === name);
+        
+        if (!userToFind) return alert("Usuario no encontrado.");
+
+        const currentFeatures = await getFaceFeatures();
+        if (currentFeatures) {
+            const diff = compareFaces(currentFeatures, userToFind.features);
+            
+            // Umbral de diferencia (0.05 es bastante preciso para MediaPipe)
+            if (diff < 0.05) {
+                alert("✅ LOGIN CORRECTO");
+                info.innerText = "Bienvenido, " + name;
+            } else {
+                alert("❌ Rostro no coincide.");
+            }
+        }
+    });
+
+    init();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+body { background: #0f172a; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+.container { background: #1e293b; padding: 30px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); text-align: center; width: 350px; }
+.video-container { width: 320px; height: 240px; background: #000; border-radius: 12px; overflow: hidden; margin: 20px auto; border: 3px solid #38bdf8; }
+input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: none; box-sizing: border-box; }
+.actions { display: flex; gap: 10px; }
+button { flex: 1; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.btn-pri { background: #38bdf8; color: #0f172a; }
+.btn-sec { background: #475569; color: white; }
+#info { font-size: 0.8rem; color: #94a3b8; margin-top: 15px; }
