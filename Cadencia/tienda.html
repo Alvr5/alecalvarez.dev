@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Producto</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            overflow-x: hidden;
+            background: url('fondocta.png') no-repeat center/cover;
+        }
+
+        header{
+            background-color: #005BE8;
+        }
+
+        /* LOGO */
+        .logo {
+            width: max-content;
+            display: inline-block;
+        }
+
+        .logo img {
+            width: 154px;
+            margin-left: 20px;
+        }
+
+        /* MENÚ */
+        .menu {
+            width: 98%;
+            display: inline-block;
+            position: absolute;
+            top: 37px;
+            font-weight: bold;
+            font-size: 13px;
+            left: 170px;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        ul li {
+            display: inline-block;
+            margin-left: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        main {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* PRODUCTO: Liquid Glass */
+        .producto {
+        display: flex;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(15px) saturate(180%);
+        -webkit-backdrop-filter: blur(15px) saturate(180%);
+        border-radius: 25px;
+        border: 1px solid rgba(255,255,255,0.3);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        overflow: hidden;
+        max-width: 900px;
+        width: 90%;
+    }
+
+    /* Contenido izquierdo */
+    .producto .info {
+        flex: 1;
+        padding: 40px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .producto .info h3 {
+        margin: 0 0 10px 0;
+        font-size: 24px;
+    }
+
+    .producto .info p {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: 20px;
+    }
+
+    .colores {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .colores span {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        margin-right: 10px;
+        cursor: pointer;
+        border: 2px solid #fff;
+    }
+
+    .colores span.red { background: #FF4C4C; }
+    .colores span.green { background: #7ED957; }
+    .colores span.white { background: #fff; }
+    .colores span.black { background: #000; }
+    .colores span.purple { background: #9B80F7; }
+
+    .cantidad {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .cantidad button {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        border: none;
+        background: #007BFF;
+        color: white;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+
+    .cantidad span {
+        margin: 0 10px;
+        font-size: 16px;
+    }
+
+    .producto button.comprar {
+        width: 120px;
+        padding: 10px;
+        border: none;
+        background: #007BFF;
+        color: white;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    /* Imagen derecha */
+    .producto .imagen {
+        flex: 1;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 25px 0 0 25px; /* solo bordes exteriores */
+        overflow: hidden;
+    }
+
+    .producto .imagen img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+        .carrito{
+    position: relative;
+    left: 280px;
+    bottom: 14px;
+    background: white;
+    padding: 9px;
+    border-radius: 100%;
+    width: 10px;
+    height: 5px;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    text-align: center;
+        }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+        .producto {
+            flex-direction: column;
+        }
+        .producto .imagen {
+            border-radius: 25px 25px 0 0;
+            width: 100%;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="Frame 6 (1).png" alt=""></div>
+        <div class="menu">
+            <ul>
+                <li>Inicio</li>
+                <li>Tienda</li>
+                <li>FAQ</li>
+                <div class="carrito">1</div>
+                <li style="float: right; position: relative; right: 180px;">Contactar</li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+          <div class="producto">
+        <div class="imagen">
+            <img src="Rectangle 1 (2).png" alt="Bicicleta">
+        </div>
+        <div class="info">
+            <div>
+                <h3>21-Speed Mountain Bike</h3>
+                <p>42cm Frame Red, Adult Off-Road Bicycle, Men'S & Women'S Trail Bike, High-Performance Cycling MTB, Durable All-Terrain Bike, Shimano Gears, Suspension Fork, Lightweight Aluminum Frame</p>
+            </div>
+            <div>
+                <div class="colores">
+                    <span class="red"></span>
+                    <span class="green"></span>
+                    <span class="white"></span>
+                    <span class="black"></span>
+                    <span class="purple"></span>
+                </div>
+                <div class="cantidad">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+                <button class="comprar">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+
+        
+    </main>
+
+    <!-- Filtro SVG para distorsión líquida -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none">
+        <filter id="liquid">
+            <feTurbulence id="turbulence" baseFrequency="0.02 0.03" numOctaves="3" result="turb"/>
+            <feDisplacementMap in2="turb" in="SourceGraphic" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
+
+    <script>
+    const imagenBici = document.querySelector(".imagen img");
+    const colores = document.querySelectorAll(".colores span");
+
+    colores.forEach(color => {
+        color.addEventListener("click", () => {
+            if (color.classList.contains("green")) {
+                imagenBici.src = "Rectangle 1 (2) (1).png";
+            }
+            if (color.classList.contains("red")) {
+                imagenBici.src = "Rectangle 1 (2).png";
+            }
+            if (color.classList.contains("black")) {
+                imagenBici.src = "black.jpg";
+            }
+            if (color.classList.contains("white")) {
+                imagenBici.src = "white.jpg";
+            }
+            if (color.classList.contains("purple")) {
+                imagenBici.src = "purple.jpg";
+            }
+        });
+    });
+
+    // ---- CANTIDAD ----
+    const carrito = document.querySelector(".carrito");
+    const cantidadSpan = document.querySelector(".cantidad span");
+    const botonesCantidad = document.querySelectorAll(".cantidad button");
+
+    let cantidad = 1;
+
+    botonesCantidad[0].addEventListener("click", () => {
+        if (cantidad > 1) {
+            cantidad--;
+            actualizarCantidad();
+        }
+    });
+
+    botonesCantidad[1].addEventListener("click", () => {
+        cantidad++;
+        actualizarCantidad();
+    });
+
+    function actualizarCantidad() {
+        cantidadSpan.textContent = cantidad;
+        carrito.textContent = cantidad;
+    }
+</script>
+
+
+</body>
+</html>
