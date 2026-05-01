@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadencia</title>
+    <link rel="shortcut icon" href="Group 8 (1).png" type="image/x-icon" style="object-fit: cover;">
+</head>
+<body>
+    
+
+    <img src="Rectangle 1 (3).png" alt="" class="bici">
+
+    <div id="colorrojo" onclick="rojoseleccionado()"></div>
+    <div id="colorazul" onclick="azulseleccionado()"></div>
+    <div id="colorverde" onclick="verdeseleccionado()"></div>
+
+    <script>
+        const bicicleta = document.querySelector(".bici");
+
+        const azul = document.getElementById("colorazul");
+        const rojo = document.getElementById("colorrojo");
+        const verde = document.getElementById("colorverde");
+
+
+    function azulseleccionado() {
+        bicicleta.src = "Rectangle 1 (2) (1).png";
+    }
+
+    function rojoseleccionado() {
+        bicicleta.src = "Rectangle 1 (2).png";
+    }
+
+    function verdeseleccionado() {
+        bicicleta.src = "verde.png";
+    }
+
+    </script>
+
+<style>
+    #colorrojo{
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+
+      #colorazul{
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+
+     #colorverde{
+        width: 100px;
+        height: 100px;
+        background-color: green;
+    }
+</style>
+</body>
+</html>
