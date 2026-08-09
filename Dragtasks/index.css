@@ -1,0 +1,87 @@
+body{
+    margin: 0;
+}
+
+.dashboard{
+        width: 80%;
+    background: #3f8aff;
+    align-self: center;
+    position: absolute;
+    left: 200px;
+    top: 140px;
+    height: 70%;
+    border-radius: 15px;
+}
+
+.dashboard h2{
+        width: 98%;
+    color: white;
+    font-family: sans-serif;
+    margin-left: 30px;
+}
+
+.columna{
+          width: 20%;
+    height: 78%;
+    margin-left: 110px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: inline-table;
+}
+
+.columna .titecolumn{
+        font-family: sans-serif;
+    text-align: center;
+    background: #DF7A7A;
+    color: white;
+    padding: 1px 40px;
+    width: max-content;
+    border-radius: 10px;
+    position: relative;
+    left: 90px;
+}
+
+.columna .titecolumn2{
+        font-family: sans-serif;
+    text-align: center;
+    background: #DCE920;
+    color: white;
+    padding: 1px 40px;
+    width: max-content;
+    border-radius: 10px;
+    position: relative;
+    left: 90px;
+}
+
+
+.columna .titecolumn3{
+        font-family: sans-serif;
+    text-align: center;
+    background: #78FAB3;
+    color: white;
+    padding: 1px 40px;
+    width: max-content;
+    border-radius: 10px;
+    position: relative;
+    left: 90px;
+}
+
+.columna input{
+       position: relative;
+    top: 20px;
+    display: inline-block;
+    height: 28px;
+    margin-bottom: 20px;
+}
+
+.columna button{
+        display: inline-block;
+    margin-left: 10px;
+    position: absolute;
+    top: 170px;
+    background: blue;
+    color: white;
+    padding: 7px 39px;
+    border-radius: 5px;
+}

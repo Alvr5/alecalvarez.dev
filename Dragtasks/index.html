@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragTasks</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="title">
+            <h2>DragTasks</h2>
+        </div>
+
+        <!-- COLUMNA TO-DO -->
+        <div class="columna" id="task-todo">
+            <div class="titecolumn">
+                <h3>To-do</h3>
+            </div>
+            <input type="text" placeholder="Create new task" class="inputask">
+            <button class="crearbutton">Create</button>
+
+            <!-- Contenedor de tareas To-do -->
+            <div id="task-todo"></div>
+        </div>
+
+        <!-- COLUMNA DOING -->
+        <div class="columna" id="task-doing">
+            <div class="titecolumn2">
+                <h3>Doing</h3>
+            </div>
+
+            <!-- Contenedor de tareas Doing -->
+            <div id="task-doing"></div>
+        </div>
+
+        <!-- COLUMNA DONE -->
+        <div class="columna" id="task-done">
+            <div class="titecolumn3">
+                <h3>Done</h3>
+            </div>
+
+            <!-- Contenedor de tareas Done -->
+            <div id="task-done"></div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
