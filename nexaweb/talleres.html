@@ -1,0 +1,2491 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Mapa de Talleres</title>
+
+
+<!-- =====================================================
+     LEAFLET
+====================================================== -->
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+>
+
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+    body {
+
+        margin: 0;
+
+        padding: 20px;
+
+        font-family: Arial, sans-serif;
+
+        background: #f4f7f6;
+    }
+
+
+    h1 {
+
+        text-align: center;
+
+        margin-top: 0;
+
+        color: #333;
+    }
+
+
+    /* =====================================================
+       CONTENEDOR
+    ====================================================== */
+
+    .contenedor {
+
+        max-width: 1400px;
+
+        margin: auto;
+
+        display: grid;
+
+        grid-template-columns: 1fr 380px;
+
+        gap: 20px;
+    }
+
+
+    /* =====================================================
+       MAPA
+    ====================================================== */
+
+    #mapa {
+
+        width: 100%;
+
+        height: 700px;
+
+        border-radius: 8px;
+
+        overflow: hidden;
+
+        box-shadow:
+            0 4px 15px
+            rgba(0, 0, 0, 0.12);
+    }
+
+
+    /* =====================================================
+       PANEL
+    ====================================================== */
+
+    .panel {
+
+        background: white;
+
+        border-radius: 8px;
+
+        padding: 20px;
+
+        box-shadow:
+            0 4px 15px
+            rgba(0, 0, 0, 0.12);
+
+        height: 700px;
+
+        overflow-y: auto;
+    }
+
+
+    .panel h2 {
+
+        margin-top: 0;
+
+        color: #333;
+    }
+
+
+    /* =====================================================
+       FORMULARIO
+    ====================================================== */
+
+    .form-group {
+
+        margin-bottom: 15px;
+    }
+
+
+    label {
+
+        display: block;
+
+        margin-bottom: 6px;
+
+        font-weight: bold;
+
+        color: #555;
+    }
+
+
+    input,
+    textarea {
+
+        width: 100%;
+
+        padding: 10px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 5px;
+
+        font-size: 14px;
+
+        font-family: inherit;
+    }
+
+
+    textarea {
+
+        resize: vertical;
+    }
+
+
+    input:focus,
+    textarea:focus {
+
+        outline: none;
+
+        border-color: #3498db;
+
+        box-shadow:
+            0 0 0 2px
+            rgba(52, 152, 219, 0.12);
+    }
+
+
+    /* =====================================================
+       BOTONES
+    ====================================================== */
+
+    .btn {
+
+        width: 100%;
+
+        padding: 11px;
+
+        border: none;
+
+        border-radius: 5px;
+
+        cursor: pointer;
+
+        font-weight: bold;
+
+        font-size: 14px;
+    }
+
+
+    .btn-buscar {
+
+        background: #3498db;
+
+        color: white;
+
+        margin-top: 8px;
+    }
+
+
+    .btn-buscar:hover {
+
+        background: #2980b9;
+    }
+
+
+    .btn-crear {
+
+        background: #2ecc71;
+
+        color: white;
+
+        margin-top: 8px;
+    }
+
+
+    .btn-crear:hover {
+
+        background: #27ae60;
+    }
+
+
+    .btn:disabled {
+
+        background: #aaa;
+
+        cursor: not-allowed;
+    }
+
+
+    /* =====================================================
+       RESULTADO DIRECCIÓN
+    ====================================================== */
+
+    .resultado-direccion {
+
+        background: #f1f8ff;
+
+        border: 1px solid #cce5ff;
+
+        border-radius: 5px;
+
+        padding: 10px;
+
+        margin-top: 10px;
+
+        font-size: 13px;
+
+        display: none;
+    }
+
+
+    /* =====================================================
+       MENSAJES
+    ====================================================== */
+
+    .mensaje {
+
+        margin-top: 10px;
+
+        text-align: center;
+
+        font-size: 13px;
+
+        min-height: 20px;
+    }
+
+
+    /* =====================================================
+       RUTA
+    ====================================================== */
+
+    .ruta-info {
+
+        background: #f1f8ff;
+
+        border: 1px solid #cce5ff;
+
+        border-radius: 6px;
+
+        padding: 10px;
+
+        margin-top: 15px;
+
+        display: none;
+
+        font-size: 13px;
+
+        text-align: center;
+    }
+
+
+    .btn-quitar-ruta {
+
+        background: #7f8c8d;
+
+        color: white;
+
+        margin-top: 8px;
+    }
+
+
+    .btn-quitar-ruta:hover {
+
+        background: #636e72;
+    }
+
+
+    /* =====================================================
+       LISTA
+    ====================================================== */
+
+    .lista-talleres {
+
+        margin-top: 25px;
+    }
+
+
+    .lista-talleres h3 {
+
+        border-bottom: 1px solid #ddd;
+
+        padding-bottom: 10px;
+    }
+
+
+    .taller {
+
+        border: 1px solid #ddd;
+
+        border-radius: 6px;
+
+        padding: 12px;
+
+        margin-bottom: 10px;
+
+        background: #fafafa;
+    }
+
+
+    .taller-nombre {
+
+        font-weight: bold;
+
+        font-size: 16px;
+
+        color: #333;
+
+        margin-bottom: 5px;
+    }
+
+
+    .taller-direccion {
+
+        font-size: 12px;
+
+        color: #777;
+
+        margin-bottom: 8px;
+    }
+
+
+    .taller-descripcion {
+
+        font-size: 13px;
+
+        color: #666;
+
+        margin-bottom: 10px;
+    }
+
+
+    .taller-botones {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 5px;
+    }
+
+
+    .btn-ver {
+
+        background: #3498db;
+
+        color: white;
+    }
+
+
+    .btn-ruta {
+
+        background: #9b59b6;
+
+        color: white;
+    }
+
+
+    .btn-eliminar {
+
+        background: #e74c3c;
+
+        color: white;
+    }
+
+
+    .btn-ver:hover {
+
+        background: #2980b9;
+    }
+
+
+    .btn-ruta:hover {
+
+        background: #8e44ad;
+    }
+
+
+    .btn-eliminar:hover {
+
+        background: #c0392b;
+    }
+
+
+    .vacio {
+
+        color: #999;
+
+        text-align: center;
+
+        font-size: 14px;
+
+        padding: 20px 0;
+    }
+
+
+    /* =====================================================
+       MÓVIL
+    ====================================================== */
+
+    @media (max-width: 850px) {
+
+        .contenedor {
+
+            grid-template-columns: 1fr;
+        }
+
+
+        #mapa {
+
+            height: 500px;
+        }
+
+
+        .panel {
+
+            height: auto;
+        }
+
+    }
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>
+    Mapa de Talleres
+</h1>
+
+
+<div class="contenedor">
+
+
+    <!-- =====================================================
+         MAPA
+    ====================================================== -->
+
+    <div id="mapa"></div>
+
+
+    <!-- =====================================================
+         PANEL
+    ====================================================== -->
+
+    <div class="panel">
+
+
+        <h2>
+            Crear taller
+        </h2>
+
+
+        <form id="formulario">
+
+
+            <div class="form-group">
+
+                <label for="nombre">
+                    Nombre del negocio
+                </label>
+
+
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Ej. Taller de Juan"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="direccion">
+                    Dirección
+                </label>
+
+
+                <input
+                    type="text"
+                    id="direccion"
+                    placeholder="Ej. Carrer de Mallorca 123, Barcelona"
+                    required
+                >
+
+
+                <button
+                    type="button"
+                    id="btnBuscar"
+                    class="btn btn-buscar"
+                >
+                    Buscar ubicación
+                </button>
+
+
+                <div
+                    id="resultadoDireccion"
+                    class="resultado-direccion"
+                ></div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="descripcion">
+                    Descripción
+                </label>
+
+
+                <textarea
+                    id="descripcion"
+                    rows="4"
+                    placeholder="Describe el taller..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="btnCrear"
+                class="btn btn-crear"
+                disabled
+            >
+                Crear taller
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="mensaje"
+            class="mensaje"
+        ></div>
+
+
+        <!-- =================================================
+             INFORMACIÓN DE RUTA
+        ================================================== -->
+
+        <div
+            id="rutaInfo"
+            class="ruta-info"
+        >
+
+            <strong>
+                Ruta hasta el taller
+            </strong>
+
+            <br><br>
+
+            <span id="rutaDistancia"></span>
+
+            <br>
+
+            <span id="rutaTiempo"></span>
+
+
+            <button
+                type="button"
+                id="btnQuitarRuta"
+                class="btn btn-quitar-ruta"
+            >
+                Quitar ruta
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             LISTA
+        ================================================== -->
+
+        <div class="lista-talleres">
+
+            <h3>
+                Talleres registrados
+            </h3>
+
+
+            <div id="listaTalleres">
+
+                <div class="vacio">
+                    Cargando...
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     LEAFLET
+========================================================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- =========================================================
+     SUPABASE
+========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"
+></script>
+
+
+<script>
+
+
+    // ========================================================
+    // SUPABASE
+    // ========================================================
+
+    if (!window.supabase) {
+
+        throw new Error(
+            "No se ha podido cargar la librería de Supabase."
+        );
+
+    }
+
+
+    const SUPABASE_URL =
+        "https://rinzjdugubowyqpuenyt.supabase.co";
+
+
+    const SUPABASE_KEY =
+        "sb_publishable_wzQme7UA8TM1mZl09Dd9lg_tqDj3sZR";
+
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    // ========================================================
+    // MAPA
+    // ========================================================
+
+    const limitesEspaña =
+        L.latLngBounds(
+            [27.5, -18.5],
+            [44.5, 4.5]
+        );
+
+
+    const mapa =
+        L.map(
+            "mapa",
+            {
+
+                maxBounds:
+                    limitesEspaña,
+
+                maxBoundsViscosity:
+                    1.0,
+
+                minZoom:
+                    5
+
+            }
+        ).setView(
+            [40.4168, -3.7038],
+            6
+        );
+
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+
+            attribution:
+                "&copy; OpenStreetMap contributors"
+
+        }
+    ).addTo(mapa);
+
+
+    // ========================================================
+    // ICONO DEL TALLER
+    // ========================================================
+
+    const iconoTaller =
+        L.icon({
+
+            iconUrl:
+                "icono-taller.png",
+
+            iconSize:
+                [45, 45],
+
+            iconAnchor:
+                [22, 45],
+
+            popupAnchor:
+                [0, -45]
+
+        });
+
+
+    // ========================================================
+    // VARIABLES
+    // ========================================================
+
+    let talleres = [];
+
+    let marcadores = {};
+
+    let ubicacionSeleccionada = null;
+
+    let marcadorTemporal = null;
+
+    let rutaActual = null;
+
+    let marcadorUsuario = null;
+
+
+    // ========================================================
+    // ELEMENTOS
+    // ========================================================
+
+    const formulario =
+        document.getElementById(
+            "formulario"
+        );
+
+
+    const nombre =
+        document.getElementById(
+            "nombre"
+        );
+
+
+    const direccion =
+        document.getElementById(
+            "direccion"
+        );
+
+
+    const descripcion =
+        document.getElementById(
+            "descripcion"
+        );
+
+
+    const btnBuscar =
+        document.getElementById(
+            "btnBuscar"
+        );
+
+
+    const btnCrear =
+        document.getElementById(
+            "btnCrear"
+        );
+
+
+    const resultadoDireccion =
+        document.getElementById(
+            "resultadoDireccion"
+        );
+
+
+    const mensaje =
+        document.getElementById(
+            "mensaje"
+        );
+
+
+    const listaTalleres =
+        document.getElementById(
+            "listaTalleres"
+        );
+
+
+    const rutaInfo =
+        document.getElementById(
+            "rutaInfo"
+        );
+
+
+    const rutaDistancia =
+        document.getElementById(
+            "rutaDistancia"
+        );
+
+
+    const rutaTiempo =
+        document.getElementById(
+            "rutaTiempo"
+        );
+
+
+    const btnQuitarRuta =
+        document.getElementById(
+            "btnQuitarRuta"
+        );
+
+
+    // ========================================================
+    // ESCAPAR HTML
+    // ========================================================
+
+    function escaparHTML(texto) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.textContent =
+            texto || "";
+
+
+        return div.innerHTML;
+
+    }
+
+
+    // ========================================================
+    // BUSCAR DIRECCIÓN
+    // ========================================================
+
+    async function buscarDireccion() {
+
+        const texto =
+            direccion.value.trim();
+
+
+        if (!texto) {
+
+            mensaje.innerText =
+                "Escribe una dirección.";
+
+            mensaje.style.color =
+                "#e74c3c";
+
+            return;
+
+        }
+
+
+        btnBuscar.disabled =
+            true;
+
+
+        btnBuscar.innerText =
+            "Buscando...";
+
+
+        mensaje.innerText =
+            "Buscando dirección...";
+
+
+        mensaje.style.color =
+            "#3498db";
+
+
+        try {
+
+
+            const url =
+                "https://nominatim.openstreetmap.org/search?" +
+
+                new URLSearchParams({
+
+                    q:
+                        texto,
+
+                    format:
+                        "json",
+
+                    limit:
+                        "1",
+
+                    addressdetails:
+                        "1",
+
+                    countrycodes:
+                        "es"
+
+                });
+
+
+            const respuesta =
+                await fetch(
+                    url
+                );
+
+
+            if (!respuesta.ok) {
+
+                throw new Error(
+                    "No se pudo contactar con el servicio de mapas."
+                );
+
+            }
+
+
+            const resultados =
+                await respuesta.json();
+
+
+            if (
+                !resultados ||
+                resultados.length === 0
+            ) {
+
+                throw new Error(
+                    "No se encontró esa dirección en España."
+                );
+
+            }
+
+
+            const resultado =
+                resultados[0];
+
+
+            if (
+                !resultado.address ||
+                resultado.address.country_code !== "es"
+            ) {
+
+                throw new Error(
+                    "La dirección debe estar en España."
+                );
+
+            }
+
+
+            const latitud =
+                parseFloat(
+                    resultado.lat
+                );
+
+
+            const longitud =
+                parseFloat(
+                    resultado.lon
+                );
+
+
+            if (
+                !Number.isFinite(latitud) ||
+                !Number.isFinite(longitud)
+            ) {
+
+                throw new Error(
+                    "La ubicación encontrada no tiene coordenadas válidas."
+                );
+
+            }
+
+
+            ubicacionSeleccionada = {
+
+                latitud:
+                    latitud,
+
+                longitud:
+                    longitud,
+
+                direccion:
+                    resultado.display_name
+
+            };
+
+
+            resultadoDireccion.style.display =
+                "block";
+
+
+            resultadoDireccion.innerHTML =
+
+                "<strong>Ubicación encontrada:</strong><br>" +
+
+                escaparHTML(
+                    resultado.display_name
+                );
+
+
+            mensaje.innerText =
+                "Ubicación encontrada. Comprueba el marcador en el mapa.";
+
+
+            mensaje.style.color =
+                "#2ecc71";
+
+
+            if (
+                marcadorTemporal
+            ) {
+
+                mapa.removeLayer(
+                    marcadorTemporal
+                );
+
+            }
+
+
+            marcadorTemporal =
+                L.marker(
+
+                    [
+                        latitud,
+                        longitud
+                    ],
+
+                    {
+                        icon:
+                            iconoTaller
+                    }
+
+                ).addTo(mapa);
+
+
+            marcadorTemporal.bindPopup(
+
+                "<strong>" +
+
+                escaparHTML(
+                    nombre.value ||
+                    "Nuevo taller"
+                ) +
+
+                "</strong><br><br>" +
+
+                escaparHTML(
+                    resultado.display_name
+                )
+
+            ).openPopup();
+
+
+            mapa.setView(
+
+                [
+                    latitud,
+                    longitud
+                ],
+
+                17
+
+            );
+
+
+            btnCrear.disabled =
+                false;
+
+
+        } catch (error) {
+
+            console.error(
+                "Error buscando dirección:",
+                error
+            );
+
+
+            ubicacionSeleccionada =
+                null;
+
+
+            btnCrear.disabled =
+                true;
+
+
+            if (
+                marcadorTemporal
+            ) {
+
+                mapa.removeLayer(
+                    marcadorTemporal
+                );
+
+                marcadorTemporal =
+                    null;
+
+            }
+
+
+            mensaje.innerText =
+                error.message ||
+                "No se encontró la dirección.";
+
+
+            mensaje.style.color =
+                "#e74c3c";
+
+
+            resultadoDireccion.style.display =
+                "none";
+
+
+        } finally {
+
+            btnBuscar.disabled =
+                false;
+
+
+            btnBuscar.innerText =
+                "Buscar ubicación";
+
+        }
+
+    }
+
+
+    // ========================================================
+    // BOTÓN BUSCAR
+    // ========================================================
+
+    btnBuscar.addEventListener(
+        "click",
+        buscarDireccion
+    );
+
+
+    direccion.addEventListener(
+        "keydown",
+        function(evento) {
+
+            if (
+                evento.key === "Enter"
+            ) {
+
+                evento.preventDefault();
+
+                buscarDireccion();
+
+            }
+
+        }
+    );
+
+
+    // ========================================================
+    // AÑADIR MARCADOR
+    // ========================================================
+
+    function añadirMarcador(taller) {
+
+
+        const latitud =
+            Number(
+                taller.latitud
+            );
+
+
+        const longitud =
+            Number(
+                taller.longitud
+            );
+
+
+        if (
+            !Number.isFinite(latitud) ||
+            !Number.isFinite(longitud)
+        ) {
+
+            console.error(
+                "Coordenadas inválidas:",
+                taller
+            );
+
+            return;
+
+        }
+
+
+        const marcador =
+            L.marker(
+
+                [
+                    latitud,
+                    longitud
+                ],
+
+                {
+                    icon:
+                        iconoTaller
+                }
+
+            ).addTo(mapa);
+
+
+        let popup =
+
+            "<strong>" +
+
+            escaparHTML(
+                taller.nombre
+            ) +
+
+            "</strong><br><br>" +
+
+            "📍 " +
+
+            escaparHTML(
+                taller.direccion
+            );
+
+
+        if (
+            taller.descripcion
+        ) {
+
+            popup +=
+
+                "<br><br>" +
+
+                escaparHTML(
+                    taller.descripcion
+                );
+
+        }
+
+
+        marcador.bindPopup(
+            popup
+        );
+
+
+        marcadores[
+            taller.id
+        ] =
+            marcador;
+
+
+        return marcador;
+
+    }
+
+
+    // ========================================================
+    // MOSTRAR LISTA
+    // ========================================================
+
+    function mostrarLista() {
+
+
+        listaTalleres.innerHTML =
+            "";
+
+
+        if (
+            talleres.length === 0
+        ) {
+
+            listaTalleres.innerHTML =
+
+                '<div class="vacio">' +
+
+                'No hay talleres registrados.' +
+
+                '</div>';
+
+            return;
+
+        }
+
+
+        talleres.forEach(
+            function(taller) {
+
+
+                const elemento =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                elemento.className =
+                    "taller";
+
+
+                elemento.innerHTML =
+
+                    '<div class="taller-nombre">' +
+
+                    escaparHTML(
+                        taller.nombre
+                    ) +
+
+                    '</div>' +
+
+
+                    '<div class="taller-direccion">' +
+
+                    "📍 " +
+
+                    escaparHTML(
+                        taller.direccion
+                    ) +
+
+                    '</div>' +
+
+
+                    '<div class="taller-descripcion">' +
+
+                    escaparHTML(
+                        taller.descripcion
+                    ) +
+
+                    '</div>' +
+
+
+                    '<div class="taller-botones">' +
+
+
+                    '<button ' +
+
+                    'type="button" ' +
+
+                    'class="btn btn-ver">' +
+
+                    'Ver' +
+
+                    '</button>' +
+
+
+                    '<button ' +
+
+                    'type="button" ' +
+
+                    'class="btn btn-ruta">' +
+
+                    '🚗 Cómo llegar' +
+
+                    '</button>' +
+
+
+                    '<button ' +
+
+                    'type="button" ' +
+
+                    'class="btn btn-eliminar">' +
+
+                    'Eliminar' +
+
+                    '</button>' +
+
+
+                    '</div>';
+
+
+                // --------------------------------------------
+                // VER
+                // --------------------------------------------
+
+                const btnVer =
+                    elemento.querySelector(
+                        ".btn-ver"
+                    );
+
+
+                btnVer.addEventListener(
+                    "click",
+                    function() {
+
+
+                        mapa.setView(
+
+                            [
+                                Number(
+                                    taller.latitud
+                                ),
+
+                                Number(
+                                    taller.longitud
+                                )
+                            ],
+
+                            17
+
+                        );
+
+
+                        if (
+                            marcadores[
+                                taller.id
+                            ]
+                        ) {
+
+                            marcadores[
+                                taller.id
+                            ].openPopup();
+
+                        }
+
+                    }
+                );
+
+
+                // --------------------------------------------
+                // CÓMO LLEGAR
+                // --------------------------------------------
+
+                const btnRuta =
+                    elemento.querySelector(
+                        ".btn-ruta"
+                    );
+
+
+                btnRuta.addEventListener(
+                    "click",
+                    function() {
+
+                        calcularRuta(
+                            taller
+                        );
+
+                    }
+                );
+
+
+                // --------------------------------------------
+                // ELIMINAR
+                // --------------------------------------------
+
+                const btnEliminar =
+                    elemento.querySelector(
+                        ".btn-eliminar"
+                    );
+
+
+                btnEliminar.addEventListener(
+                    "click",
+                    function() {
+
+                        eliminarTaller(
+                            taller.id
+                        );
+
+                    }
+                );
+
+
+                listaTalleres.appendChild(
+                    elemento
+                );
+
+            }
+        );
+
+    }
+
+
+    // ========================================================
+    // OBTENER UBICACIÓN DEL USUARIO
+    // ========================================================
+
+    function obtenerUbicacionUsuario() {
+
+        return new Promise(
+            function(resolve, reject) {
+
+
+                if (
+                    !navigator.geolocation
+                ) {
+
+                    reject(
+                        new Error(
+                            "Tu navegador no permite obtener tu ubicación."
+                        )
+                    );
+
+                    return;
+
+                }
+
+
+                navigator.geolocation.getCurrentPosition(
+
+                    function(posicion) {
+
+                        resolve({
+
+                            latitud:
+                                posicion.coords.latitude,
+
+                            longitud:
+                                posicion.coords.longitude
+
+                        });
+
+                    },
+
+
+                    function(error) {
+
+                        let mensajeError =
+                            "No se pudo obtener tu ubicación.";
+
+
+                        if (
+                            error.code ===
+                            error.PERMISSION_DENIED
+                        ) {
+
+                            mensajeError =
+                                "Has denegado el permiso de ubicación.";
+
+                        }
+
+
+                        if (
+                            error.code ===
+                            error.POSITION_UNAVAILABLE
+                        ) {
+
+                            mensajeError =
+                                "Tu ubicación no está disponible.";
+
+                        }
+
+
+                        if (
+                            error.code ===
+                            error.TIMEOUT
+                        ) {
+
+                            mensajeError =
+                                "Se agotó el tiempo para obtener tu ubicación.";
+
+                        }
+
+
+                        reject(
+                            new Error(
+                                mensajeError
+                            )
+                        );
+
+                    },
+
+
+                    {
+
+                        enableHighAccuracy:
+                            true,
+
+                        timeout:
+                            10000,
+
+                        maximumAge:
+                            60000
+
+                    }
+
+                );
+
+            }
+        );
+
+    }
+
+
+    // ========================================================
+    // CALCULAR RUTA
+    // ========================================================
+
+    async function calcularRuta(taller) {
+
+
+        mensaje.innerText =
+            "Obteniendo tu ubicación...";
+
+
+        mensaje.style.color =
+            "#3498db";
+
+
+        try {
+
+
+            const usuario =
+                await obtenerUbicacionUsuario();
+
+
+            mensaje.innerText =
+                "Calculando ruta...";
+
+
+            // -----------------------------------------------
+            // MARCADOR DEL USUARIO
+            // -----------------------------------------------
+
+            if (
+                marcadorUsuario
+            ) {
+
+                mapa.removeLayer(
+                    marcadorUsuario
+                );
+
+            }
+
+
+            marcadorUsuario =
+                L.circleMarker(
+
+                    [
+                        usuario.latitud,
+                        usuario.longitud
+                    ],
+
+                    {
+
+                        radius:
+                            8,
+
+                        color:
+                            "#3498db",
+
+                        fillColor:
+                            "#3498db",
+
+                        fillOpacity:
+                            1
+
+                    }
+
+                ).addTo(mapa);
+
+
+            marcadorUsuario.bindPopup(
+                "Tu ubicación"
+            );
+
+
+            // -----------------------------------------------
+            // BORRAR RUTA ANTERIOR
+            // -----------------------------------------------
+
+            if (
+                rutaActual
+            ) {
+
+                mapa.removeLayer(
+                    rutaActual
+                );
+
+                rutaActual =
+                    null;
+
+            }
+
+
+            // -----------------------------------------------
+            // OSRM
+            // -----------------------------------------------
+
+            const url =
+
+                "https://router.project-osrm.org/route/v1/driving/" +
+
+                usuario.longitud +
+                "," +
+                usuario.latitud +
+
+                ";" +
+
+                Number(
+                    taller.longitud
+                ) +
+                "," +
+                Number(
+                    taller.latitud
+                ) +
+
+                "?overview=full&geometries=geojson";
+
+
+            const respuesta =
+                await fetch(
+                    url
+                );
+
+
+            if (!respuesta.ok) {
+
+                throw new Error(
+                    "No se pudo calcular la ruta."
+                );
+
+            }
+
+
+            const datos =
+                await respuesta.json();
+
+
+            if (
+                datos.code !== "Ok" ||
+                !datos.routes ||
+                datos.routes.length === 0
+            ) {
+
+                throw new Error(
+                    "No se encontró una ruta."
+                );
+
+            }
+
+
+            const ruta =
+                datos.routes[0];
+
+
+            // -----------------------------------------------
+            // DIBUJAR RUTA
+            // -----------------------------------------------
+
+            rutaActual =
+                L.geoJSON(
+                    ruta.geometry,
+                    {
+
+                        style: {
+
+                            weight:
+                                6,
+
+                            opacity:
+                                0.8
+
+                        }
+
+                    }
+                ).addTo(mapa);
+
+
+            // -----------------------------------------------
+            // DISTANCIA
+            // -----------------------------------------------
+
+            const distanciaKm =
+                ruta.distance /
+                1000;
+
+
+            let distanciaTexto;
+
+
+            if (
+                distanciaKm < 1
+            ) {
+
+                distanciaTexto =
+                    Math.round(
+                        ruta.distance
+                    ) +
+                    " m";
+
+            } else {
+
+                distanciaTexto =
+                    distanciaKm.toFixed(1) +
+                    " km";
+
+            }
+
+
+            // -----------------------------------------------
+            // TIEMPO
+            // -----------------------------------------------
+
+            const minutos =
+                Math.round(
+                    ruta.duration /
+                    60
+                );
+
+
+            let tiempoTexto;
+
+
+            if (
+                minutos < 60
+            ) {
+
+                tiempoTexto =
+                    minutos +
+                    " min";
+
+            } else {
+
+                const horas =
+                    Math.floor(
+                        minutos / 60
+                    );
+
+
+                const minutosRestantes =
+                    minutos % 60;
+
+
+                tiempoTexto =
+                    horas +
+                    " h " +
+                    minutosRestantes +
+                    " min";
+
+            }
+
+
+            rutaDistancia.innerText =
+                "📏 Distancia: " +
+                distanciaTexto;
+
+
+            rutaTiempo.innerText =
+                "⏱️ Tiempo aproximado: " +
+                tiempoTexto;
+
+
+            rutaInfo.style.display =
+                "block";
+
+
+            // -----------------------------------------------
+            // AJUSTAR MAPA A LA RUTA
+            // -----------------------------------------------
+
+            mapa.fitBounds(
+                rutaActual.getBounds(),
+                {
+                    padding:
+                        [30, 30]
+                }
+            );
+
+
+            mensaje.innerText =
+                "Ruta calculada hasta " +
+                taller.nombre +
+                ".";
+
+
+            mensaje.style.color =
+                "#2ecc71";
+
+
+        } catch (error) {
+
+            console.error(
+                "Error calculando ruta:",
+                error
+            );
+
+
+            mensaje.innerText =
+                error.message ||
+                "No se pudo calcular la ruta.";
+
+
+            mensaje.style.color =
+                "#e74c3c";
+
+        }
+
+    }
+
+
+    // ========================================================
+    // QUITAR RUTA
+    // ========================================================
+
+    btnQuitarRuta.addEventListener(
+        "click",
+        function() {
+
+
+            if (
+                rutaActual
+            ) {
+
+                mapa.removeLayer(
+                    rutaActual
+                );
+
+                rutaActual =
+                    null;
+
+            }
+
+
+            if (
+                marcadorUsuario
+            ) {
+
+                mapa.removeLayer(
+                    marcadorUsuario
+                );
+
+                marcadorUsuario =
+                    null;
+
+            }
+
+
+            rutaInfo.style.display =
+                "none";
+
+
+            mensaje.innerText =
+                "";
+
+        }
+    );
+
+
+    // ========================================================
+    // CARGAR TALLERES
+    // ========================================================
+
+    async function cargarTalleres() {
+
+
+        listaTalleres.innerHTML =
+
+            '<div class="vacio">' +
+
+            'Cargando talleres...' +
+
+            '</div>';
+
+
+        try {
+
+
+            const resultado =
+                await supabaseClient
+
+                    .from("talleres")
+
+                    .select(
+                        "id, created_at, nombre, direccion, latitud, longitud, descripcion"
+                    )
+
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            const data =
+                resultado.data;
+
+
+            const error =
+                resultado.error;
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            talleres =
+                data || [];
+
+
+            // -----------------------------------------------
+            // LIMPIAR MARCADORES
+            // -----------------------------------------------
+
+            Object.keys(
+                marcadores
+            ).forEach(
+                function(id) {
+
+                    mapa.removeLayer(
+                        marcadores[id]
+                    );
+
+                }
+            );
+
+
+            marcadores = {};
+
+
+            // -----------------------------------------------
+            // AÑADIR TALLERES
+            // -----------------------------------------------
+
+            talleres.forEach(
+                function(taller) {
+
+                    añadirMarcador(
+                        taller
+                    );
+
+                }
+            );
+
+
+            mostrarLista();
+
+
+        } catch (error) {
+
+            console.error(
+                "Error cargando talleres:",
+                error
+            );
+
+
+            listaTalleres.innerHTML =
+
+                '<div class="vacio">' +
+
+                '<strong>Error cargando talleres</strong><br><br>' +
+
+                escaparHTML(
+                    error.message ||
+                    "Error desconocido."
+                ) +
+
+                '</div>';
+
+        }
+
+    }
+
+
+    // ========================================================
+    // CREAR TALLER
+    // ========================================================
+
+    formulario.addEventListener(
+        "submit",
+        async function(evento) {
+
+
+            evento.preventDefault();
+
+
+            if (
+                !ubicacionSeleccionada
+            ) {
+
+                mensaje.innerText =
+                    "Primero busca la ubicación.";
+
+
+                mensaje.style.color =
+                    "#e74c3c";
+
+
+                return;
+
+            }
+
+
+            const nombreTexto =
+                nombre.value.trim();
+
+
+            const descripcionTexto =
+                descripcion.value.trim();
+
+
+            if (!nombreTexto) {
+
+                mensaje.innerText =
+                    "Escribe el nombre del taller.";
+
+
+                mensaje.style.color =
+                    "#e74c3c";
+
+
+                return;
+
+            }
+
+
+            if (!descripcionTexto) {
+
+                mensaje.innerText =
+                    "Escribe una descripción.";
+
+
+                mensaje.style.color =
+                    "#e74c3c";
+
+
+                return;
+
+            }
+
+
+            btnCrear.disabled =
+                true;
+
+
+            btnBuscar.disabled =
+                true;
+
+
+            mensaje.innerText =
+                "Guardando taller...";
+
+
+            mensaje.style.color =
+                "#3498db";
+
+
+            try {
+
+
+                const resultado =
+                    await supabaseClient
+
+                        .from("talleres")
+
+                        .insert({
+
+                            nombre:
+                                nombreTexto,
+
+                            direccion:
+                                ubicacionSeleccionada.direccion,
+
+                            latitud:
+                                ubicacionSeleccionada.latitud,
+
+                            longitud:
+                                ubicacionSeleccionada.longitud,
+
+                            descripcion:
+                                descripcionTexto
+
+                        })
+
+                        .select()
+
+                        .single();
+
+
+                const tallerCreado =
+                    resultado.data;
+
+
+                const error =
+                    resultado.error;
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                mensaje.innerText =
+                    "¡Taller guardado correctamente!";
+
+
+                mensaje.style.color =
+                    "#2ecc71";
+
+
+                if (
+                    marcadorTemporal
+                ) {
+
+                    mapa.removeLayer(
+                        marcadorTemporal
+                    );
+
+
+                    marcadorTemporal =
+                        null;
+
+                }
+
+
+                formulario.reset();
+
+
+                ubicacionSeleccionada =
+                    null;
+
+
+                resultadoDireccion.style.display =
+                    "none";
+
+
+                btnCrear.disabled =
+                    true;
+
+
+                if (
+                    tallerCreado
+                ) {
+
+                    talleres.unshift(
+                        tallerCreado
+                    );
+
+
+                    añadirMarcador(
+                        tallerCreado
+                    );
+
+
+                    mostrarLista();
+
+                } else {
+
+                    await cargarTalleres();
+
+                }
+
+
+            } catch (error) {
+
+
+                console.error(
+                    "Error guardando taller:",
+                    error
+                );
+
+
+                mensaje.innerText =
+
+                    "No se pudo guardar el taller: " +
+
+                    (
+                        error.message ||
+                        "Error desconocido."
+                    );
+
+
+                mensaje.style.color =
+                    "#e74c3c";
+
+
+                btnCrear.disabled =
+                    false;
+
+            }
+
+
+            btnBuscar.disabled =
+                false;
+
+        }
+    );
+
+
+    // ========================================================
+    // ELIMINAR TALLER
+    // ========================================================
+
+    async function eliminarTaller(id) {
+
+
+        const taller =
+            talleres.find(
+                function(item) {
+
+                    return String(
+                        item.id
+                    ) ===
+                    String(id);
+
+                }
+            );
+
+
+        if (!taller) {
+
+            return;
+
+        }
+
+
+        const confirmar =
+            confirm(
+
+                '¿Quieres eliminar el taller "' +
+
+                taller.nombre +
+
+                '"?'
+
+            );
+
+
+        if (!confirmar) {
+
+            return;
+
+        }
+
+
+        mensaje.innerText =
+            "Eliminando taller...";
+
+
+        mensaje.style.color =
+            "#3498db";
+
+
+        try {
+
+
+            const resultado =
+                await supabaseClient
+
+                    .from("talleres")
+
+                    .delete()
+
+                    .eq(
+                        "id",
+                        id
+                    );
+
+
+            const error =
+                resultado.error;
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            if (
+                marcadores[id]
+            ) {
+
+                mapa.removeLayer(
+                    marcadores[id]
+                );
+
+
+                delete marcadores[id];
+
+            }
+
+
+            talleres =
+                talleres.filter(
+                    function(item) {
+
+                        return String(
+                            item.id
+                        ) !==
+                        String(id);
+
+                    }
+                );
+
+
+            mostrarLista();
+
+
+            mensaje.innerText =
+                "Taller eliminado.";
+
+
+            mensaje.style.color =
+                "#2ecc71";
+
+
+        } catch (error) {
+
+
+            console.error(
+                "Error eliminando taller:",
+                error
+            );
+
+
+            mensaje.innerText =
+
+                "No se pudo eliminar el taller: " +
+
+                (
+                    error.message ||
+                    "Error desconocido."
+                );
+
+
+            mensaje.style.color =
+                "#e74c3c";
+
+        }
+
+    }
+
+
+    // ========================================================
+    // CARGAR AL ABRIR
+    // ========================================================
+
+    cargarTalleres();
+
+
+</script>
+
+
+</body>
+
+</html>
