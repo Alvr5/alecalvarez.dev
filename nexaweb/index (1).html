@@ -1,21 +1,57 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Nexa · Talleres en toda España</title>
-<link rel="icon" type="image/x-icon" href="Plugin icon - 1 (2) 5.png">
+
+<link
+  rel="icon"
+  type="image/x-icon"
+  href="Plugin icon - 1 (2) 5.png"
+>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link
+  href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+
+<!-- LEAFLET -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+
+<!-- LEAFLET MARKER CLUSTER -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+/>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
+/>
+
+<script
+  src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js">
+</script>
+
+<!-- SUPABASE -->
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js">
+</script>
+
 
 <style>
+
 :root{
   --negro:#000;
   --amarillo:#ffe066;
@@ -27,36 +63,37 @@
 *{
   box-sizing:border-box;
   margin:0;
-  padding:0
+  padding:0;
 }
 
 html{
   scroll-behavior:smooth;
-  scroll-padding-top:80px
+  scroll-padding-top:80px;
 }
 
 body{
   font-family:'Figtree',Arial,sans-serif;
   background:var(--negro);
   color:var(--blanco);
-  line-height:1.5
+  line-height:1.5;
 }
 
 a{
   color:inherit;
-  text-decoration:none
+  text-decoration:none;
 }
 
 button{
   font-family:inherit;
   cursor:pointer;
-  border:none
+  border:none;
 }
 
 :focus-visible{
   outline:2px solid var(--amarillo);
-  outline-offset:3px
+  outline-offset:3px;
 }
+
 
 /* =========================
    NAV
@@ -68,93 +105,105 @@ nav{
   left:0;
   right:0;
   z-index:2000;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   padding:18px 55px;
-  background:linear-gradient(#000 40%,transparent)
+
+  background:linear-gradient(#000 40%,transparent);
 }
 
 .nav-left{
   display:flex;
   align-items:center;
-  gap:45px
+  gap:45px;
 }
 
 .logo{
   display:flex;
   align-items:center;
   gap:10px;
+
   font-weight:800;
   font-size:19px;
-  letter-spacing:.5px
+  letter-spacing:.5px;
 }
 
 .logo img{
   width:24px;
   height:24px;
-  object-fit:contain
+  object-fit:contain;
 }
 
 .nav-links{
   display:flex;
   gap:28px;
+
   font-size:13px;
-  font-weight:500
+  font-weight:500;
 }
 
 .nav-links a:hover{
-  color:var(--amarillo)
+  color:var(--amarillo);
 }
 
 .nav-right{
   display:flex;
   align-items:center;
-  gap:10px
+  gap:10px;
 }
 
 .btn{
   background:var(--amarillo);
   color:#000;
+
   font-weight:600;
   font-size:14px;
+
   padding:11px 18px;
+
   border-radius:10px;
+
   transition:.2s;
-  display:inline-block
+
+  display:inline-block;
 }
 
 .btn:hover{
-  background:#fff
+  background:#fff;
 }
 
 .btn-sec{
   background:transparent;
   color:#fff;
-  border:1px solid #555
+
+  border:1px solid #555;
 }
 
 .btn-sec:hover{
   background:#222;
-  color:#fff
+  color:#fff;
 }
 
 #zonaNoUsuario{
   display:flex;
-  gap:10px
+  gap:10px;
 }
 
 #zonaUsuario{
   display:none;
   align-items:center;
-  gap:10px
+  gap:10px;
 }
 
 #nombreNegocio{
   font-weight:600;
   font-size:14px;
-  color:var(--amarillo)
+  color:var(--amarillo);
 }
+
 
 /* =========================
    HERO
@@ -162,9 +211,13 @@ nav{
 
 .hero{
   position:relative;
+
   min-height:1000px;
+
   padding:115px 55px 0;
+
   overflow:hidden;
+
   background:
     radial-gradient(
       ellipse at 75% 20%,
@@ -175,76 +228,101 @@ nav{
       180deg,
       #0b0b12 0%,
       #000 95%
-    )
+    );
 }
 
 .hero-texto{
   position:relative;
   z-index:3;
-  max-width:860px
+
+  max-width:860px;
 }
 
 .hero h1{
   font-size:clamp(34px,4.2vw,56px);
+
   line-height:1.1;
+
   font-weight:800;
-  text-transform:uppercase
+
+  text-transform:uppercase;
 }
 
 .hero h1 span{
-  color:var(--amarillo)
+  color:var(--amarillo);
 }
 
 .hero p{
   margin:28px 0 30px;
+
   font-size:clamp(18px,1.9vw,27px);
+
   line-height:1.35;
+
   max-width:800px;
-  font-weight:500
+
+  font-weight:500;
 }
 
 .img-cara{
   position:absolute;
+
   left:343px;
   top:472px;
+
   width:721px;
   height:473px;
+
   object-fit:cover;
+
   border-radius:22px;
-  z-index:1
+
+  z-index:1;
 }
 
 .img-pintura{
   position:absolute;
+
   right:51px;
   top:303px;
+
   width:535px;
   height:351px;
+
   object-fit:cover;
+
   border-radius:22px;
-  z-index:2
+
+  z-index:2;
 }
 
 .img-movil{
   position:absolute;
+
   right:15px;
   top:990px;
+
   width:425px;
+
   border-radius:30px;
+
   z-index:2;
+
   -webkit-mask-image:
     radial-gradient(
       ellipse at center,
       #000 60%,
       transparent 100%
     );
+
   mask-image:
     radial-gradient(
       ellipse at center,
       #000 60%,
       transparent 100%
-    )
+    );
 }
+
 
 /* =========================
    SOBRE
@@ -252,31 +330,43 @@ nav{
 
 .sobre{
   position:relative;
+
   padding:0 55px 60px;
+
   margin-top:-140px;
+
   z-index:4;
+
   max-width:1090px;
-  top:100px
+
+  top:100px;
 }
 
 .sobre h2,
 .faq h2{
   padding:40px 70px 80px;
+
   max-width:1140px;
+
   top:60px;
-  position:relative
+
+  position:relative;
 }
 
 .sobre h2{
   font-size:36px;
-  margin-bottom:28px
+
+  margin-bottom:28px;
 }
 
 .sobre p{
   font-size:24px;
+
   line-height:1.4;
-  font-weight:500
+
+  font-weight:500;
 }
+
 
 /* =========================
    FAQ
@@ -284,58 +374,82 @@ nav{
 
 .faq{
   padding:40px 70px 80px;
-  max-width:1140px
+
+  max-width:1140px;
 }
 
 .faq h2{
   font-size:42px;
-  margin-bottom:35px
+
+  margin-bottom:35px;
 }
 
 .faq-item{
   border:1px solid var(--borde);
+
   border-radius:14px;
+
   margin-bottom:30px;
-  overflow:hidden
+
+  overflow:hidden;
 }
 
 .faq-item button{
   width:100%;
+
   background:none;
+
   color:var(--amarillo);
+
   font-size:26px;
+
   font-weight:500;
+
   text-align:left;
+
   padding:30px;
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
-  gap:20px
+
+  gap:20px;
 }
 
 .faq-item .mas{
   font-size:34px;
+
   line-height:1;
-  transition:transform .25s
+
+  transition:transform .25s;
 }
 
 .faq-item.abierto .mas{
-  transform:rotate(45deg)
+  transform:rotate(45deg);
 }
 
 .faq-resp{
   max-height:0;
+
   overflow:hidden;
+
   transition:max-height .3s ease;
+
   color:var(--gris);
+
   font-size:18px;
-  padding:0 30px
+
+  padding:0 30px;
 }
 
 .faq-item.abierto .faq-resp{
   max-height:300px;
-  padding-bottom:28px
+
+  padding-bottom:28px;
 }
+
 
 /* =========================
    MAPA
@@ -343,61 +457,121 @@ nav{
 
 .talleres{
   padding:40px 55px 60px;
+
   max-width:1290px;
-  margin:0 auto
+
+  margin:0 auto;
 }
 
 .talleres h2{
   font-size:36px;
+
   color:var(--amarillo);
+
   margin-bottom:8px;
-  font-weight:800
+
+  font-weight:800;
 }
 
 .talleres>p{
   color:var(--gris);
+
   margin-bottom:22px;
-  font-size:18px
+
+  font-size:18px;
 }
 
 #mapa{
   height:600px;
+
   border-radius:18px;
+
   border:1px solid var(--borde);
-  overflow:hidden
+
+  overflow:hidden;
 }
 
 #estadoMapa{
   color:var(--gris);
+
   font-size:14px;
-  padding-top:12px
+
+  padding-top:12px;
 }
+
+
+/* =========================
+   POPUP TALLER
+========================= */
 
 .popup-taller h3{
   font-size:17px;
+
   margin-bottom:6px;
-  color:#111
+
+  color:#111;
 }
 
 .popup-taller p{
   font-size:14px;
+
   color:#444;
-  margin-bottom:6px
+
+  margin-bottom:6px;
 }
 
 .popup-taller .direccion{
   font-size:13px;
-  color:#777
+
+  color:#777;
 }
 
 .popup-taller button{
   margin-top:8px;
+
   background:#111;
+
   color:var(--amarillo);
+
   padding:8px 12px;
+
   border-radius:8px;
-  font-size:13px
+
+  font-size:13px;
 }
+
+
+/* =========================
+   CLUSTERS
+========================= */
+
+.cluster-taller{
+  width:48px;
+
+  height:48px;
+
+  border-radius:50%;
+
+  background:var(--amarillo);
+
+  border:3px solid #000;
+
+  color:#000;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:15px;
+
+  font-weight:800;
+
+  box-shadow:
+    0 3px 10px rgba(0,0,0,.35);
+}
+
 
 /* =========================
    FOOTER
@@ -405,26 +579,34 @@ nav{
 
 footer{
   padding:60px 70px 50px;
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   flex-wrap:wrap;
-  gap:20px
+
+  gap:20px;
 }
 
 footer .logo{
-  font-size:32px
+  font-size:32px;
 }
 
 footer .logo img{
   width:70px;
-  height:45px
+
+  height:45px;
 }
 
 footer p{
   color:#777;
-  font-size:14px
+
+  font-size:14px;
 }
+
 
 /* =========================
    MODALES
@@ -432,97 +614,140 @@ footer p{
 
 .modal{
   display:none;
+
   position:fixed;
+
   inset:0;
+
   background:rgba(0,0,0,.75);
+
   z-index:5000;
+
   align-items:center;
+
   justify-content:center;
-  padding:20px
+
+  padding:20px;
 }
 
 .modal-content{
   width:100%;
+
   max-width:420px;
+
   background:#111;
+
   border:1px solid var(--borde);
+
   border-radius:16px;
+
   padding:30px;
-  position:relative
+
+  position:relative;
 }
 
 .modal-content h2{
   color:var(--amarillo);
-  margin-bottom:8px
+
+  margin-bottom:8px;
 }
 
 .modal-content p{
   color:var(--gris);
+
   font-size:14px;
-  margin-bottom:18px
+
+  margin-bottom:18px;
 }
 
 .close{
   position:absolute;
+
   top:12px;
+
   right:18px;
+
   font-size:28px;
+
   cursor:pointer;
+
   color:#999;
-  background:none
+
+  background:none;
 }
 
 .form-group{
-  margin-bottom:16px
+  margin-bottom:16px;
 }
 
 .form-group label{
   display:block;
+
   margin-bottom:6px;
+
   font-size:14px;
-  font-weight:600
+
+  font-weight:600;
 }
 
 .form-group input{
   width:100%;
+
   padding:12px;
+
   background:#000;
+
   border:1px solid #444;
+
   border-radius:8px;
+
   color:#fff;
-  font-size:15px
+
+  font-size:15px;
 }
 
 .form-group input:focus{
   border-color:var(--amarillo);
-  outline:none
+
+  outline:none;
 }
 
 .modal-submit{
   width:100%;
+
   padding:13px;
-  margin-top:4px
+
+  margin-top:4px;
 }
 
 .mensaje{
   display:none;
+
   margin-top:14px;
+
   padding:12px;
+
   border-radius:8px;
-  font-size:14px
+
+  font-size:14px;
 }
 
 .mensaje.error{
   display:block;
+
   background:#4a1515;
-  color:#fecaca
+
+  color:#fecaca;
 }
 
 .mensaje.ok{
   display:block;
+
   background:#14391f;
-  color:#bbf7d0
+
+  color:#bbf7d0;
 }
+
 
 /* =========================
    RESPONSIVE
@@ -532,98 +757,119 @@ footer p{
 
   .hero{
     min-height:0;
-    padding-bottom:40px
+
+    padding-bottom:40px;
   }
 
   .img-cara,
   .img-pintura,
   .img-movil{
     position:relative;
+
     left:auto;
     right:auto;
     top:auto;
+
     width:100%;
+
     max-width:560px;
+
     height:auto;
+
     display:block;
-    margin:24px 0 0
+
+    margin:24px 0 0;
   }
 
   .img-movil{
     max-width:320px;
-    margin-left:auto
+
+    margin-left:auto;
   }
 
   .sobre{
-    margin-top:0
+    margin-top:0;
   }
+
 }
+
 
 @media(max-width:700px){
 
   nav{
-    padding:14px 18px
+    padding:14px 18px;
   }
 
   .nav-links,
   #nombreNegocio,
   .nav-left .logo span{
-    display:none
+    display:none;
   }
 
   .nav-left{
-    gap:0
+    gap:0;
   }
 
   .hero,
   .sobre,
   .talleres{
     padding-left:20px;
-    padding-right:20px
+
+    padding-right:20px;
   }
 
   .faq{
-    padding:30px 20px 60px
+    padding:30px 20px 60px;
   }
 
   .faq-item button{
     font-size:18px;
-    padding:20px
+
+    padding:20px;
   }
 
   .sobre h2{
-    font-size:28px
+    font-size:28px;
   }
 
   .sobre p{
-    font-size:18px
+    font-size:18px;
   }
 
   #mapa{
-    height:480px
+    height:480px;
   }
 
   footer{
-    padding:40px 20px
+    padding:40px 20px;
   }
 
   .btn{
     padding:9px 12px;
-    font-size:13px
+
+    font-size:13px;
   }
+
 }
+
 
 @media(prefers-reduced-motion:reduce){
 
   *{
     transition:none!important;
-    scroll-behavior:auto!important
+
+    scroll-behavior:auto!important;
   }
+
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <!-- =========================
      NAV
@@ -634,17 +880,36 @@ footer p{
   <div class="nav-left">
 
     <a href="#inicio" class="logo">
-      <img src="icono-taller.png" alt="">
+
+      <img
+        src="icono-taller.png"
+        alt=""
+        style="width:60px;height:60px;"
+      >
+
       <span>NEXA</span>
+
     </a>
 
+
     <div class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#sobre">Sobre nexa</a>
-      <a href="#talleres">Talleres</a>
+
+      <a href="#inicio">
+        Inicio
+      </a>
+
+      <a href="#sobre">
+        Sobre nexa
+      </a>
+
+      <a href="#talleres">
+        Talleres
+      </a>
+
     </div>
 
   </div>
+
 
   <div class="nav-right">
 
@@ -656,6 +921,7 @@ footer p{
     >
       Escríbenos un Whatsapp!
     </a>
+
 
     <!-- USUARIO NO AUTENTICADO -->
 
@@ -669,6 +935,7 @@ footer p{
       </button>
 
     </div>
+
 
     <!-- NEGOCIO AUTENTICADO -->
 
@@ -706,29 +973,45 @@ footer p{
   <div class="hero-texto">
 
     <h1>
+
       Talleres en toda
-      <span>España</span>,
+
+      <span>
+        España
+      </span>,
+
       <br>
+
       crea uno o únete a uno
+
     </h1>
 
+
     <p>
+
       Imagínate poder unirte a un taller de cerámica,
       descubrir nuevas aficiones o incluso crear tu propio
       taller y atraer nuevos clientes.
+
     </p>
 
-    <a class="btn" href="#sobre">
+
+    <a
+      class="btn"
+      href="#sobre"
+    >
       + Información
     </a>
 
   </div>
+
 
   <img
     class="img-cara"
     src="cara.jpg"
     alt="Mujer con la cara pintada de colores"
   >
+
 
   <img
     class="img-pintura"
@@ -737,6 +1020,7 @@ footer p{
   >
 
 </header>
+
 
 <img
   class="img-movil"
@@ -749,13 +1033,18 @@ footer p{
      SOBRE
 ========================= -->
 
-<section class="sobre" id="sobre">
+<section
+  class="sobre"
+  id="sobre"
+>
 
   <h2>
     ¿Cómo nació la idea de Nexa?
   </h2>
 
+
   <p>
+
     La idea de crear esta plataforma de creación de talleres
     nació de que en 2021 Alec, propietario de esta plataforma,
     vio que los pequeños negocios estaban al margen de cerrar
@@ -763,6 +1052,7 @@ footer p{
     por lo cual esta plataforma ayudó a varias empresas a
     remontar el déficit económico que tenían y poder ofrecer
     talleres a gente interesada.
+
   </p>
 
 </section>
@@ -772,21 +1062,32 @@ footer p{
      FAQ
 ========================= -->
 
-<section class="faq" id="faq">
+<section
+  class="faq"
+  id="faq"
+>
 
-  <h2>FAQ</h2>
+  <h2>
+    FAQ
+  </h2>
+
 
   <div class="faq-item">
 
-    <button aria-expanded="false">
+    <button
+      aria-expanded="false"
+    >
 
       <span>
         ¿Cómo puedo crear mi taller como negocio?
       </span>
 
-      <span class="mas">+</span>
+      <span class="mas">
+        +
+      </span>
 
     </button>
+
 
     <div class="faq-resp">
 
@@ -801,15 +1102,20 @@ footer p{
 
   <div class="faq-item">
 
-    <button aria-expanded="false">
+    <button
+      aria-expanded="false"
+    >
 
       <span>
         ¿Cómo me uno a un taller?
       </span>
 
-      <span class="mas">+</span>
+      <span class="mas">
+        +
+      </span>
 
     </button>
+
 
     <div class="faq-resp">
 
@@ -823,15 +1129,20 @@ footer p{
 
   <div class="faq-item">
 
-    <button aria-expanded="false">
+    <button
+      aria-expanded="false"
+    >
 
       <span>
         ¿Tiene algún coste publicar mi taller?
       </span>
 
-      <span class="mas">+</span>
+      <span class="mas">
+        +
+      </span>
 
     </button>
+
 
     <div class="faq-resp">
 
@@ -849,17 +1160,23 @@ footer p{
      MAPA
 ========================= -->
 
-<section class="talleres" id="talleres">
+<section
+  class="talleres"
+  id="talleres"
+>
 
   <h2>
     Mapa de talleres
   </h2>
 
+
   <p>
     Los talleres registrados aparecen automáticamente en el mapa.
   </p>
 
+
   <div id="mapa"></div>
+
 
   <div id="estadoMapa">
     Cargando talleres...
@@ -874,16 +1191,23 @@ footer p{
 
 <footer>
 
-  <a href="#inicio" class="logo">
+  <a
+    href="#inicio"
+    class="logo"
+  >
 
     <img
       src="icono-taller.png"
       alt=""
+      style="width:24px;height:24px;"
     >
 
-    <span>NEXA</span>
+    <span>
+      NEXA
+    </span>
 
   </a>
+
 
   <p>
     © 2026 Nexa — Todos los derechos reservados.
@@ -896,7 +1220,10 @@ footer p{
      MODAL LOGIN
 ========================= -->
 
-<div id="modalLogin" class="modal">
+<div
+  id="modalLogin"
+  class="modal"
+>
 
   <div class="modal-content">
 
@@ -908,21 +1235,27 @@ footer p{
       &times;
     </button>
 
+
     <h2>
       Iniciar sesión
     </h2>
+
 
     <p>
       Accede con la cuenta de tu negocio.
     </p>
 
-    <form onsubmit="iniciarSesion(event)">
+
+    <form
+      onsubmit="iniciarSesion(event)"
+    >
 
       <div class="form-group">
 
         <label for="loginEmail">
           Email
         </label>
+
 
         <input
           id="loginEmail"
@@ -939,6 +1272,7 @@ footer p{
         <label for="loginPassword">
           Contraseña
         </label>
+
 
         <input
           id="loginPassword"
@@ -959,14 +1293,17 @@ footer p{
 
     </form>
 
+
     <div
       id="mensajeLogin"
       class="mensaje"
     ></div>
 
+
     <p style="margin:16px 0 0">
 
       ¿Quieres registrar tu negocio?
+
       El registro es con autorización previa:
       escríbenos por Whatsapp.
 
@@ -1011,16 +1348,27 @@ const supabaseClient =
 ===================================================== */
 
 const zonaNoUsuario =
-  document.getElementById("zonaNoUsuario");
+  document.getElementById(
+    "zonaNoUsuario"
+  );
+
 
 const zonaUsuario =
-  document.getElementById("zonaUsuario");
+  document.getElementById(
+    "zonaUsuario"
+  );
+
 
 const nombreNegocio =
-  document.getElementById("nombreNegocio");
+  document.getElementById(
+    "nombreNegocio"
+  );
+
 
 const estadoMapa =
-  document.getElementById("estadoMapa");
+  document.getElementById(
+    "estadoMapa"
+  );
 
 
 /* =====================================================
@@ -1031,20 +1379,27 @@ document
   .querySelectorAll(".faq-item button")
   .forEach(function(btn) {
 
-    btn.addEventListener("click", function() {
+    btn.addEventListener(
+      "click",
+      function() {
 
-      const item =
-        btn.parentElement;
+        const item =
+          btn.parentElement;
 
-      const abierto =
-        item.classList.toggle("abierto");
 
-      btn.setAttribute(
-        "aria-expanded",
-        abierto
-      );
+        const abierto =
+          item.classList.toggle(
+            "abierto"
+          );
 
-    });
+
+        btn.setAttribute(
+          "aria-expanded",
+          abierto
+        );
+
+      }
+    );
 
   });
 
@@ -1053,86 +1408,191 @@ document
    MAPA LEAFLET
 ===================================================== */
 
-const iconoTaller = L.icon({
+const iconoTaller =
+  L.icon({
 
-  iconUrl:
-    "icono-taller.png",
+    iconUrl:
+      "icono-taller.png",
 
-  iconSize:
-    [45, 45],
+    iconSize:
+      [45,45],
 
-  iconAnchor:
-    [22, 45],
+    iconAnchor:
+      [22,45],
 
-  popupAnchor:
-    [0, -45]
+    popupAnchor:
+      [0,-45]
 
-});
+  });
 
 
 /*
   Límites aproximados de España.
-  Evita que el usuario pueda desplazar
-  el mapa demasiado fuera del territorio.
 */
 
 const limitesEspana =
   L.latLngBounds(
-    [27.5, -18.5],
-    [44.5, 4.5]
+    [27.5,-18.5],
+    [44.5,4.5]
   );
 
 
 const mapa =
-  L.map("mapa", {
+  L.map(
+    "mapa",
+    {
 
-    maxBounds:
-      limitesEspana,
+      maxBounds:
+        limitesEspana,
 
-    maxBoundsViscosity:
-      1.0,
+      maxBoundsViscosity:
+        1.0,
 
-    minZoom:
-      5,
+      minZoom:
+        5,
 
-    scrollWheelZoom:
-      false
+      scrollWheelZoom:
+        false
 
-  })
+    }
+  )
   .setView(
-    [40.4168, -3.7038],
+    [40.4168,-3.7038],
     6
   );
 
 
 /*
-  Permite hacer zoom con la rueda
-  solamente cuando el usuario está
-  interactuando directamente con el mapa.
+  Zoom con rueda únicamente
+  al interactuar con el mapa.
 */
 
 mapa.on(
   "click",
   function() {
+
     mapa.scrollWheelZoom.enable();
+
   }
 );
+
 
 mapa.on(
   "mouseout",
   function() {
+
     mapa.scrollWheelZoom.disable();
+
   }
 );
 
 
+/* =====================================================
+   MAPA BASE
+===================================================== */
+
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   {
+
     attribution:
       "&copy; OpenStreetMap contributors"
+
   }
 ).addTo(mapa);
+
+
+/* =====================================================
+   CLUSTER DE TALLERES
+===================================================== */
+
+const grupoTalleres =
+  L.markerClusterGroup({
+
+    /*
+      Distancia en píxeles en la que
+      dos o más talleres se consideran
+      parte del mismo grupo.
+    */
+
+    maxClusterRadius:
+      50,
+
+
+    /*
+      No mostrar el área del grupo
+      cuando pasas el ratón.
+    */
+
+    showCoverageOnHover:
+      false,
+
+
+    /*
+      Cuando llegamos al máximo zoom,
+      permite separar los talleres.
+    */
+
+    spiderfyOnMaxZoom:
+      true,
+
+
+    /*
+      Al hacer clic en +2, +3, etc.,
+      acerca el mapa al grupo.
+    */
+
+    zoomToBoundsOnClick:
+      true,
+
+
+    /*
+      Personalización del círculo.
+    */
+
+    iconCreateFunction:
+      function(cluster) {
+
+        const cantidad =
+          cluster.getChildCount();
+
+
+        return L.divIcon({
+
+          html:
+            '<div class="cluster-taller">' +
+
+              '+' +
+              cantidad +
+
+            '</div>',
+
+
+          className:
+            "",
+
+
+          iconSize:
+            [48,48],
+
+
+          iconAnchor:
+            [24,24]
+
+        });
+
+      }
+
+  });
+
+
+/*
+  Añadimos el grupo al mapa.
+*/
+
+grupoTalleres.addTo(
+  mapa
+);
 
 
 let talleres = [];
@@ -1150,26 +1610,34 @@ function escaparHTML(texto) {
     texto === null ||
     texto === undefined
   ) {
+
     return "";
+
   }
 
+
   return String(texto)
+
     .replace(
       /&/g,
       "&amp;"
     )
+
     .replace(
       /</g,
       "&lt;"
     )
+
     .replace(
       />/g,
       "&gt;"
     )
+
     .replace(
       /"/g,
       "&quot;"
     )
+
     .replace(
       /'/g,
       "&#039;"
@@ -1186,6 +1654,7 @@ async function cargarTalleres() {
 
   estadoMapa.textContent =
     "Cargando talleres...";
+
 
   try {
 
@@ -1209,7 +1678,9 @@ async function cargarTalleres() {
 
 
     if (error) {
+
       throw error;
+
     }
 
 
@@ -1218,19 +1689,11 @@ async function cargarTalleres() {
 
 
     /*
-      Eliminamos los marcadores
-      anteriores antes de volver a cargarlos.
+      Limpiamos todos los talleres
+      anteriores del cluster.
     */
 
-    Object
-      .values(marcadores)
-      .forEach(function(marcador) {
-
-        mapa.removeLayer(
-          marcador
-        );
-
-      });
+    grupoTalleres.clearLayers();
 
 
     marcadores = {};
@@ -1240,92 +1703,152 @@ async function cargarTalleres() {
       Crear un marcador por taller.
     */
 
-    talleres.forEach(function(taller) {
+    talleres.forEach(
+      function(taller) {
 
-      if (
-        taller.latitud === null ||
-        taller.longitud === null
-      ) {
-        return;
+        /*
+          Si no tiene coordenadas,
+          no lo mostramos.
+        */
+
+        if (
+          taller.latitud === null ||
+          taller.longitud === null
+        ) {
+
+          return;
+
+        }
+
+
+        const lat =
+          Number(
+            taller.latitud
+          );
+
+
+        const lng =
+          Number(
+            taller.longitud
+          );
+
+
+        /*
+          Comprobamos coordenadas válidas.
+        */
+
+        if (
+          !Number.isFinite(lat) ||
+          !Number.isFinite(lng)
+        ) {
+
+          return;
+
+        }
+
+
+        /*
+          Creamos el marcador.
+        */
+
+        const marcador =
+          L.marker(
+            [lat,lng],
+            {
+              icon:
+                iconoTaller
+            }
+          );
+
+
+        const descripcion =
+          taller.descripcion
+            ? taller.descripcion
+            : "Sin descripción.";
+
+
+        /*
+          Popup del taller.
+        */
+
+        marcador.bindPopup(
+
+          '<div class="popup-taller">' +
+
+            "<h3>" +
+
+              escaparHTML(
+                taller.nombre
+              ) +
+
+            "</h3>" +
+
+
+            "<p>" +
+
+              escaparHTML(
+                descripcion
+              ) +
+
+            "</p>" +
+
+
+            '<p class="direccion">' +
+
+              "📍 " +
+
+              escaparHTML(
+                taller.direccion
+              ) +
+
+            "</p>" +
+
+
+            '<button onclick="centrarTaller(' +
+
+              lat +
+
+              "," +
+
+              lng +
+
+            ')">' +
+
+              "Ver ubicación" +
+
+            "</button>" +
+
+          "</div>"
+
+        );
+
+
+        /*
+          Guardamos el marcador.
+        */
+
+        marcadores[
+          taller.id
+        ] =
+          marcador;
+
+
+        /*
+          Añadimos el marcador
+          al sistema de clusters.
+        */
+
+        grupoTalleres.addLayer(
+          marcador
+        );
+
       }
+    );
 
 
-      const lat =
-        Number(taller.latitud);
-
-      const lng =
-        Number(taller.longitud);
-
-
-      if (
-        !Number.isFinite(lat) ||
-        !Number.isFinite(lng)
-      ) {
-        return;
-      }
-
-
-      const marcador =
-        L.marker(
-          [lat, lng],
-          {
-            icon:
-              iconoTaller
-          }
-        ).addTo(mapa);
-
-
-      const descripcion =
-        taller.descripcion
-          ? taller.descripcion
-          : "Sin descripción.";
-
-
-      marcador.bindPopup(
-
-        '<div class="popup-taller">' +
-
-          "<h3>" +
-            escaparHTML(
-              taller.nombre
-            ) +
-          "</h3>" +
-
-          "<p>" +
-            escaparHTML(
-              descripcion
-            ) +
-          "</p>" +
-
-          '<p class="direccion">' +
-            "📍 " +
-            escaparHTML(
-              taller.direccion
-            ) +
-          "</p>" +
-
-          '<button onclick="centrarTaller(' +
-            lat +
-            "," +
-            lng +
-          ')">' +
-            "Ver ubicación" +
-          "</button>" +
-
-        "</div>"
-
-      );
-
-
-      marcadores[taller.id] =
-        marcador;
-
-    });
-
-
-    /*
-      Estado del mapa.
-    */
+    /* =================================================
+       ESTADO DEL MAPA
+    ================================================= */
 
     const n =
       talleres.length;
@@ -1337,12 +1860,14 @@ async function cargarTalleres() {
         "Todavía no hay talleres registrados.";
 
     }
+
     else if (n === 1) {
 
       estadoMapa.textContent =
         "1 taller registrado.";
 
     }
+
     else {
 
       estadoMapa.textContent =
@@ -1352,12 +1877,14 @@ async function cargarTalleres() {
     }
 
   }
+
   catch (error) {
 
     console.error(
       "Error cargando talleres:",
       error
     );
+
 
     estadoMapa.textContent =
       "No se pudieron cargar los talleres.";
@@ -1371,10 +1898,13 @@ async function cargarTalleres() {
    CENTRAR TALLER
 ===================================================== */
 
-function centrarTaller(lat, lng) {
+function centrarTaller(
+  lat,
+  lng
+) {
 
   mapa.setView(
-    [lat, lng],
+    [lat,lng],
     15
   );
 
@@ -1385,7 +1915,9 @@ function centrarTaller(lat, lng) {
    NEGOCIOS
 ===================================================== */
 
-async function obtenerNegocio(userId) {
+async function obtenerNegocio(
+  userId
+) {
 
   const {
     data,
@@ -1407,7 +1939,9 @@ async function obtenerNegocio(userId) {
 
 
   if (error) {
+
     throw error;
+
   }
 
 
@@ -1433,7 +1967,9 @@ async function comprobarSesion() {
 
 
     if (error) {
+
       throw error;
+
     }
 
 
@@ -1456,8 +1992,7 @@ async function comprobarSesion() {
 
     /*
       Hay sesión.
-      Ahora comprobamos que el usuario
-      también existe en negocios.
+      Comprobamos que sea un negocio.
     */
 
     const negocio =
@@ -1467,7 +2002,8 @@ async function comprobarSesion() {
 
 
     /*
-      Usuario de Supabase pero NO negocio.
+      Usuario de Supabase
+      pero no negocio.
     */
 
     if (!negocio) {
@@ -1475,6 +2011,7 @@ async function comprobarSesion() {
       await supabaseClient
         .auth
         .signOut();
+
 
       mostrarNoAutenticado();
 
@@ -1492,12 +2029,14 @@ async function comprobarSesion() {
     );
 
   }
+
   catch (error) {
 
     console.error(
       "Error comprobando sesión:",
       error
     );
+
 
     mostrarNoAutenticado();
 
@@ -1514,6 +2053,7 @@ function mostrarNoAutenticado() {
 
   zonaNoUsuario.style.display =
     "flex";
+
 
   zonaUsuario.style.display =
     "none";
@@ -1532,8 +2072,10 @@ function mostrarAutenticado(
   zonaNoUsuario.style.display =
     "none";
 
+
   zonaUsuario.style.display =
     "flex";
+
 
   nombreNegocio.textContent =
     negocio.nombre;
@@ -1573,7 +2115,9 @@ function cerrarLogin() {
    INICIAR SESIÓN
 ===================================================== */
 
-async function iniciarSesion(event) {
+async function iniciarSesion(
+  event
+) {
 
   event.preventDefault();
 
@@ -1633,7 +2177,9 @@ async function iniciarSesion(event) {
 
 
     if (error) {
+
       throw error;
+
     }
 
 
@@ -1654,6 +2200,7 @@ async function iniciarSesion(event) {
         .auth
         .signOut();
 
+
       throw new Error(
         "Esta cuenta no pertenece a un negocio registrado."
       );
@@ -1670,8 +2217,7 @@ async function iniciarSesion(event) {
 
 
     /*
-      Cerramos el modal y actualizamos
-      la navegación.
+      Cerramos el modal.
     */
 
     setTimeout(
@@ -1686,6 +2232,7 @@ async function iniciarSesion(event) {
     );
 
   }
+
   catch (error) {
 
     console.error(
@@ -1724,9 +2271,11 @@ async function cerrarSesion() {
 
     console.error(error);
 
+
     alert(
       "No se pudo cerrar la sesión."
     );
+
 
     return;
 
@@ -1843,8 +2392,8 @@ window.addEventListener(
   await comprobarSesion();
 
 })();
+
 </script>
 
 </body>
 </html>
-```
